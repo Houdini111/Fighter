@@ -48,17 +48,14 @@
     <script>scripts\enemyAtkDmg.gml</script>
     <script>scripts\checkHit.gml</script>
     <script>scripts\tryMove.gml</script>
+    <scripts name="gp">
+      <script>scripts\gp_direction.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\myFont</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_player</object>
-    <object>objects\obj_camera</object>
-    <objects name="Enemies">
-      <object>objects\obj_enemy</object>
-      <object>objects\obj_testEnemy1</object>
-    </objects>
     <objects name="walls">
       <object>objects\obj_wall_N</object>
       <object>objects\obj_wall_S</object>
@@ -81,8 +78,7 @@
       <object>objects\obj_testDungeon</object>
       <object>objects\obj_dungeon</object>
     </objects>
-    <object>objects\hit_str</object>
-    <object>objects\obj_master</object>
+    <object>objects\obj_player</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_testDungeon</room>

@@ -16,9 +16,41 @@ view_enabled = true;
 
 global.darkened = make_color_rgb(150, 150, 150);
 
-global.master = instance_create(0, 0, obj_master);
-global.camera = instance_create(0, 0, obj_camera);
-global.dungeon = instance_create(0, 0, obj_testDungeon);</code>
+global.player = instance_create(128, 128, obj_player);
+
+//global.master = instance_create(0, 0, obj_master);
+//global.camera = instance_create(0, 0, obj_camera);
+//global.dungeon = instance_create(0, 0, obj_testDungeon);
+
+
+
+show_debug_message("++++++++++++++++++++++++");
+gp_num = gamepad_get_device_count();
+show_debug_message("DEVICE SLOTS: " + string(gp_num));
+global.gp_slot = -1;
+show_debug_message("++++++++++++++++++++++++");
+for (i = 0; i &lt; gp_num; i++)
+{
+    if(gamepad_is_connected(i))
+        { 
+            global.gp[i] = true; 
+            if(global.gp_slot == -1) { global.gp_slot = i; }
+        }
+    else
+        { global.gp[i] = false; }
+    
+    show_debug_message(global.gp[i]); 
+}
+show_debug_message("++++++++++++++++++++++++");
+if(global.gp_slot != -1)
+{
+    show_debug_message("GAMEPAD SLOT: " + string(global.gp_slot));
+    show_debug_message("++++++++++++++++++++++++");
+    deadzone = 0.25;
+    gamepad_set_axis_deadzone(global.gp_slot, deadzone);
+    show_debug_message("SET DEADZONE TO: " + string(deadzone));
+    show_debug_message("++++++++++++++++++++++++");
+}</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
@@ -49,7 +81,7 @@ global.dungeon = instance_create(0, 0, obj_testDungeon);</code>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
   </backgrounds>
   <views>
-    <view visible="-1" objName="obj_camera" xview="0" yview="0" wview="1280" hview="720" xport="0" yport="0" wport="1280" hport="720" hborder="640" vborder="360" hspeed="-1" vspeed="-1"/>
+    <view visible="-1" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1280" hview="720" xport="0" yport="0" wport="1280" hport="720" hborder="640" vborder="360" hspeed="-1" vspeed="-1"/>
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
@@ -75,7 +107,6 @@ global.dungeon = instance_create(0, 0, obj_testDungeon);</code>
     <instance objName="obj_cobble" x="320" y="288" name="inst_E6EF029A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_cobble" x="352" y="288" name="inst_ADAFA8E9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_cobble" x="384" y="288" name="inst_737FA4AD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_player" x="288" y="288" name="inst_0224D52C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_wall_S" x="160" y="448" name="inst_BA14191C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_wall_S" x="192" y="448" name="inst_115166B2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_wall_S" x="224" y="448" name="inst_15CCD81E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -184,8 +215,6 @@ global.dungeon = instance_create(0, 0, obj_testDungeon);</code>
     <instance objName="obj_void" x="160" y="480" name="inst_834992CF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_void" x="128" y="480" name="inst_775CEEA6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_void" x="96" y="480" name="inst_CB83D239" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_testEnemy1" x="384" y="384" name="inst_59372EA1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_testEnemy1" x="384" y="320" name="inst_C1DBCE8C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
