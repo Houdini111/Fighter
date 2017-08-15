@@ -2,7 +2,7 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>0</visible>
+  <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -25,22 +25,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.master = id;
+            <string>turn = 'p';
 
-timeLimit = 500;
+
+timeLimit = 5; //5 seconds
 time = timeLimit;
 
-turn = 'p';
-
-pattern = "n/a";
-
-startTurn = current_time;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="3" enumb="1">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -59,80 +55,27 @@ startTurn = current_time;
             <kind>1</kind>
             <string>if(turn == 'p')
 {
-    time -= delta_time/10000;
+    time -= delta_time/1000000; //Convert to full seconds and subtract
     
     if(time &lt;= 0)
     {
         time = 0;
-        turn = 'e'
-        
-        startTurn = 0;
+        turn = 'e';
     }
 }
-if(turn == 'e')
+else if (turn == 'e')
 {
+    time += delta_time/1000000;
+    
     if(time &gt;= timeLimit)
     {
         time = timeLimit;
-        turn = 'p'
-        pattern = 'n/a'
-        
-        startTurn = 0;
+        turn = 'p';
     }
+}
 
-    if(pattern = 'n/a')
-    {
-        inRange = 2;        
-        pattern = irandom_range(round(inRange*0.5), inRange);   
-    }
-    
-    startTurn += delta_time/500;    
-    change = getEnemyTimeChange(pattern, startTurn, timeLimit, time);
-    time += change;
-    show_debug_message(change);
-    
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (turn == 'e')
-{
-    if(keyboard_key == vk_space)
-    {
-        if(dodgeCount &gt; 0)
-        {
-            for(i = 0; i &lt; array_length_1d(dodgePoints); i++)
-            {
-                if(time &gt; dodgePoints[i]*(1-dodgeTolerance)
-                    and time &lt; dodgePoints[i]*(1+dodgeTolerance))
-                {
-                    dodgePoints[i] = true;
-                    i = array_length_1d(dodgePoints);
-                }
-            }
-        }
-        dodgeCount--;
-    }
-}
+
+
 </string>
           </argument>
         </arguments>

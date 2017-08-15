@@ -182,36 +182,37 @@ targetOf = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.gp_slot != -1)
+            <string>if(global.master.turn == 'p')
 {
-    //Look around
-    stickDir = gp_direction(global.gp_slot, "r");
-    stickDist = point_distance(0, 0, gamepad_axis_value(global.gp_slot, gp_axisrh), gamepad_axis_value(global.gp_slot, gp_axisrv) );
-    if( stickDist &gt; 0 ) 
+    if(global.gp_slot != -1)
     {
-        if( stickDir == undefined )
-            { rot = rot; }
-        else if( stickDir &gt;= 315 or stickDir &lt;= 45 )
-            { rot = 'r'; }
-        else if( stickDir &gt; 45 and stickDir &lt; 135 )
-            { rot = 'u'; }
-        else if( stickDir &gt;= 135 and stickDir &lt;= 225 )
-            { rot = 'l'; }
-        else if( stickDir &gt; 225 and stickDir &lt; 315 )
-            { rot = 'd'; }        
+        //Look around
+        stickDir = gp_direction(global.gp_slot, "r");
+        stickDist = point_distance(0, 0, gamepad_axis_value(global.gp_slot, gp_axisrh), gamepad_axis_value(global.gp_slot, gp_axisrv) );
+        if( stickDist &gt; 0 ) 
+        {
+            if( stickDir &gt;= 315 or stickDir &lt;= 45 )
+                { rot = 'r'; }
+            else if( stickDir &gt; 45 and stickDir &lt; 135 )
+                { rot = 'u'; }
+            else if( stickDir &gt;= 135 and stickDir &lt;= 225 )
+                { rot = 'l'; }
+            else if( stickDir &gt; 225 and stickDir &lt; 315 )
+                { rot = 'd'; }        
+        }
+               
+        //Move around
+        if(gamepad_button_check_pressed(global.gp_slot, gp_padu)) //dpad_up
+            { y-=32; }
+        if(gamepad_button_check_pressed(global.gp_slot, gp_padd)) //dpad_down
+            { y+=32; }
+        if(gamepad_button_check_pressed(global.gp_slot, gp_padl)) //dpad_left
+            { x-=32; }
+        if(gamepad_button_check_pressed(global.gp_slot, gp_padr)) //dpad_right
+            { x+=32; }
     }
-    
-            
-    //Move around
-    if(gamepad_button_check_pressed(global.gp_slot, gp_padu)) //dpad_up
-        { y-=32; }
-    if(gamepad_button_check_pressed(global.gp_slot, gp_padd)) //dpad_down
-        { y+=32; }
-    if(gamepad_button_check_pressed(global.gp_slot, gp_padl)) //dpad_left
-        { x-=32; }
-    if(gamepad_button_check_pressed(global.gp_slot, gp_padr)) //dpad_right
-        { x+=32; }
 }
+
 
 
 
@@ -329,7 +330,7 @@ draw_text(10, 10, text);
 
 
 
-/*
+
 draw_set_alpha(0.7);
 
 height = 20;
@@ -348,22 +349,25 @@ timeLimit = global.master.timeLimit;
 //Time
 draw_set_colour(c_black);
 draw_rectangle( (view_wview[0]/2)-(width/2), height, (view_wview[0]/2)+(width/2), height*2, false );
+
 if(global.master.turn == 'e')
 {  
     d = true;
 
     draw_set_color(c_red);    
     
-    //for(i = 0; i &lt; array_length_1d(dodgePoints); i++)
-    //{ 
+    /*
+    for(i = 0; i &lt; array_length_1d(dodgePoints); i++)
+    { 
         //Draw the lines  
-    //    if(dodgePoints[i] == 1) { t = -1; } //If it's already been dodged, move it out of the way
-    //    else { t = dodgePoints[i]*timeLimit/width; } 
-    //    draw_line_width((view_wview[0]-width)/2+t, height, (view_wview[0]-width)/2+t, height*2, 2);     
+        if(dodgePoints[i] == 1) { t = -1; } //If it's already been dodged, move it out of the way
+        else { t = dodgePoints[i]*timeLimit/width; } 
+        draw_line_width((view_wview[0]-width)/2+t, height, (view_wview[0]-width)/2+t, height*2, 2);     
         
         //Have they dodged everything? 
-    //    if(dodgePoints[i] != true) { d = false; }
+        if(dodgePoints[i] != true) { d = false; }
     }
+    */
     
     //show_debug_message(d);
     if(d) { draw_set_color(c_green); }
@@ -372,6 +376,8 @@ if(global.master.turn == 'e')
 
 }
 else { draw_set_color(c_green); }
+
+
 draw_rectangle( (view_wview[0]/2)-(width/2), height, (view_wview[0]/2)-(width/2)+(time/timeLimit*width), height*2, false );
 draw_set_colour(c_black);
 draw_rectangle( (view_wview[0]/2)-(width/2), height, (view_wview[0]/2)+(width/2), height*2, true );
@@ -393,7 +399,7 @@ else if(global.master.turn == 'e')
 draw_set_color(c_black);
 draw_rectangle(view_wview[0]/2+width/2, 0, view_wview[0]/2+width/2+height, height*2, true);
 draw_line(view_wview[0]/2+width/2, height, view_wview[0]/2+width/2+height, height);
-
+/*
 //Combo options
 options = 0;
 size = 60
@@ -417,10 +423,10 @@ for(i = 0; i &lt; array_length_2d(st, state); i++)
         options++;
     }
 }
-
+*/
 draw_set_alpha(1);
 
-*/
+
 </string>
           </argument>
         </arguments>
@@ -474,7 +480,8 @@ draw_sprite(asset_get_index("spr_p_" + rot), 0, x, y);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.turn == 'p')
+            <string>/*
+if(global.turn == 'p')
 {
     key = "";
     attacking = false;
@@ -561,6 +568,7 @@ draw_sprite(asset_get_index("spr_p_" + rot), 0, x, y);
         }   
     }
 }
+*/
 </string>
           </argument>
         </arguments>

@@ -79,6 +79,7 @@
       <object>objects\obj_dungeon</object>
     </objects>
     <object>objects\obj_player</object>
+    <object>objects\obj_master</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_testDungeon</room>

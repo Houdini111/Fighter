@@ -16,14 +16,15 @@ view_enabled = true;
 
 global.darkened = make_color_rgb(150, 150, 150);
 
+global.master = instance_create(0, 0, obj_master);
 global.player = instance_create(128, 128, obj_player);
-
-//global.master = instance_create(0, 0, obj_master);
 //global.camera = instance_create(0, 0, obj_camera);
 //global.dungeon = instance_create(0, 0, obj_testDungeon);
 
 
 
+
+//CONTROLLER SUPPORT
 show_debug_message("++++++++++++++++++++++++");
 gp_num = gamepad_get_device_count();
 show_debug_message("DEVICE SLOTS: " + string(gp_num));
@@ -39,7 +40,7 @@ for (i = 0; i &lt; gp_num; i++)
     else
         { global.gp[i] = false; }
     
-    show_debug_message(global.gp[i]); 
+    show_debug_message("SLOT " + string(i) + ": " + string(global.gp[i])); 
 }
 show_debug_message("++++++++++++++++++++++++");
 if(global.gp_slot != -1)
@@ -50,7 +51,13 @@ if(global.gp_slot != -1)
     gamepad_set_axis_deadzone(global.gp_slot, deadzone);
     show_debug_message("SET DEADZONE TO: " + string(deadzone));
     show_debug_message("++++++++++++++++++++++++");
-}</code>
+}
+else 
+{
+    show_debug_message("NO GAMEPAD FOUND");
+    show_debug_message("++++++++++++++++++++++++");
+}
+//END CONTROLLER SUPPORT</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
