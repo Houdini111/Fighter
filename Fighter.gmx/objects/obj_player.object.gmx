@@ -38,6 +38,9 @@ def = 5;
 
 
 
+dPad = array(0, 0, 0, 0); //Frames held for DPad Up, right, down, and left
+MOVE_REPEAT_DELAY = 0.25;
+
 
 
 //Language
@@ -205,14 +208,52 @@ if(global.master.turn == 'p')
         }
                
         //Move around
-        if(gamepad_button_check_pressed(global.gp_slot, gp_padu)) //dpad_up
+        if(gamepad_button_check_pressed(global.gp_slot, gp_padu)) //dpad_up first press
             { y-=32; }
-        if(gamepad_button_check_pressed(global.gp_slot, gp_padd)) //dpad_down
+        if(gamepad_button_check(global.gp_slot, gp_padu)) //dpad_up hold
+            {  dPad[0] += delta_time/1000000; } //Adds how many seconds the button has been held
+        else { dPad[0] = 0; } 
+        
+        if(gamepad_button_check_pressed(global.gp_slot, gp_padd)) //dpad_down first press
             { y+=32; }
-        if(gamepad_button_check_pressed(global.gp_slot, gp_padl)) //dpad_left
+        if(gamepad_button_check(global.gp_slot, gp_padd)) //dpad_down hold
+            {  dPad[2] += delta_time/1000000; } //Adds how many seconds the button has been held 
+        else { dPad[2] = 0; } 
+        
+        if(gamepad_button_check_pressed(global.gp_slot, gp_padl)) //dpad_left first press
             { x-=32; }
-        if(gamepad_button_check_pressed(global.gp_slot, gp_padr)) //dpad_right
+        if(gamepad_button_check(global.gp_slot, gp_padl)) //dpad_left hold
+            {  dPad[3] += delta_time/1000000; } //Adds how many seconds the button has been held 
+        else { dPad[3] = 0; } 
+        
+        if(gamepad_button_check_pressed(global.gp_slot, gp_padr)) //dpad_right first press
             { x+=32; }
+        if(gamepad_button_check(global.gp_slot, gp_padr)) //dpad_right hold
+            {  dPad[1] += delta_time/1000000; } //Adds how many seconds the button has been held 
+        else { dPad[1] = 0; } 
+        
+        
+        //Every half second, try to move again
+        if( dPad[0]%1 &gt;= MOVE_REPEAT_DELAY ) 
+        { 
+            dPad[0] = 0;
+            y-=32;
+        }
+        if( dPad[1]%1 &gt;= MOVE_REPEAT_DELAY ) 
+        { 
+            dPad[1] = 0;
+            x+=32;
+        }
+        if( dPad[2]%1 &gt;= MOVE_REPEAT_DELAY ) 
+        { 
+            dPad[2] = 0;
+            y+=32;
+        }
+        if( dPad[3]%1 &gt;= MOVE_REPEAT_DELAY ) 
+        { 
+            dPad[3] = 0;
+            x-=32;
+        }
         
         if( !checkMove(id, x, y) ) //If they cannot move there, 
         {
@@ -336,6 +377,11 @@ if(global.gp_slot != -1)
     text+="RSTK_X: "+string(gamepad_axis_value(global.gp_slot, gp_axisrh))+"#";
     text+="RSTK_Y: "+string(gamepad_axis_value(global.gp_slot, gp_axisrv))+"#";
     text+="RSTK_DIR: "+string( gp_direction(global.gp_slot, "r") )+"#";
+    text+="#";
+    text+="HELD_UP: "+string(dPad[0])+"#";
+    text+="HELD_RIGHT: "+string(dPad[1])+"#";
+    text+="HELD_DOWN: "+string(dPad[2])+"#";
+    text+="HELD_LEFT: "+string(dPad[3])+"#";
 }
 else { text = "NO GAMEPAD FOUND"; }
 

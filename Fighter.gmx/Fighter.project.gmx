@@ -54,6 +54,7 @@
       <script>scripts\enemyAtkDmg.gml</script>
     </scripts>
     <script>scripts\checkMove.gml</script>
+    <script>scripts\array.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\myFont</font>
