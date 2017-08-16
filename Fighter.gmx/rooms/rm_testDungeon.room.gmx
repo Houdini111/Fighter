@@ -16,6 +16,8 @@ view_enabled = true;
 
 global.darkened = make_color_rgb(150, 150, 150);
 
+global.SEGMENT = 32;
+
 global.master = instance_create(0, 0, obj_master);
 global.player = instance_create(128, 128, obj_player);
 //global.camera = instance_create(0, 0, obj_camera);

@@ -39,18 +39,21 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\nextState.gml</script>
-    <script>scripts\comboItem.gml</script>
-    <script>scripts\getEnemyTimeChange.gml</script>
-    <script>scripts\selectEnemyEq.gml</script>
-    <script>scripts\startAttack.gml</script>
-    <script>scripts\attack.gml</script>
-    <script>scripts\enemyAtkDmg.gml</script>
-    <script>scripts\checkHit.gml</script>
-    <script>scripts\tryMove.gml</script>
     <scripts name="gp">
       <script>scripts\gp_direction.gml</script>
     </scripts>
+    <scripts name="OLD">
+      <script>scripts\tryMove.gml</script>
+      <script>scripts\nextState.gml</script>
+      <script>scripts\comboItem.gml</script>
+      <script>scripts\checkHit.gml</script>
+      <script>scripts\startAttack.gml</script>
+      <script>scripts\attack.gml</script>
+      <script>scripts\selectEnemyEq.gml</script>
+      <script>scripts\getEnemyTimeChange.gml</script>
+      <script>scripts\enemyAtkDmg.gml</script>
+    </scripts>
+    <script>scripts\checkMove.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\myFont</font>
@@ -69,6 +72,7 @@
       <object>objects\obj_convex_SE</object>
       <object>objects\obj_convex_SW</object>
       <object>objects\obj_convex_NW</object>
+      <object>objects\obj_wall</object>
     </objects>
     <objects name="floors">
       <object>objects\obj_cobble</object>

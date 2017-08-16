@@ -182,7 +182,10 @@ targetOf = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.master.turn == 'p')
+            <string>oldX = x;
+oldY = y;
+
+if(global.master.turn == 'p')
 {
     if(global.gp_slot != -1)
     {
@@ -210,6 +213,20 @@ targetOf = 0;
             { x-=32; }
         if(gamepad_button_check_pressed(global.gp_slot, gp_padr)) //dpad_right
             { x+=32; }
+        
+        if( !checkMove(id, x, y) ) //If they cannot move there, 
+        {
+            if( checkMove(id, oldX, y) ) //try moving just the y
+                { x = oldX; } //If successful, keep it  
+            else if( checkMove(id, x, oldY) )//If that doesn't work, try just moving the x 
+                { y = oldY; } //If it works, then keep it
+            else //If that doesn't work, stay in place
+            { 
+                x = oldX;
+                y = oldY;
+            }
+            
+        }
     }
 }
 
