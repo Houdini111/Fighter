@@ -85,6 +85,10 @@
     </objects>
     <object>objects\obj_player</object>
     <object>objects\obj_master</object>
+    <object>objects\obj_enemy</object>
+    <objects name="enemies">
+      <object>objects\obj_testEnemy</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_testDungeon</room>

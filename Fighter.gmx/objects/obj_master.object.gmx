@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-100</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,12 +25,19 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>turn = 'p';
+            <string>debug_ui = false;
+
+turn = 'p';
 
 
 timeLimit = 5; //5 seconds
 time = timeLimit;
 
+gridSize = 32;
+
+
+global.grid = mp_grid_create(0, 0, room_width/gridSize, room_height/gridSize, gridSize, gridSize);
+mp_grid_add_instances(global.grid, obj_wall, false);
 </string>
           </argument>
         </arguments>
@@ -74,6 +81,103 @@ else if (turn == 'e')
     }
 }
 
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(gamepad_button_check_pressed(global.gp_slot, gp_shoulderl))
+    { debug_ui = !debug_ui; }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(debug_ui)
+{
+    draw_set_alpha(0.4);
+    mp_grid_draw(global.grid);
+    draw_set_alpha(1);
+
+    text="";
+    if(global.gp_slot != -1)
+    {   
+        text+="DPAD_UP: "+string(gamepad_button_check(global.gp_slot, gp_padu))+"#";
+        text+="DPAD_LEFT: "+string(gamepad_button_check(global.gp_slot, gp_padl))+"#";
+        text+="DPAD_RIGHT: "+string(gamepad_button_check(global.gp_slot, gp_padr))+"#";
+        text+="DPAD_DOWN: "+string(gamepad_button_check(global.gp_slot, gp_padd))+"#";
+        text+="#";
+        text+="BTN_A: "+string(gamepad_button_check(global.gp_slot, gp_face1))+"#";
+        text+="BTN_B: "+string(gamepad_button_check(global.gp_slot, gp_face2))+"#";
+        text+="BTN_X: "+string(gamepad_button_check(global.gp_slot, gp_face3))+"#";
+        text+="BTN_Y: "+string(gamepad_button_check(global.gp_slot, gp_face4))+"#";
+        text+="#";
+        text+="LSTK_X: "+string(gamepad_axis_value(global.gp_slot, gp_axislh))+"#";
+        text+="LSTK_Y: "+string(gamepad_axis_value(global.gp_slot, gp_axislv))+"#";
+        text+="LSTK_DIR: "+string( gp_direction(global.gp_slot, "l") )+"#";
+        text+="#";
+        text+="RSTK_X: "+string(gamepad_axis_value(global.gp_slot, gp_axisrh))+"#";
+        text+="RSTK_Y: "+string(gamepad_axis_value(global.gp_slot, gp_axisrv))+"#";
+        text+="RSTK_DIR: "+string( gp_direction(global.gp_slot, "r") )+"#";
+        text+="#";
+        text+="BTN_LB: "+string(gamepad_button_check(global.gp_slot, gp_shoulderl))+"#";
+        text+="BTN_RB: "+string(gamepad_button_check(global.gp_slot, gp_shoulderr))+"#";
+        text+="#";
+        text+="HELD_UP: "+string(global.player.dPad[0])+"/"+string(global.player.MOVE_REPEAT_DELAY)+"#";
+        text+="HELD_RIGHT: "+string(global.player.dPad[1])+"/"+string(global.player.MOVE_REPEAT_DELAY)+"#";
+        text+="HELD_DOWN: "+string(global.player.dPad[2])+"/"+string(global.player.MOVE_REPEAT_DELAY)+"#";
+        text+="HELD_LEFT: "+string(global.player.dPad[3])+"/"+string(global.player.MOVE_REPEAT_DELAY)+"#";
+    }
+    else { text = "NO GAMEPAD FOUND"; }
+    
+    draw_set_color(c_white);
+    draw_text(10, 10, text);
+    
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+    
+    draw_text( view_wview[0]/2, global.player.height*0.5, string(global.player.myHealth)+"/"+string(global.player.maxHealth) );
+    draw_text( view_wview[0]/2, global.player.height*1.5, string(time)+"/"+string(timeLimit) );
+    
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_top);
+}
 
 
 </string>
