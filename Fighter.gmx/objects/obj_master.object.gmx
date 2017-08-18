@@ -105,8 +105,12 @@ else if (turn == 'e')
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(gamepad_button_check_pressed(global.gp_slot, gp_shoulderl))
-    { debug_ui = !debug_ui; }
+            <string>if( gamepad_button_check_pressed(global.gp_slot, gp_shoulderl)
+    or keyboard_check_pressed(vk_f3) )
+{ 
+    debug_ui = !debug_ui; 
+    show_debug_overlay(debug_ui);
+}
 </string>
           </argument>
         </arguments>
@@ -130,11 +134,15 @@ else if (turn == 'e')
           <argument>
             <kind>1</kind>
             <string>if(debug_ui)
-{
+{   
+    //pathfinding grid 
+    //WARNING: VERY GPU INTENSIVE
+    /*
     draw_set_alpha(0.4);
     mp_grid_draw(global.grid);
     draw_set_alpha(1);
-
+    */
+    
     text="";
     if(global.gp_slot != -1)
     {   

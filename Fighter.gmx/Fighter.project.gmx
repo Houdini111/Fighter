@@ -31,6 +31,7 @@
     </sprites>
     <sprites name="attack_patterns">
       <sprite>sprites\spr_basic1</sprite>
+      <sprite>sprites\spr_hb_flower</sprite>
     </sprites>
     <sprite>sprites\spr_redLine</sprite>
   </sprites>
@@ -55,6 +56,8 @@
     </scripts>
     <script>scripts\checkMove.gml</script>
     <script>scripts\array.gml</script>
+    <script>scripts\gp_update.gml</script>
+    <script>scripts\hb.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\myFont</font>
@@ -89,6 +92,7 @@
     <objects name="enemies">
       <object>objects\obj_testEnemy</object>
     </objects>
+    <object>objects\obj_atk_hb</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_testDungeon</room>

@@ -198,6 +198,8 @@ else if ( global.master.turn == 'e' )
             <string>oldX = x;
 oldY = y;
 
+if( keyboard_check_pressed( vk_f5 ) ) { gp_update(); }
+
 
 if(global.master.turn == 'p')
 {
