@@ -37,6 +37,9 @@ myHealth = maxHealth;
 atk = 5;
 def = 5;
 
+hitMax[0] = 2; //The number of seconds that each hit will be available
+hitValue[0] = 0;
+
 
 
 dPad = array(0, 0, 0, 0); //Time held for DPad Up, right, down, and left
@@ -281,6 +284,10 @@ if(global.master.turn == 'p')
 
 
 
+//TEST CIRCLE
+hitValue[0] += delta_time/1000000;
+if( hitValue[0] &gt; hitMax[0]) { hitValue[0] = 0; } 
+//END TEST CIRCLE
 
 
 
@@ -381,6 +388,10 @@ timeLimit = global.master.timeLimit;
 //Time
 draw_set_colour(c_black);
 draw_rectangle( (view_wview[0]/2)-(width/2), height, (view_wview[0]/2)+(width/2), height*2, false );
+//draw_circle(view_wview[0]/2, height*2, 50, true)
+
+draw_act_circle(50, 0, hitValue[0], hitMax[0], 33, 60, 30);
+
 
 if(global.master.turn == 'e')
 {  

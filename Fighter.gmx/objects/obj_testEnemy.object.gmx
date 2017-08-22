@@ -28,6 +28,7 @@
             <string>path = path_add();
 
 moveSpeed = 0.25; //Move every quarter second
+attackSpeed = 1; //Attack once every second
 
 timeSinceMove = 0;
 

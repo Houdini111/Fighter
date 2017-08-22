@@ -58,6 +58,8 @@
     <script>scripts\array.gml</script>
     <script>scripts\gp_update.gml</script>
     <script>scripts\hb.gml</script>
+    <script>scripts\draw_pie.gml</script>
+    <script>scripts\draw_act_circle.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\myFont</font>
