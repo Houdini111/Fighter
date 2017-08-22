@@ -29,6 +29,7 @@
 
 turn = 'p';
 
+global.tileSize = 32;
 
 timeLimit = 5; //5 seconds
 time = timeLimit;

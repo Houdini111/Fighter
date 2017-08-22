@@ -15,8 +15,8 @@ thisY = height*2+yFromBottomOfBar;
 degreesCovered = (-VAL/MAX*180)+180;
 
 
-draw_pie( thisX, thisY, hitMax[0], hitMax[0]*2, c_black, radius, 90, 0.8, 240);
-draw_pie( thisX, thisY, hitValue[0], hitMax[0]*2, c_green, radius-1, 90, 0.9, 240);
+draw_pie( thisX, thisY, MAX, MAX*2, c_black, radius, 90, 0.8, 240);
+draw_pie( thisX, thisY, VAL, MAX*2, c_green, radius-1, 90, 0.9, 240);
 draw_pie( thisX, thisY, activationTimePercent, 100, c_yellow, radius-1, activationPointPercent, 0.6, 240);
 draw_set_color(c_red);
 draw_line( thisX, thisY, thisX+(radius-1)*cos(degtorad(degreesCovered)), thisY+(radius-1)*sin(degtorad(degreesCovered)) );

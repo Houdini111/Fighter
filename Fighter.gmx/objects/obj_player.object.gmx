@@ -37,8 +37,12 @@ myHealth = maxHealth;
 atk = 5;
 def = 5;
 
-hitMax[0] = 2; //The number of seconds that each hit will be available
-hitValue[0] = 0;
+
+hitMax = ds_list_create();
+hitValue = ds_list_create();
+hitTime = ds_list_create();
+hitPoint = ds_list_create();
+hitSize = ds_list_create();
 
 
 
@@ -285,10 +289,22 @@ if(global.master.turn == 'p')
 
 
 //TEST CIRCLE
-hitValue[0] += delta_time/1000000;
-if( hitValue[0] &gt; hitMax[0]) { hitValue[0] = 0; } 
-//END TEST CIRCLE
+for(i = 0; i &lt; ds_list_size(hitValue); i++)
+{ 
 
+    ds_list_replace(hitValue, i, ds_list_find_value(hitValue, i)+delta_time/1000000 ); 
+    if( ds_list_find_value(hitValue, i) &gt; ds_list_find_value(hitMax, i) )
+    {
+        ds_list_delete(hitValue, i);
+        ds_list_delete(hitMax, i);
+        ds_list_delete(hitTime, i);
+        ds_list_delete(hitPoint, i);
+        ds_list_delete(hitSize, i);
+
+        i--;
+    } 
+}
+//END TEST CIRCLE
 
 
 
@@ -388,9 +404,10 @@ timeLimit = global.master.timeLimit;
 //Time
 draw_set_colour(c_black);
 draw_rectangle( (view_wview[0]/2)-(width/2), height, (view_wview[0]/2)+(width/2), height*2, false );
-//draw_circle(view_wview[0]/2, height*2, 50, true)
 
-draw_act_circle(50, 0, hitValue[0], hitMax[0], 33, 60, 30);
+//Dodge circles
+for(i = 0; i &lt; ds_list_size(hitValue); i++)
+{  draw_act_circle(ds_list_find_value(hitTime, i)/timeLimit*width, 0, ds_list_find_value(hitValue, i), ds_list_find_value(hitMax, i), 33, ds_list_find_value(hitPoint, i), ds_list_find_value(hitSize, i)); } 
 
 
 if(global.master.turn == 'e')
