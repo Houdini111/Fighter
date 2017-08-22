@@ -269,19 +269,11 @@ if(global.master.turn == 'p')
         }
         
         
-        if( !checkMove(id, x, y) ) //If they cannot move there, 
-        {
-            if( checkMove(id, oldX, y) ) //try moving just the y
-                { x = oldX; } //If successful, keep it  
-            else if( checkMove(id, x, oldY) )//If that doesn't work, try just moving the x 
-                { y = oldY; } //If it works, then keep it
-            else //If that doesn't work, stay in place
-            { 
-                x = oldX;
-                y = oldY;
-            }
-            
-        }
+        if( !checkMove(id, x, oldY) ) //Can they move to the new x?
+            { x = oldX; }   //If not, move back
+        
+        if( !checkMove(id, oldX, y) ) //Can they move to the new Y?
+            { y = oldY; }
     }
 }
 
