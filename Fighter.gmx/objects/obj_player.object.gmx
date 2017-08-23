@@ -37,13 +37,20 @@ myHealth = maxHealth;
 atk = 5;
 def = 5;
 
-
+/*
 hitMax = ds_list_create();
 hitValue = ds_list_create();
 hitTime = ds_list_create();
 hitPoint = ds_list_create();
 hitSize = ds_list_create();
+*/
 
+rhythm_left = view_wview[0]*.8;
+rhythm_width = view_wview[0]*.2-10;
+rhythm_top = view_hview[0]*.2;
+rhythm_height = view_hview[0]*.8-10;
+
+lanes = 4;
 
 
 dPad = array(0, 0, 0, 0); //Time held for DPad Up, right, down, and left
@@ -287,7 +294,7 @@ if(global.master.turn == 'p')
 
 
 
-
+/*
 //TEST CIRCLE
 for(i = 0; i &lt; ds_list_size(hitValue); i++)
 { 
@@ -305,7 +312,7 @@ for(i = 0; i &lt; ds_list_size(hitValue); i++)
     } 
 }
 //END TEST CIRCLE
-
+*/
 
 
 /*
@@ -406,8 +413,8 @@ draw_set_colour(c_black);
 draw_rectangle( (view_wview[0]/2)-(width/2), height, (view_wview[0]/2)+(width/2), height*2, false );
 
 //Dodge circles
-for(i = 0; i &lt; ds_list_size(hitValue); i++)
-{  draw_act_circle(ds_list_find_value(hitTime, i)/timeLimit*width, 0, ds_list_find_value(hitValue, i), ds_list_find_value(hitMax, i), 33, ds_list_find_value(hitPoint, i), ds_list_find_value(hitSize, i)); } 
+//for(i = 0; i &lt; ds_list_size(hitValue); i++)
+//{  draw_act_circle(ds_list_find_value(hitTime, i)/timeLimit*width, 0, ds_list_find_value(hitValue, i), ds_list_find_value(hitMax, i), 33, ds_list_find_value(hitPoint, i), ds_list_find_value(hitSize, i)); } 
 
 
 if(global.master.turn == 'e')
@@ -489,6 +496,47 @@ draw_set_alpha(1);
 
 
 
+
+//TEST RHYTHM 
+draw_set_color(c_black);
+
+draw_set_alpha(0.2);
+draw_rectangle(rhythm_left, rhythm_top, rhythm_left+rhythm_width, rhythm_top+rhythm_height, false);
+
+draw_set_alpha(0.4);
+for(i = rhythm_left; i &lt;= rhythm_left+rhythm_width; i += rhythm_width/lanes)
+    { draw_line(i, rhythm_top, i, rhythm_top+rhythm_height); } 
+
+draw_gradient_line(rhythm_left, rhythm_top+rhythm_height*.05, rhythm_left+rhythm_width, rhythm_top+rhythm_height*.05, 10, 10, c_white);
+
+draw_set_color(c_black);
+draw_line(rhythm_left, rhythm_top, rhythm_left+rhythm_width, rhythm_top);
+draw_line(rhythm_left, rhythm_top+rhythm_height, rhythm_left+rhythm_width, rhythm_top+rhythm_height);
+
+
+draw_set_alpha(1);
+
+draw_set_halign(fa_center);
+draw_set_valign(fa_bottom);
+
+rhy_sym[0] = "X";
+rhy_sym[1] = "A";
+rhy_sym[2] = "B";
+rhy_sym[3] = "Y";
+rhy_col[0] = global.master.my_blue;
+rhy_col[1] = global.master.my_green;
+rhy_col[2] = global.master.my_red;
+rhy_col[3] = global.master.my_orange;
+for(i = 0; i &lt; lanes; i++)
+{ 
+    draw_text_shadow(rhythm_left+(rhythm_width/lanes/2)+(rhythm_width/lanes*i), rhythm_top-5, 
+        rhy_sym[i], fnt_gp_sym, 2, c_black, rhy_col[i]); 
+} 
+
+
+draw_set_valign(fa_top);
+draw_set_halign(fa_left);
+//END TEST RHYTHM
 
 
 

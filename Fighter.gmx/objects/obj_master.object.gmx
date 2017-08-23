@@ -34,11 +34,18 @@ global.tileSize = 32;
 timeLimit = 5; //5 seconds
 time = timeLimit;
 
-gridSize = 32;
 
+gridSize = 32;
 
 global.grid = mp_grid_create(0, 0, room_width/gridSize, room_height/gridSize, gridSize, gridSize);
 mp_grid_add_instances(global.grid, obj_wall, false);
+
+
+rhy_speed = 1.5;
+my_blue = make_color_rgb(71, 131, 229); //Blue
+my_green = make_color_rgb(71, 232, 74); //Green
+my_red = make_color_rgb(237, 59, 49); //Red
+my_orange = make_color_rgb(255, 166, 89); //Orange
 </string>
           </argument>
         </arguments>
@@ -136,6 +143,7 @@ else if (turn == 'e')
             <kind>1</kind>
             <string>if(debug_ui)
 {   
+    draw_set_font(fnt_debug);
     //pathfinding grid 
     //WARNING: VERY GPU INTENSIVE
     /*
@@ -176,7 +184,7 @@ else if (turn == 'e')
     else { text = "NO GAMEPAD FOUND"; }
     
     draw_set_color(c_white);
-    draw_text(10, 10, text);
+    draw_text_shadow(10, 25, text, fnt_debug, 2, c_black, c_white);
     
     draw_set_halign(fa_center);
     draw_set_valign(fa_middle);
