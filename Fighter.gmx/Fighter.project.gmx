@@ -63,6 +63,8 @@
     <script>scripts\e_attack.gml</script>
     <script>scripts\draw_gradient_line.gml</script>
     <script>scripts\draw_text_shadow.gml</script>
+    <script>scripts\attack_pattern.gml</script>
+    <script>scripts\peice.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\myFont</font>
@@ -97,7 +99,8 @@
     <object>objects\obj_master</object>
     <object>objects\obj_enemy</object>
     <objects name="enemies">
-      <object>objects\obj_testEnemy</object>
+      <object>objects\obj_testEnemy1</object>
+      <object>objects\obj_testEnemy2</object>
     </objects>
     <object>objects\obj_atk_hb</object>
     <objects name="rhythm_objs">

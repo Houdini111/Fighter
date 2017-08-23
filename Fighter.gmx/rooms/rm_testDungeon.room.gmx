@@ -20,7 +20,8 @@ global.SEGMENT = 32;
 
 global.master = instance_create(0, 0, obj_master);
 global.player = instance_create(208, 336, obj_player);
-instance_create(528, 304, obj_testEnemy);
+instance_create(528, 304, obj_testEnemy1);
+instance_create(528, 624, obj_testEnemy2);
 //global.camera = instance_create(0, 0, obj_camera);
 //global.dungeon = instance_create(0, 0, obj_testDungeon);
 

@@ -25,35 +25,97 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>maxHealth = 100;
-myHealth = maxHealth; 
-lastHealth = myHealth;
+            <string>event_inherited();
 
-dodgeTime = 0.7; //Dodge @ 70% 
+moveSpeed = 0.25; //Move every quarter second
+attackSpeed = 1; //Attack once every second
 
-atk = 5;
-def = 5;
+pattern = 1;
+range = 1;
 
-
-
-//Particle system
-mySys = part_system_create();
-part_system_position(mySys, x, y);
-part_system_depth(mySys, -20);
-
-//Particles
-myPart = part_type_create();
-part_type_shape(myPart, pt_shape_disk);
-part_type_size(myPart, 0.15, 0.3, -0.02, 0);
-part_type_color1(myPart, c_red);
-part_type_life(myPart, room_speed*1.0, room_speed*1.5);
-part_type_speed(myPart, 3, 12, -0.5, 0);
+sightRange = 360; //In pixels (half of the width of the screen)
 
 
-//Particle Emitters
-emit = part_emitter_create(mySys);
 
-global.enemy = id;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>startX = x;
+startY = y;
+
+if( global.master.turn == 'e')
+{
+    timeSinceMove += delta_time/1000000;
+    
+    if( timeSinceMove &gt;= moveSpeed )
+    {
+        if ( !path_exists(path) )
+            { path = path_add(); }   
+        
+        canSee = !collision_line(x, y, global.player.x, global.player.y, obj_wall, false, true);
+        inRadius = distance_to_point(global.player.x, global.player.y) &lt; sightRange;
+        
+        if(canSee and inRadius)
+        {
+            goalX = global.player.x;
+            goalY = global.player.y;
+            
+            if( y &lt; goalY ) { goalY -= global.tileSize; }
+            else if( y &gt; goalY ) { goalY += global.tileSize; } 
+            else if( x &lt; goalX ) { goalX -= global.tileSize; }
+            else if( x &gt; goalX ) { goalX += global.tileSize; } 
+                
+            if( mp_grid_path(global.grid, path, x, y, goalX, goalY, false) )
+                { path_start(path, 32, path_action_stop, false); }
+                
+            timeSinceMove = 0;
+            path_speed = global.tileSize;
+        }
+    }
+    
+    if( x+range*global.tileSize &gt;= global.player.x and x-range*global.tileSize &lt;= global.player.x )
+    {
+        if( y+range*global.tileSize &gt;= global.player.y and y-range*global.tileSize &lt;= global.player.y )
+        {
+            in_attack_pos = true;
+        }
+    }
+    
+    if(in_attack_pos)
+    {
+        time_since_attack += delta_time/1000000;
+        
+        if( time_since_attack &gt; attackSpeed ) 
+        { 
+            e_attack(id); 
+            time_since_attack = 0;
+        }
+    }
+}
+else if( global.master.turn == 'p' ) 
+{
+    if( path_exists(path) ) { path_delete(path); }
+    in_attack_pos = false;
+}
 </string>
           </argument>
         </arguments>

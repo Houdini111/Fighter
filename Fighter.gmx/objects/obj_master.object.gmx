@@ -46,6 +46,8 @@ my_blue = make_color_rgb(71, 131, 229); //Blue
 my_green = make_color_rgb(71, 232, 74); //Green
 my_red = make_color_rgb(237, 59, 49); //Red
 my_orange = make_color_rgb(255, 166, 89); //Orange
+
+global.rhy = ds_list_create();
 </string>
           </argument>
         </arguments>
@@ -113,7 +115,7 @@ else if (turn == 'e')
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if( gamepad_button_check_pressed(global.gp_slot, gp_shoulderl)
+            <string>if( gamepad_button_check_pressed(global.gp_slot, gp_select)
     or keyboard_check_pressed(vk_f3) )
 { 
     debug_ui = !debug_ui; 
@@ -196,7 +198,10 @@ else if (turn == 'e')
     draw_set_valign(fa_top);
 }
 
-
+text=""
+for(i = 0; i &lt; ds_list_size(global.rhy); i++)
+    { text += string( object_get_name(ds_list_find_value(global.rhy, i).object_index ) ) + ", "; }
+draw_text_shadow(10, 700, text, fnt_debug, 2, c_black, c_white);
 </string>
           </argument>
         </arguments>
