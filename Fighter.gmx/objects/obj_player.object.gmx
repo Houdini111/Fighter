@@ -45,6 +45,8 @@ rhythm_height = view_hview[0]*.8-10;
 
 lanes = 4;
 
+judgement = judgement_line(rhythm_left, rhythm_width, rhythm_top, rhythm_height);
+
 
 dPad = array(0, 0, 0, 0); //Time held for DPad Up, right, down, and left
 MOVE_REPEAT_DELAY = 0.25;
@@ -158,7 +160,7 @@ else if ( global.master.turn == 'e' )
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>self</whoName>
+        <whoName>other</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
@@ -243,13 +245,34 @@ if(global.master.turn == 'p')
         
         if( !checkMove(id, oldX, y) ) //Can they move to the new Y?
             { y = oldY; }
-            
-            
-        
-        if( gamepad_button_check_pressed(global.gp_slot, gp_face1) ) //A
-        {  
-            
-        }
+    }
+}
+
+if(global.gp_slot != -1)
+{
+    if( gamepad_button_check_pressed(global.gp_slot, gp_face3) ) //X
+    {  
+        h = collision_point(rhythm_left+((rhythm_width/lanes)*.5), judgement.y, obj_rhy_base, false, true);
+        if( h != noone) //Check if there is a peice in the judgement line
+            { h.alarm[0] = 1; }
+    }
+    if( gamepad_button_check_pressed(global.gp_slot, gp_face1) ) //A
+    {  
+        h = collision_point(rhythm_left+((rhythm_width/lanes)*1.5), judgement.y, obj_rhy_base, false, true);
+        if( h != noone) //Check if there is a peice in the judgement line
+            { h.alarm[0] = 1; }
+    }
+    if( gamepad_button_check_pressed(global.gp_slot, gp_face2) ) //B
+    {  
+        h = collision_point(rhythm_left+((rhythm_width/lanes)*2.5), judgement.y, obj_rhy_base, false, true);
+        if( h != noone) //Check if there is a peice in the judgement line
+            { h.alarm[0] = 1; }
+    }
+    if( gamepad_button_check_pressed(global.gp_slot, gp_face4) ) //Y
+    {  
+        h = collision_point(rhythm_left+((rhythm_width/lanes)*3.5), judgement.y, obj_rhy_base, false, true);
+        if( h != noone) //Check if there is a peice in the judgement line
+            { h.alarm[0] = 1; }
     }
 }
 </string>
@@ -274,7 +297,16 @@ if(global.master.turn == 'p')
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_gradient_line(rhythm_left, rhythm_top+rhythm_height*.05, rhythm_left+rhythm_width, rhythm_top+rhythm_height*.05, 10, 10, c_white);
+            <string>draw_set_color(c_gray);
+
+draw_set_alpha(1);
+for(i = rhythm_left; i &lt;= rhythm_left+rhythm_width; i += rhythm_width/lanes)
+    { draw_line(i, rhythm_top, i, rhythm_top+rhythm_height); } 
+
+draw_set_color(c_black);
+draw_line(rhythm_left, rhythm_top, rhythm_left+rhythm_width, rhythm_top);
+draw_line(rhythm_left, rhythm_top+rhythm_height, rhythm_left+rhythm_width, rhythm_top+rhythm_height);
+
 </string>
           </argument>
         </arguments>
@@ -386,14 +418,6 @@ draw_set_color(c_black);
 
 draw_set_alpha(0.2);
 draw_rectangle(rhythm_left, rhythm_top, rhythm_left+rhythm_width, rhythm_top+rhythm_height, false);
-
-draw_set_alpha(0.4);
-for(i = rhythm_left; i &lt;= rhythm_left+rhythm_width; i += rhythm_width/lanes)
-    { draw_line(i, rhythm_top, i, rhythm_top+rhythm_height); } 
-
-draw_set_color(c_black);
-draw_line(rhythm_left, rhythm_top, rhythm_left+rhythm_width, rhythm_top);
-draw_line(rhythm_left, rhythm_top+rhythm_height, rhythm_left+rhythm_width, rhythm_top+rhythm_height);
 
 
 //TEXT

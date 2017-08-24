@@ -3,10 +3,10 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-25</depth>
+  <depth>-15</depth>
   <persistent>0</persistent>
   <parentName>obj_rhy_base</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>spr_rhy_base</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>event_inherited();
 
-x = left+width*3;
+x = left+(width+2)*3;
 
 my_color = global.master.my_orange;
 

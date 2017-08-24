@@ -3,10 +3,10 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-25</depth>
+  <depth>-15</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>spr_rhy_base</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -35,7 +35,7 @@ path_width = right - left;
 
 lanes = global.player.lanes;
 
-width = path_width/lanes;
+width = (path_width-6)/lanes;
 height = 20;
 
 x = left;
@@ -66,6 +66,31 @@ draw_border = 0.06;
           <argument>
             <kind>1</kind>
             <string>ds_list_delete(global.rhy, ds_list_find_index(global.rhy, id));
+
+if(y &lt;= top) { global.player.myHealth -= global.player.maxHealth*0.1; }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>instance_destroy();
 </string>
           </argument>
         </arguments>
