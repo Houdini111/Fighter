@@ -196,6 +196,13 @@ else if (turn == 'e')
     
     draw_set_halign(fa_left);
     draw_set_valign(fa_top);
+    
+    draw_set_color(c_white);
+    draw_rectangle(global.player.rhythm_left, global.player.rhythm_top+global.player.rhythm_height, global.player.rhythm_left+global.player.rhythm_width, view_hport[0], false);
+    draw_set_color(c_purple);
+    draw_line(global.player.rhythm_left, global.player.rhythm_top+global.player.rhythm_height, global.player.rhythm_left, view_hport[0]);
+    draw_line(global.player.rhythm_left+global.player.rhythm_width, global.player.rhythm_top+global.player.rhythm_height, global.player.rhythm_left+global.player.rhythm_width, view_hport[0]);
+    draw_line(global.player.rhythm_left+(global.player.rhythm_width*(time%1)), global.player.rhythm_top+global.player.rhythm_height, global.player.rhythm_left+(global.player.rhythm_width*(time%1)), view_hport[0]);
 }
 
 text=""
