@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-100</depth>
+  <depth>-11</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -42,10 +42,10 @@ mp_grid_add_instances(global.grid, obj_wall, false);
 
 
 rhy_speed = 1.5;
-my_blue = make_color_rgb(71, 131, 229); //Blue
-my_green = make_color_rgb(71, 232, 74); //Green
-my_red = make_color_rgb(237, 59, 49); //Red
-my_orange = make_color_rgb(255, 166, 89); //Orange
+my_blue = make_color_hsv(154, 191, 210); //Blue
+my_green = make_color_hsv(86, 191, 210); //Green   
+my_red = make_color_hsv(2, 191, 210); //Red        
+my_orange = make_color_hsv(20, 191, 210); //Orange 
 
 global.rhy = ds_list_create();
 </string>

@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-25</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -96,7 +96,7 @@ if(y+height &lt; top) { instance_destroy(); }
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -117,6 +117,7 @@ if(y+height &lt; top) { instance_destroy(); }
 if(y &gt; bottom) { h_bottom = h_top; }
 else { h_bottom = min(y+height, bottom); }
 
+draw_set_blend_mode(bm_normal);
 draw_set_alpha(1);
 draw_set_color(c_black);
 draw_rectangle(x, h_top, x+width, h_bottom, false);
