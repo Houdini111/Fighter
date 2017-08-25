@@ -20,6 +20,7 @@ global.SEGMENT = 32;
 
 global.master = instance_create(0, 0, obj_master);
 global.player = instance_create(208, 336, obj_player);
+global.camera = instance_create(0, 0, obj_camera);
 instance_create(528, 304, obj_testEnemy1);
 instance_create(528, 560, obj_testEnemy2);
 instance_create(208, 624, obj_testEnemy3);

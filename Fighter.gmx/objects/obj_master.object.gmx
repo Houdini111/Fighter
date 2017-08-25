@@ -203,6 +203,9 @@ if(debug_ui)
         text+="BTN_LB: "+string(gamepad_button_check(global.gp_slot, gp_shoulderl))+"#";
         text+="BTN_RB: "+string(gamepad_button_check(global.gp_slot, gp_shoulderr))+"#";
         text+="#";
+        text+="L_TRIGGR: "+string(gamepad_button_check(global.gp_slot, gp_shoulderlb))+"#";
+        text+="R_TRIGGER: "+string(gamepad_button_check(global.gp_slot, gp_shoulderrb))+"#";
+        text+="#";
         text+="START: "+string(gamepad_button_check(global.gp_slot, gp_start))+"#";
         text+="SELECT: "+string(gamepad_button_check(global.gp_slot, gp_select))+"#";
         text+="#";

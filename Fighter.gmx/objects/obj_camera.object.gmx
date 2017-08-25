@@ -2,7 +2,7 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -25,13 +25,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_object[0] = id;
+            <string>shake = false;
 
-x = view_xview[0] + view_wview[0]/2;
-y = view_yview[0] + view_hview[0]/2;
+offsetX = 0;
+//offsetY = 0;
 
-shake = false;
-rock = false;
+magnitude = 10;
 </string>
           </argument>
         </arguments>
@@ -54,10 +53,8 @@ rock = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>rock = false;
-
-x = view_xview + view_wview[0]/2;
-y = view_yview + view_hview[0]/2;
+            <string>shake = false;
+offsetX = 0;
 </string>
           </argument>
         </arguments>
@@ -80,10 +77,41 @@ y = view_yview + view_hview[0]/2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>shake = false;
+            <string>shake = true;
+alarm[1] = 15;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>x = global.player.x;
+y = global.player.y;
 
-x = view_xview + view_wview[0]/2;
-y = view_yview + view_hview[0]/2;
+//Move view
+view_xview = x - view_wview/2;
+view_yview = y - view_hview/2;
+//Make sure that it doesn't go out of the room
+view_xview = max(0, min(view_xview, room_width - view_wview));
+view_yview = max(0, min(view_yview, room_height - view_hview));
+
+view_xview[0] += offsetX;
 </string>
           </argument>
         </arguments>
@@ -106,26 +134,7 @@ y = view_yview + view_hview[0]/2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(shake)
-{
-    alarm[0] = room_speed/3;
-    shake = false;
-}
-else if(rock)
-{
-    alarm[1] = room_speed/4;
-    rock = false;
-    start = current_time;
-}
-
-if(alarm[0] &gt; 0)
-{
-    x += random_range(-5, 5);
-    y += random_range(-5, 5); 
-}
-
-else if(alarm[1] &gt; 0)
-    { x += 10*sin( (current_time-start)/10 ); } 
+            <string>if(shake) { offsetX = irandom_range(-(magnitude), magnitude); }
 </string>
           </argument>
         </arguments>

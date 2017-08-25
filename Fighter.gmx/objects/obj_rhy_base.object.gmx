@@ -67,7 +67,11 @@ draw_border = 0.06;
             <kind>1</kind>
             <string>ds_list_delete(global.rhy, ds_list_find_index(global.rhy, id));
 
-if(y &lt;= top) { global.player.myHealth -= global.player.maxHealth*0.1; }
+if(y &lt;= top) 
+{ 
+    global.player.myHealth -= global.player.maxHealth*0.1; 
+    global.camera.alarm[0] = 1;
+}
 </string>
           </argument>
         </arguments>

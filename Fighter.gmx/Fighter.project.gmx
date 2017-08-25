@@ -56,6 +56,7 @@
     <script>scripts\nextState.gml</script>
     <script>scripts\peice.gml</script>
   </scripts>
+  <shaders name="shaders"/>
   <fonts name="fonts">
     <font>fonts\fnt_myFont</font>
     <font>fonts\fnt_title</font>
@@ -99,6 +100,7 @@
       <object>objects\obj_rhy_3</object>
       <object>objects\obj_rhy_4</object>
     </objects>
+    <object>objects\obj_camera</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_testDungeon</room>
