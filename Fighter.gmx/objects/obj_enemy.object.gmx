@@ -58,7 +58,173 @@ mp_potential_settings(maxrot, rotstep, ahead, onspot);
           <argument>
             <kind>1</kind>
             <string>if( path_speed &gt; 0 ) { path_speed = 0; }
+mp_grid_clear_cell(global.grid, floor(startX/global.gridSize), floor(startY/global.gridSize));
+mp_grid_add_cell(global.grid, floor(x/global.gridSize), floor(y/global.gridSize));
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>startX = x;
+startY = y;
+
+if( global.master.turn == 'e')
+{
+    timeSinceMove += delta_time/1000000;
+    
+    if( timeSinceMove &gt;= moveSpeed )
+    {
+        if ( !path_exists(path) )
+            { path = path_add(); }   
+        
+        canSee = !collision_line(x, y, global.player.x, global.player.y, obj_wall, false, true);
+        inRadius = distance_to_point(global.player.x, global.player.y) &lt; sightRange;
+        
+        if(canSee and inRadius)
+        {
+            //goalX = global.player.x;
+            //goalY = global.player.y;
+            
+            mp_grid_clear_cell(global.grid, floor(x/global.gridSize), floor(y/global.gridSize));
+            path_delete(path);
+            path = path_add();
+            
+            /*
+            if( y &lt; goalY ) { goalY -= global.tileSize; }
+            else if( y &gt; goalY ) { goalY += global.tileSize; } 
+            else if( x &lt; goalX ) { goalX -= global.tileSize; }
+            else if( x &gt; goalX ) { goalX += global.tileSize; } 
+              */  
+            
+            //Prepare the holder for the info about what places are available 
+            //rangePlaces[0] = false;
+            //for(i = 0; i &lt; range*4; i++) { rangePlaces[i] = false; }
+            placesX = ds_list_create();
+            placesY = ds_list_create();
+            
+            _x = global.player.x;
+            _y = global.player.y;
+            
+            //Check the top to right side (not including the right side)
+            for(_y = global.player.y - range*global.gridSize; _y &lt; global.player.y; _y += global.gridSize)
+            {
+                if( mp_grid_get_cell(global.grid, floor(_x/global.gridSize), floor(_y/global.gridSize)) == 0 )
+                { 
+                    ds_list_add( placesX, _x);
+                    ds_list_add( placesY, _y);
+                }
+            
+                _x += global.gridSize;
+            }
+            
+            //Check the right to bottom side (not including the bottom side)
+            for(_x = global.player.x + range*global.gridSize; _x &gt; global.player.x; _x -= global.gridSize)
+            {
+                if( mp_grid_get_cell(global.grid, floor(_x/global.gridSize), floor(_y/global.gridSize)) == 0 )
+                { 
+                    ds_list_add( placesX, _x);
+                    ds_list_add( placesY, _y);
+                }
+            
+                _y += global.gridSize;
+            }
+            
+            //Check the bottom to left side (not including the left side)
+            for(_y = global.player.y + range*global.gridSize; _y &gt; global.player.y; _y -= global.gridSize)
+            {
+                if( mp_grid_get_cell(global.grid, floor(_x/global.gridSize), floor(_y/global.gridSize)) == 0 )
+                { 
+                    ds_list_add( placesX, _x);
+                    ds_list_add( placesY, _y);
+                }
+            
+                _x -= global.gridSize;
+            }
+            
+            //Check the right to bottom side (not including the bottom side)
+            for(_x = global.player.x - range*global.gridSize; _x &lt; global.player.x; _x += global.gridSize)
+            {
+                if( mp_grid_get_cell(global.grid, floor(_x/global.gridSize), floor(_y/global.gridSize)) == 0 )
+                { 
+                    ds_list_add( placesX, _x);
+                    ds_list_add( placesY, _y);
+                }
+            
+                _y -= global.gridSize;
+            }
+            
+            //If there is an available spot
+            if(ds_list_size(placesX) &gt; 0)
+            {
+                goalX = ds_list_find_value(placesX, 0);
+                goalY = ds_list_find_value(placesY, 0);
+                //Find the closest open spot   
+                for(i = 0; i &lt; ds_list_size(placesX); i++)
+                {
+                    if( distance_to_point(goalX, goalY) &gt; distance_to_point( ds_list_find_value(placesX, i), ds_list_find_value(placesY, i) ) )
+                    {
+                        goalX = ds_list_find_value(placesX, i);
+                        goalY = ds_list_find_value(placesY, i)
+                    }
+                }
+                
+                
+                if( mp_grid_path(global.grid, path, x, y, goalX, goalY, false) )
+                { 
+                    path_start(path, 32, path_action_stop, false); 
+                    timeSinceMove = 0;
+                    path_speed = global.tileSize;
+                }
+            }
+              
+            mp_grid_add_cell(global.grid, floor(x/global.gridSize), floor(y/global.gridSize));  
+            ds_list_destroy(placesX);
+            ds_list_destroy(placesY);
+        }
+    }
+    
+    if( x+range*global.tileSize &gt;= global.player.x and x-range*global.tileSize &lt;= global.player.x )
+    {
+        if( y+range*global.tileSize &gt;= global.player.y and y-range*global.tileSize &lt;= global.player.y )
+        {
+            in_attack_pos = true;
+        }
+    }
+    
+    if(in_attack_pos)
+    {
+        time_since_attack += delta_time/1000000;
+        
+        if( time_since_attack &gt; attackSpeed ) 
+        { 
+            e_attack(id); 
+            time_since_attack = 0;
+        }
+    }
+}
+else if( global.master.turn == 'p' ) 
+{
+    if( path_exists(path) ) { path_delete(path); }
+    in_attack_pos = false;
+}
 </string>
           </argument>
         </arguments>

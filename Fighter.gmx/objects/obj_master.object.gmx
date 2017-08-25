@@ -35,9 +35,9 @@ timeLimit = 5; //5 seconds
 time = timeLimit;
 
 
-gridSize = 32;
+global.gridSize = 32;
 
-global.grid = mp_grid_create(0, 0, room_width/gridSize, room_height/gridSize, gridSize, gridSize);
+global.grid = mp_grid_create(0, 0, room_width/global.gridSize, room_height/global.gridSize, global.gridSize, global.gridSize);
 mp_grid_add_instances(global.grid, obj_wall, false);
 
 

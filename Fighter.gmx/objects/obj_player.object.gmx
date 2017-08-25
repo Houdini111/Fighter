@@ -141,7 +141,7 @@ turnStart = current_time;
           <argument>
             <kind>1</kind>
             <string>if( global.master.turn == 'p' )
-    { mp_grid_clear_cell(global.grid, floor(x/global.master.gridSize), floor(y/global.master.gridSize) ); }
+    { mp_grid_clear_cell(global.grid, floor(x/global.gridSize), floor(y/global.gridSize) ); }
 else if ( global.master.turn == 'e' ) 
     {  mp_grid_add_instances(global.grid, obj_player, false); }
 </string>

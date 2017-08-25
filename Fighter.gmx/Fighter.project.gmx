@@ -43,29 +43,18 @@
   <scripts name="scripts">
     <scripts name="gp">
       <script>scripts\gp_direction.gml</script>
+      <script>scripts\gp_update.gml</script>
     </scripts>
-    <scripts name="OLD">
-      <script>scripts\tryMove.gml</script>
-      <script>scripts\nextState.gml</script>
-      <script>scripts\comboItem.gml</script>
-      <script>scripts\checkHit.gml</script>
-      <script>scripts\startAttack.gml</script>
-      <script>scripts\attack.gml</script>
-      <script>scripts\selectEnemyEq.gml</script>
-      <script>scripts\getEnemyTimeChange.gml</script>
-      <script>scripts\enemyAtkDmg.gml</script>
-    </scripts>
-    <script>scripts\checkMove.gml</script>
     <script>scripts\array.gml</script>
-    <script>scripts\gp_update.gml</script>
-    <script>scripts\hb.gml</script>
-    <script>scripts\draw_pie.gml</script>
-    <script>scripts\draw_act_circle.gml</script>
-    <script>scripts\e_attack.gml</script>
+    <script>scripts\checkMove.gml</script>
+    <script>scripts\comboItem.gml</script>
     <script>scripts\draw_gradient_line.gml</script>
     <script>scripts\draw_text_shadow.gml</script>
-    <script>scripts\peice.gml</script>
+    <script>scripts\e_attack.gml</script>
+    <script>scripts\e_pathfind.gml</script>
     <script>scripts\judgement_line.gml</script>
+    <script>scripts\nextState.gml</script>
+    <script>scripts\peice.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\myFont</font>
@@ -91,10 +80,6 @@
     <objects name="floors">
       <object>objects\obj_cobble</object>
       <object>objects\obj_void</object>
-    </objects>
-    <objects name="Dungeons">
-      <object>objects\obj_testDungeon</object>
-      <object>objects\obj_dungeon</object>
     </objects>
     <object>objects\obj_player</object>
     <object>objects\obj_master</object>
