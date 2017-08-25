@@ -100,23 +100,10 @@ if( global.master.turn == 'e')
         
         if(canSee and inRadius)
         {
-            //goalX = global.player.x;
-            //goalY = global.player.y;
-            
             mp_grid_clear_cell(global.grid, floor(x/global.gridSize), floor(y/global.gridSize));
             path_delete(path);
             path = path_add();
             
-            /*
-            if( y &lt; goalY ) { goalY -= global.tileSize; }
-            else if( y &gt; goalY ) { goalY += global.tileSize; } 
-            else if( x &lt; goalX ) { goalX -= global.tileSize; }
-            else if( x &gt; goalX ) { goalX += global.tileSize; } 
-              */  
-            
-            //Prepare the holder for the info about what places are available 
-            //rangePlaces[0] = false;
-            //for(i = 0; i &lt; range*4; i++) { rangePlaces[i] = false; }
             placesX = ds_list_create();
             placesY = ds_list_create();
             
@@ -134,7 +121,6 @@ if( global.master.turn == 'e')
             
                 _x += global.gridSize;
             }
-            
             //Check the right to bottom side (not including the bottom side)
             for(_x = global.player.x + range*global.gridSize; _x &gt; global.player.x; _x -= global.gridSize)
             {
@@ -146,7 +132,6 @@ if( global.master.turn == 'e')
             
                 _y += global.gridSize;
             }
-            
             //Check the bottom to left side (not including the left side)
             for(_y = global.player.y + range*global.gridSize; _y &gt; global.player.y; _y -= global.gridSize)
             {
@@ -155,7 +140,6 @@ if( global.master.turn == 'e')
                     ds_list_add( placesX, _x);
                     ds_list_add( placesY, _y);
                 }
-            
                 _x -= global.gridSize;
             }
             
@@ -167,7 +151,6 @@ if( global.master.turn == 'e')
                     ds_list_add( placesX, _x);
                     ds_list_add( placesY, _y);
                 }
-            
                 _y -= global.gridSize;
             }
             
@@ -192,6 +175,11 @@ if( global.master.turn == 'e')
                     path_start(path, 32, path_action_stop, false); 
                     timeSinceMove = 0;
                     path_speed = global.tileSize;
+                    
+                    len = path_get_length(path);
+                    nextX = path_get_x(path, 32/len);
+                    nextY = path_get_y(path, 32/len);
+                    mp_grid_add_cell(global.grid, floor(nextX/global.gridSize), floor(nextY/global.gridSize));
                 }
             }
               
