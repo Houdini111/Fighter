@@ -25,35 +25,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>maxHealth = 100;
-myHealth = maxHealth; 
-lastHealth = myHealth;
+            <string>event_inherited();
 
-dodgeTime = 0.7; //Dodge @ 70% 
+moveSpeed = 0.25; //Move every quarter second
+attackSpeed = 1; //Attack once every second
 
-atk = 5;
-def = 5;
+pattern = 1;
+range = 1;
 
-
-
-//Particle system
-mySys = part_system_create();
-part_system_position(mySys, x, y);
-part_system_depth(mySys, -20);
-
-//Particles
-myPart = part_type_create();
-part_type_shape(myPart, pt_shape_disk);
-part_type_size(myPart, 0.15, 0.3, -0.02, 0);
-part_type_color1(myPart, c_red);
-part_type_life(myPart, room_speed*1.0, room_speed*1.5);
-part_type_speed(myPart, 3, 12, -0.5, 0);
+sightRange = 360; //In pixels (half of the width of the screen)
 
 
-//Particle Emitters
-emit = part_emitter_create(mySys);
 
-global.enemy = id;
 </string>
           </argument>
         </arguments>

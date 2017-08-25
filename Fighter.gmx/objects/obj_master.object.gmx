@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-100</depth>
+  <depth>-11</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -34,11 +34,20 @@ global.tileSize = 32;
 timeLimit = 5; //5 seconds
 time = timeLimit;
 
-gridSize = 32;
 
+global.gridSize = 32;
 
-global.grid = mp_grid_create(0, 0, room_width/gridSize, room_height/gridSize, gridSize, gridSize);
+global.grid = mp_grid_create(0, 0, room_width/global.gridSize, room_height/global.gridSize, global.gridSize, global.gridSize);
 mp_grid_add_instances(global.grid, obj_wall, false);
+
+
+rhy_speed = 1.5;
+my_blue = make_color_hsv(154, 191, 210); //Blue
+my_green = make_color_hsv(86, 191, 210); //Green   
+my_red = make_color_hsv(2, 191, 210); //Red        
+my_orange = make_color_hsv(20, 191, 210); //Orange 
+
+global.rhy = ds_list_create();
 </string>
           </argument>
         </arguments>
@@ -106,7 +115,7 @@ else if (turn == 'e')
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if( gamepad_button_check_pressed(global.gp_slot, gp_shoulderl)
+            <string>if( gamepad_button_check_pressed(global.gp_slot, gp_select)
     or keyboard_check_pressed(vk_f3) )
 { 
     debug_ui = !debug_ui; 
@@ -136,6 +145,7 @@ else if (turn == 'e')
             <kind>1</kind>
             <string>if(debug_ui)
 {   
+    draw_set_font(fnt_debug);
     //pathfinding grid 
     //WARNING: VERY GPU INTENSIVE
     /*
@@ -176,7 +186,7 @@ else if (turn == 'e')
     else { text = "NO GAMEPAD FOUND"; }
     
     draw_set_color(c_white);
-    draw_text(10, 10, text);
+    draw_text_shadow(10, 25, text, fnt_debug, 2, c_black, c_white);
     
     draw_set_halign(fa_center);
     draw_set_valign(fa_middle);
@@ -186,9 +196,19 @@ else if (turn == 'e')
     
     draw_set_halign(fa_left);
     draw_set_valign(fa_top);
+    
+    draw_set_color(c_white);
+    draw_rectangle(global.player.rhythm_left, global.player.rhythm_top+global.player.rhythm_height, global.player.rhythm_left+global.player.rhythm_width, view_hport[0], false);
+    draw_set_color(c_purple);
+    draw_line(global.player.rhythm_left, global.player.rhythm_top+global.player.rhythm_height, global.player.rhythm_left, view_hport[0]);
+    draw_line(global.player.rhythm_left+global.player.rhythm_width, global.player.rhythm_top+global.player.rhythm_height, global.player.rhythm_left+global.player.rhythm_width, view_hport[0]);
+    draw_line(global.player.rhythm_left+(global.player.rhythm_width*(time%1)), global.player.rhythm_top+global.player.rhythm_height, global.player.rhythm_left+(global.player.rhythm_width*(time%1)), view_hport[0]);
 }
 
-
+text=""
+for(i = 0; i &lt; ds_list_size(global.rhy); i++)
+    { text += string( object_get_name(ds_list_find_value(global.rhy, i).object_index ) ) + ", "; }
+draw_text_shadow(10, 700, text, fnt_debug, 2, c_black, c_white);
 </string>
           </argument>
         </arguments>

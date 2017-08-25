@@ -34,6 +34,7 @@
       <sprite>sprites\spr_hb_flower</sprite>
     </sprites>
     <sprite>sprites\spr_redLine</sprite>
+    <sprite>sprites\spr_rhy_base</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -42,28 +43,23 @@
   <scripts name="scripts">
     <scripts name="gp">
       <script>scripts\gp_direction.gml</script>
+      <script>scripts\gp_update.gml</script>
     </scripts>
-    <scripts name="OLD">
-      <script>scripts\tryMove.gml</script>
-      <script>scripts\nextState.gml</script>
-      <script>scripts\comboItem.gml</script>
-      <script>scripts\checkHit.gml</script>
-      <script>scripts\startAttack.gml</script>
-      <script>scripts\attack.gml</script>
-      <script>scripts\selectEnemyEq.gml</script>
-      <script>scripts\getEnemyTimeChange.gml</script>
-      <script>scripts\enemyAtkDmg.gml</script>
-    </scripts>
-    <script>scripts\checkMove.gml</script>
     <script>scripts\array.gml</script>
-    <script>scripts\gp_update.gml</script>
-    <script>scripts\hb.gml</script>
-    <script>scripts\draw_pie.gml</script>
-    <script>scripts\draw_act_circle.gml</script>
+    <script>scripts\checkMove.gml</script>
+    <script>scripts\comboItem.gml</script>
+    <script>scripts\draw_gradient_line.gml</script>
+    <script>scripts\draw_text_shadow.gml</script>
     <script>scripts\e_attack.gml</script>
+    <script>scripts\e_pathfind.gml</script>
+    <script>scripts\judgement_line.gml</script>
+    <script>scripts\nextState.gml</script>
+    <script>scripts\peice.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\myFont</font>
+    <font>fonts\fnt_gp_sym</font>
+    <font>fonts\fnt_debug</font>
   </fonts>
   <objects name="objects">
     <objects name="walls">
@@ -85,17 +81,23 @@
       <object>objects\obj_cobble</object>
       <object>objects\obj_void</object>
     </objects>
-    <objects name="Dungeons">
-      <object>objects\obj_testDungeon</object>
-      <object>objects\obj_dungeon</object>
-    </objects>
     <object>objects\obj_player</object>
     <object>objects\obj_master</object>
-    <object>objects\obj_enemy</object>
     <objects name="enemies">
-      <object>objects\obj_testEnemy</object>
+      <object>objects\obj_enemy</object>
+      <object>objects\obj_testEnemy1</object>
+      <object>objects\obj_testEnemy2</object>
+      <object>objects\obj_testEnemy3</object>
     </objects>
     <object>objects\obj_atk_hb</object>
+    <objects name="rhythm_objs">
+      <object>objects\obj_rhy_judgement_line</object>
+      <object>objects\obj_rhy_base</object>
+      <object>objects\obj_rhy_1</object>
+      <object>objects\obj_rhy_2</object>
+      <object>objects\obj_rhy_3</object>
+      <object>objects\obj_rhy_4</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_testDungeon</room>
