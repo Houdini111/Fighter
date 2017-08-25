@@ -27,15 +27,15 @@
             <kind>1</kind>
             <string>event_inherited();
 
-moveSpeed = 0.25; //Move every quarter second
-attackSpeed = 1; //Attack once every second
+moveSpeed = 0.25; //In seconds
+attackSpeed = 1; //In seconds
 
 pattern = 2;
 range = 1;
 
 sightRange = 360; //In pixels (half of the width of the screen)
 
-
+damage = 0.06;
 </string>
           </argument>
         </arguments>

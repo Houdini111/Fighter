@@ -90,6 +90,7 @@
       <object>objects\obj_testEnemy1</object>
       <object>objects\obj_testEnemy2</object>
       <object>objects\obj_testEnemy3</object>
+      <object>objects\obj_testEnemy4</object>
     </objects>
     <object>objects\obj_atk_hb</object>
     <objects name="rhythm_objs">

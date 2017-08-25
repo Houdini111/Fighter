@@ -95,8 +95,11 @@ if( global.master.turn == 'e')
         if ( !path_exists(path) )
             { path = path_add(); }   
         
-        canSee = !collision_line(x, y, global.player.x, global.player.y, obj_wall, false, true);
-        inRadius = distance_to_point(global.player.x, global.player.y) &lt; sightRange;
+        if(canSee = "n/a")
+        {
+            canSee = !collision_line(x, y, global.player.x, global.player.y, obj_wall, false, true);
+            inRadius = distance_to_point(global.player.x, global.player.y) &lt; sightRange;
+        }
         
         if(canSee and inRadius)
         {
@@ -189,12 +192,18 @@ if( global.master.turn == 'e')
         }
     }
     
-    if( x+range*global.tileSize &gt;= global.player.x and x-range*global.tileSize &lt;= global.player.x )
+    if(!in_attack_pos)
     {
-        if( y+range*global.tileSize &gt;= global.player.y and y-range*global.tileSize &lt;= global.player.y )
+        myGridX = floor(x/global.tileSize);
+        myGridY = floor(y/global.tileSize);
+        pGridX = floor(global.player.x/global.tileSize);
+        pGridY = floor(global.player.y/global.tileSize);
+        
+        if( abs(myGridX - pGridX) + abs(myGridY - pGridY) &lt;= range )
         {
             in_attack_pos = true;
-        }
+            time_since_attack = attackSpeed;
+        }   
     }
     
     if(in_attack_pos)
@@ -212,6 +221,8 @@ else if( global.master.turn == 'p' )
 {
     if( path_exists(path) ) { path_delete(path); }
     in_attack_pos = false;
+    canSee = "n/a";
+    inRadius = "n/a";
 }
 </string>
           </argument>

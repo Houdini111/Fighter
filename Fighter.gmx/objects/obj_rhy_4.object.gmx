@@ -30,7 +30,6 @@
 x = left+(width+2)*3;
 
 my_color = global.master.my_orange;
-
 </string>
           </argument>
         </arguments>
