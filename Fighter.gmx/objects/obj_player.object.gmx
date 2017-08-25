@@ -171,108 +171,114 @@ oldY = y;
 
 if( keyboard_check_pressed( vk_f5 ) ) { gp_update(); }
 
-
-if(global.master.turn == 'p')
+if(global.master.turn == 'pause')
 {
+    
+}
+else
+{
+    if(global.master.turn == 'p')
+    {
+        if(global.gp_slot != -1)
+        {
+            //Look around
+            stickDir = gp_direction(global.gp_slot, "r");
+            stickDist = point_distance(0, 0, gamepad_axis_value(global.gp_slot, gp_axisrh), gamepad_axis_value(global.gp_slot, gp_axisrv) );
+            if( stickDist &gt; 0 ) 
+            {
+                if( stickDir &gt;= 315 or stickDir &lt;= 45 )
+                    { rot = 'r'; }
+                else if( stickDir &gt; 45 and stickDir &lt; 135 )
+                    { rot = 'u'; }
+                else if( stickDir &gt;= 135 and stickDir &lt;= 225 )
+                    { rot = 'l'; }
+                else if( stickDir &gt; 225 and stickDir &lt; 315 )
+                    { rot = 'd'; }        
+            }
+                   
+            //Move around
+            if(gamepad_button_check_pressed(global.gp_slot, gp_padu)) //dpad_up first press
+                { y-=32; }
+            if(gamepad_button_check(global.gp_slot, gp_padu)) //dpad_up hold
+                {  dPad[0] += delta_time/1000000; } //Adds how many seconds the button has been held
+            else { dPad[0] = 0; } 
+            
+            if(gamepad_button_check_pressed(global.gp_slot, gp_padd)) //dpad_down first press
+                { y+=32; }
+            if(gamepad_button_check(global.gp_slot, gp_padd)) //dpad_down hold
+                {  dPad[2] += delta_time/1000000; } //Adds how many seconds the button has been held 
+            else { dPad[2] = 0; } 
+            
+            if(gamepad_button_check_pressed(global.gp_slot, gp_padl)) //dpad_left first press
+                { x-=32; }
+            if(gamepad_button_check(global.gp_slot, gp_padl)) //dpad_left hold
+                {  dPad[3] += delta_time/1000000; } //Adds how many seconds the button has been held 
+            else { dPad[3] = 0; } 
+            
+            if(gamepad_button_check_pressed(global.gp_slot, gp_padr)) //dpad_right first press
+                { x+=32; }
+            if(gamepad_button_check(global.gp_slot, gp_padr)) //dpad_right hold
+                {  dPad[1] += delta_time/1000000; } //Adds how many seconds the button has been held 
+            else { dPad[1] = 0; } 
+            
+            
+            //Every half second, try to move again
+            if( dPad[0]%1 &gt;= MOVE_REPEAT_DELAY ) 
+            { 
+                dPad[0] = 0;
+                y-=32;
+            }
+            if( dPad[1]%1 &gt;= MOVE_REPEAT_DELAY ) 
+            { 
+                dPad[1] = 0;
+                x+=32;
+            }
+            if( dPad[2]%1 &gt;= MOVE_REPEAT_DELAY ) 
+            { 
+                dPad[2] = 0;
+                y+=32;
+            }
+            if( dPad[3]%1 &gt;= MOVE_REPEAT_DELAY ) 
+            { 
+                dPad[3] = 0;
+                x-=32;
+            }
+            
+            
+            if( !checkMove(id, x, oldY) ) //Can they move to the new x?
+                { x = oldX; }   //If not, move back
+            
+            if( !checkMove(id, oldX, y) ) //Can they move to the new Y?
+                { y = oldY; }
+        }
+    }
+    
     if(global.gp_slot != -1)
     {
-        //Look around
-        stickDir = gp_direction(global.gp_slot, "r");
-        stickDist = point_distance(0, 0, gamepad_axis_value(global.gp_slot, gp_axisrh), gamepad_axis_value(global.gp_slot, gp_axisrv) );
-        if( stickDist &gt; 0 ) 
-        {
-            if( stickDir &gt;= 315 or stickDir &lt;= 45 )
-                { rot = 'r'; }
-            else if( stickDir &gt; 45 and stickDir &lt; 135 )
-                { rot = 'u'; }
-            else if( stickDir &gt;= 135 and stickDir &lt;= 225 )
-                { rot = 'l'; }
-            else if( stickDir &gt; 225 and stickDir &lt; 315 )
-                { rot = 'd'; }        
+        if( gamepad_button_check_pressed(global.gp_slot, gp_face3) ) //X
+        {  
+            h = collision_point(rhythm_left+((rhythm_width/lanes)*.5), judgement.y, obj_rhy_base, false, true);
+            if( h != noone) //Check if there is a peice in the judgement line
+                { h.alarm[0] = 1; }
         }
-               
-        //Move around
-        if(gamepad_button_check_pressed(global.gp_slot, gp_padu)) //dpad_up first press
-            { y-=32; }
-        if(gamepad_button_check(global.gp_slot, gp_padu)) //dpad_up hold
-            {  dPad[0] += delta_time/1000000; } //Adds how many seconds the button has been held
-        else { dPad[0] = 0; } 
-        
-        if(gamepad_button_check_pressed(global.gp_slot, gp_padd)) //dpad_down first press
-            { y+=32; }
-        if(gamepad_button_check(global.gp_slot, gp_padd)) //dpad_down hold
-            {  dPad[2] += delta_time/1000000; } //Adds how many seconds the button has been held 
-        else { dPad[2] = 0; } 
-        
-        if(gamepad_button_check_pressed(global.gp_slot, gp_padl)) //dpad_left first press
-            { x-=32; }
-        if(gamepad_button_check(global.gp_slot, gp_padl)) //dpad_left hold
-            {  dPad[3] += delta_time/1000000; } //Adds how many seconds the button has been held 
-        else { dPad[3] = 0; } 
-        
-        if(gamepad_button_check_pressed(global.gp_slot, gp_padr)) //dpad_right first press
-            { x+=32; }
-        if(gamepad_button_check(global.gp_slot, gp_padr)) //dpad_right hold
-            {  dPad[1] += delta_time/1000000; } //Adds how many seconds the button has been held 
-        else { dPad[1] = 0; } 
-        
-        
-        //Every half second, try to move again
-        if( dPad[0]%1 &gt;= MOVE_REPEAT_DELAY ) 
-        { 
-            dPad[0] = 0;
-            y-=32;
+        if( gamepad_button_check_pressed(global.gp_slot, gp_face1) ) //A
+        {  
+            h = collision_point(rhythm_left+((rhythm_width/lanes)*1.5), judgement.y, obj_rhy_base, false, true);
+            if( h != noone) //Check if there is a peice in the judgement line
+                { h.alarm[0] = 1; }
         }
-        if( dPad[1]%1 &gt;= MOVE_REPEAT_DELAY ) 
-        { 
-            dPad[1] = 0;
-            x+=32;
+        if( gamepad_button_check_pressed(global.gp_slot, gp_face2) ) //B
+        {  
+            h = collision_point(rhythm_left+((rhythm_width/lanes)*2.5), judgement.y, obj_rhy_base, false, true);
+            if( h != noone) //Check if there is a peice in the judgement line
+                { h.alarm[0] = 1; }
         }
-        if( dPad[2]%1 &gt;= MOVE_REPEAT_DELAY ) 
-        { 
-            dPad[2] = 0;
-            y+=32;
+        if( gamepad_button_check_pressed(global.gp_slot, gp_face4) ) //Y
+        {  
+            h = collision_point(rhythm_left+((rhythm_width/lanes)*3.5), judgement.y, obj_rhy_base, false, true);
+            if( h != noone) //Check if there is a peice in the judgement line
+                { h.alarm[0] = 1; }
         }
-        if( dPad[3]%1 &gt;= MOVE_REPEAT_DELAY ) 
-        { 
-            dPad[3] = 0;
-            x-=32;
-        }
-        
-        
-        if( !checkMove(id, x, oldY) ) //Can they move to the new x?
-            { x = oldX; }   //If not, move back
-        
-        if( !checkMove(id, oldX, y) ) //Can they move to the new Y?
-            { y = oldY; }
-    }
-}
-
-if(global.gp_slot != -1)
-{
-    if( gamepad_button_check_pressed(global.gp_slot, gp_face3) ) //X
-    {  
-        h = collision_point(rhythm_left+((rhythm_width/lanes)*.5), judgement.y, obj_rhy_base, false, true);
-        if( h != noone) //Check if there is a peice in the judgement line
-            { h.alarm[0] = 1; }
-    }
-    if( gamepad_button_check_pressed(global.gp_slot, gp_face1) ) //A
-    {  
-        h = collision_point(rhythm_left+((rhythm_width/lanes)*1.5), judgement.y, obj_rhy_base, false, true);
-        if( h != noone) //Check if there is a peice in the judgement line
-            { h.alarm[0] = 1; }
-    }
-    if( gamepad_button_check_pressed(global.gp_slot, gp_face2) ) //B
-    {  
-        h = collision_point(rhythm_left+((rhythm_width/lanes)*2.5), judgement.y, obj_rhy_base, false, true);
-        if( h != noone) //Check if there is a peice in the judgement line
-            { h.alarm[0] = 1; }
-    }
-    if( gamepad_button_check_pressed(global.gp_slot, gp_face4) ) //Y
-    {  
-        h = collision_point(rhythm_left+((rhythm_width/lanes)*3.5), judgement.y, obj_rhy_base, false, true);
-        if( h != noone) //Check if there is a peice in the judgement line
-            { h.alarm[0] = 1; }
     }
 }
 </string>
@@ -353,6 +359,11 @@ draw_rectangle( (view_wview[0]/2)-(width/2), height, (view_wview[0]/2)+(width/2)
 
 if( global.master.turn == 'p' ) { draw_set_color(global.master.my_green); } 
 else if( global.master.turn == 'e') { draw_set_color(global.master.my_red); }
+else if( global.master.previousTurn != 'n/a' )
+{
+    if( global.master.previousTurn == 'p' ) { draw_set_color(global.master.my_green); } 
+    else if( global.master.previousTurn == 'e') { draw_set_color(global.master.my_red); }
+}
 
 draw_set_alpha(1);
 draw_rectangle( (view_wview[0]/2)-(width/2), height, (view_wview[0]/2)-(width/2)+(time/timeLimit*width), height*2, false );
@@ -376,6 +387,19 @@ else if(global.master.turn == 'e')
 {
     draw_set_color(global.master.my_red);
     draw_rectangle(view_wview[0]/2+width/2, height, view_wview[0]/2+width/2+height, height*2, false);
+}
+else if(global.master.previousTurn != 'n/a')
+{
+    if(global.master.previousTurn == 'p')
+    {
+        draw_set_color(global.master.my_green);
+        draw_rectangle(view_wview[0]/2+width/2, 0, view_wview[0]/2+width/2+height, height, false);
+    }
+    else if(global.master.previousTurn == 'e')
+    {
+        draw_set_color(global.master.my_red);
+        draw_rectangle(view_wview[0]/2+width/2, height, view_wview[0]/2+width/2+height, height*2, false);
+    }
 }
 draw_set_alpha(alpha);
 draw_set_color(c_black);
@@ -472,7 +496,7 @@ draw_set_halign(fa_left);
             <kind>1</kind>
             <string>if(global.master.turn == 'p') 
     { draw_sprite(asset_get_index("spr_p_" + rot), 0, x, y); }
-else if (global.master.turn == 'e')
+else if (global.master.turn == 'e' or global.master.turn == 'pause')
     { draw_sprite_ext(asset_get_index("spr_p_" + rot), 0, x, y, 1, 1, 0, global.darkened, 1); }
 </string>
           </argument>

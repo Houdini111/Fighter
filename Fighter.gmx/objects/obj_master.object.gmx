@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-11</depth>
+  <depth>-20</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -28,6 +28,7 @@
             <string>debug_ui = false;
 
 turn = 'p';
+previousTurn = 'n/a';
 
 global.tileSize = 32;
 
@@ -70,7 +71,17 @@ global.rhy = ds_list_create();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(turn == 'p')
+            <string>if( global.gp_slot != -1 and gamepad_button_check_pressed(global.gp_slot, gp_start) )
+{ 
+    if(turn == 'pause') { turn = previousTurn; }
+    else
+    { 
+        previousTurn = turn;
+        turn = 'pause'; 
+    }
+}
+
+if(turn == 'p')
 {
     time -= delta_time/1000000; //Convert to full seconds and subtract
     
@@ -143,7 +154,21 @@ else if (turn == 'e')
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(debug_ui)
+            <string>if(turn == 'pause')
+{
+    draw_set_alpha(0.4);
+    draw_set_color(c_black);
+    draw_rectangle(0, 0, view_wport[0], view_hport[0], false);
+    draw_set_alpha(1);
+    
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+    draw_text_shadow(view_wport[0]/2, view_hport[0]/2, "PAUSED", fnt_title, 5, c_black, c_white);
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_top);
+}
+
+if(debug_ui)
 {   
     draw_set_font(fnt_debug);
     //pathfinding grid 
@@ -178,6 +203,9 @@ else if (turn == 'e')
         text+="BTN_LB: "+string(gamepad_button_check(global.gp_slot, gp_shoulderl))+"#";
         text+="BTN_RB: "+string(gamepad_button_check(global.gp_slot, gp_shoulderr))+"#";
         text+="#";
+        text+="START: "+string(gamepad_button_check(global.gp_slot, gp_start))+"#";
+        text+="SELECT: "+string(gamepad_button_check(global.gp_slot, gp_select))+"#";
+        text+="#";
         text+="HELD_UP: "+string(global.player.dPad[0])+"/"+string(global.player.MOVE_REPEAT_DELAY)+"#";
         text+="HELD_RIGHT: "+string(global.player.dPad[1])+"/"+string(global.player.MOVE_REPEAT_DELAY)+"#";
         text+="HELD_DOWN: "+string(global.player.dPad[2])+"/"+string(global.player.MOVE_REPEAT_DELAY)+"#";
@@ -193,6 +221,7 @@ else if (turn == 'e')
     
     draw_text( view_wview[0]/2, global.player.height*0.5, string(global.player.myHealth)+"/"+string(global.player.maxHealth) );
     draw_text( view_wview[0]/2, global.player.height*1.5, string(time)+"/"+string(timeLimit) );
+    draw_text( (view_wview[0]+global.player.width+global.player.height)/2, global.player.height, turn );
     
     draw_set_halign(fa_left);
     draw_set_valign(fa_top);

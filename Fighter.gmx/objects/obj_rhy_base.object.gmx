@@ -113,7 +113,8 @@ if(y &lt;= top) { global.player.myHealth -= global.player.maxHealth*0.1; }
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>y -= delta_time/10000*global.master.rhy_speed;
+            <string>if( global.master.turn == 'p' or global.master.turn == 'e')
+    { y -= delta_time/10000*global.master.rhy_speed; }
 
 if(y+height &lt; top) { instance_destroy(); }
 </string>
