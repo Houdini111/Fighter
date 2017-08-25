@@ -235,12 +235,19 @@ if(debug_ui)
     draw_line(global.player.rhythm_left, global.player.rhythm_top+global.player.rhythm_height, global.player.rhythm_left, view_hport[0]);
     draw_line(global.player.rhythm_left+global.player.rhythm_width, global.player.rhythm_top+global.player.rhythm_height, global.player.rhythm_left+global.player.rhythm_width, view_hport[0]);
     draw_line(global.player.rhythm_left+(global.player.rhythm_width*(time%1)), global.player.rhythm_top+global.player.rhythm_height, global.player.rhythm_left+(global.player.rhythm_width*(time%1)), view_hport[0]);
+    
+    draw_set_halign(fa_right);
+    text = string(global.player.state);
+    draw_text_shadow(view_wport[0]-10, 10, text, fnt_debug, 2, c_black, c_white);
+    draw_set_halign(fa_left);
 }
-
+/*
 text=""
 for(i = 0; i &lt; ds_list_size(global.rhy); i++)
     { text += string( object_get_name(ds_list_find_value(global.rhy, i).object_index ) ) + ", "; }
 draw_text_shadow(10, 700, text, fnt_debug, 2, c_black, c_white);
+*/
+
 </string>
           </argument>
         </arguments>

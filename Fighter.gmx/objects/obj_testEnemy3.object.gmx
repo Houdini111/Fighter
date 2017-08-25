@@ -27,6 +27,11 @@
             <kind>1</kind>
             <string>event_inherited();
 
+maxHealth = 150;
+myHealth = maxHealth;
+atk = 150;
+def = 100;
+
 moveSpeed = 0.25; //In seconds
 attackSpeed = 2; //In seconds
 
@@ -34,8 +39,6 @@ pattern = 3;
 range = 1;
 
 sightRange = 360; //In pixels (half of the width of the screen)
-
-damage = 0.20;
 </string>
           </argument>
         </arguments>

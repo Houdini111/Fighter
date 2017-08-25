@@ -13,7 +13,7 @@ draw_set_color(c_white);
 draw_circle(argument1+argument3/2, argument2+argument3/2, argument3*.9/2-2, false);
 
 draw_set_color(c_black);
-draw_set_font(myFont);
+draw_set_font(fnt_myFont);
 w = string_width(string_upper(argument0))*scale;
 h = string_height(string_upper(argument0))*scale;
 draw_text_transformed(argument1+(argument3-w)/2, argument2+(argument3-h)/2, string_upper(argument0), scale, scale, 0);

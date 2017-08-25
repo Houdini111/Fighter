@@ -6,6 +6,7 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
+    <sprite>sprites\spr_p</sprite>
     <sprite>sprites\spr_p_u</sprite>
     <sprite>sprites\spr_p_r</sprite>
     <sprite>sprites\spr_p_d</sprite>
@@ -46,7 +47,7 @@
       <script>scripts\gp_update.gml</script>
     </scripts>
     <script>scripts\array.gml</script>
-    <script>scripts\checkMove.gml</script>
+    <script>scripts\check_move.gml</script>
     <script>scripts\comboItem.gml</script>
     <script>scripts\draw_gradient_line.gml</script>
     <script>scripts\draw_text_shadow.gml</script>
@@ -54,9 +55,10 @@
     <script>scripts\e_pathfind.gml</script>
     <script>scripts\judgement_line.gml</script>
     <script>scripts\nextState.gml</script>
+    <script>scripts\p_attack.gml</script>
     <script>scripts\peice.gml</script>
+    <script>scripts\damage_calculation.gml</script>
   </scripts>
-  <shaders name="shaders"/>
   <fonts name="fonts">
     <font>fonts\fnt_myFont</font>
     <font>fonts\fnt_title</font>
@@ -92,7 +94,6 @@
       <object>objects\obj_testEnemy3</object>
       <object>objects\obj_testEnemy4</object>
     </objects>
-    <object>objects\obj_atk_hb</object>
     <objects name="rhythm_objs">
       <object>objects\obj_rhy_judgement_line</object>
       <object>objects\obj_rhy_base</object>
