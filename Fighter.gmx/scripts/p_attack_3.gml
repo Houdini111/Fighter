@@ -1,9 +1,7 @@
-///p_attack(player, pattern[, _bonus_atk_mult])
-_pl = argument[0];
-_pa = argument[1];
-_b = "n/a";
-
-if(argument_count == 3) { _b = argument[2]; }
+///p_attack(player, pattern)
+_pl = argument0;
+_pa = argument1;
+_mult = argument2;
 
 _hit = ds_list_create();
 
@@ -20,14 +18,7 @@ if( _pa == 1 )
     
     e = ds_list_find_value(_hit, 0);
     
-    if( ds_list_find_value(_hit, 0) != noone ) 
-    { 
-        damage = 0;
-        if( _b == "n/a" ) { damage = damage_calculation(_pl, e); }
-        else { damage = damage_calculation(_pl, e, _b); }
-        show_debug_message(damage);
-        e.myHealth -= damage;
-    } 
+    if( ds_list_find_value(_hit, 0) != noone ) { e.myHealth -= damage_calculation(_pl, e, _mult); }
 }
 
 else if( _pa == 2 )
@@ -43,14 +34,7 @@ else if( _pa == 2 )
     
     e = ds_list_find_value(_hit, 0);
         
-    if( ds_list_find_value(_hit, 0) != noone ) 
-    { 
-        damage = 0;
-        if( _b == "n/a" ) { damage = damage_calculation(_pl, e); }
-        else { damage = damage_calculation(_pl, e, _b); }
-        show_debug_message(damage);
-        e.myHealth -= damage;
-    }
+    if( e != noone ) { e.myHealth -= damage_calculation(_pl, e, _mult); }
 }
 
 else if( _pa == 3 )
@@ -78,14 +62,7 @@ else if( _pa == 3 )
     
     for(i = 0; i < ds_list_size(_hit); i++)
     {
-        damage = 0;
         e = ds_list_find_value(_hit, i);
-        if( e != noone ) 
-        { 
-            if( _b == "n/a" ) { damage = damage_calculation(_pl, e); }
-            else { damage = damage_calculation(_pl, e, _b); }
-            show_debug_message(damage);
-            e.myHealth -= damage;
-        }
+        if( e != noone ) { e.myHealth -= damage_calculation(_pl, e, _mult); }
     }
 }

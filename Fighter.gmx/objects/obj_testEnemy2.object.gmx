@@ -29,7 +29,7 @@
 
 maxHealth = 100;
 myHealth = maxHealth;
-atk = 100;
+atk = 70;
 def = 100;
 
 moveSpeed = 0.25; //In seconds
