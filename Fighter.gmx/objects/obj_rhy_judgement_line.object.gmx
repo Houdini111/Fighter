@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_gradient_line(x, y, x+width, y, 10, 10, c_white);
+            <string>if( global.master.ui ) { draw_gradient_line(x, y, x+width, y, 10, 10, c_white); }
 </string>
           </argument>
         </arguments>

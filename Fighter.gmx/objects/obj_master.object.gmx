@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>debug_ui = false;
+            <string>ui = true;
+debug_ui = false;
 
 turn = 'p';
 previousTurn = 'n/a';
@@ -128,10 +129,8 @@ else if (turn == 'e')
             <kind>1</kind>
             <string>if( gamepad_button_check_pressed(global.gp_slot, gp_select)
     or keyboard_check_pressed(vk_f3) )
-{ 
-    debug_ui = !debug_ui; 
-    show_debug_overlay(debug_ui);
-}
+    { debug_ui = !debug_ui; }
+if( keyboard_check_pressed(vk_f4) ) { ui = !ui; }
 </string>
           </argument>
         </arguments>

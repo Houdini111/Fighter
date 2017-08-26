@@ -16,7 +16,7 @@ for (i = 0; i < gp_num; i++)
     else
         { global.gp[i] = false; }
     
-    show_debug_message("SLOT " + string(i) + ": " + string(global.gp[i])); 
+    show_debug_message("SLOT " + string(i) + ": " + string(global.gp[i]) + " > " + string(gamepad_get_description(i))); 
 }
 show_debug_message("++++++++++++++++++++++++");
 if(global.gp_slot != -1)

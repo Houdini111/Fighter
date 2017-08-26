@@ -7,32 +7,38 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_p</sprite>
-    <sprite>sprites\spr_p_u</sprite>
-    <sprite>sprites\spr_p_r</sprite>
-    <sprite>sprites\spr_p_d</sprite>
-    <sprite>sprites\spr_p_l</sprite>
     <sprite>sprites\spr_e</sprite>
     <sprites name="map_tiles">
       <sprite>sprites\tile_ERR</sprite>
       <sprite>sprites\tile_void</sprite>
-      <sprite>sprites\tile_wall_N</sprite>
-      <sprite>sprites\tile_wall_S</sprite>
-      <sprite>sprites\tile_wall_E</sprite>
-      <sprite>sprites\tile_wall_W</sprite>
-      <sprite>sprites\tile_concave_NE</sprite>
-      <sprite>sprites\tile_concave_SE</sprite>
-      <sprite>sprites\tile_concave_SW</sprite>
-      <sprite>sprites\tile_concave_NW</sprite>
-      <sprite>sprites\tile_convex_NE</sprite>
-      <sprite>sprites\tile_convex_SE</sprite>
-      <sprite>sprites\tile_convex_SW</sprite>
-      <sprite>sprites\tile_convex_NW</sprite>
       <sprite>sprites\tile_tiled</sprite>
       <sprite>sprites\tile_cobble</sprite>
-    </sprites>
-    <sprites name="attack_patterns">
-      <sprite>sprites\spr_basic1</sprite>
-      <sprite>sprites\spr_hb_flower</sprite>
+      <sprites name="wall">
+        <sprite>sprites\tile_wall_S</sprite>
+        <sprite>sprites\tile_wall_N</sprite>
+        <sprite>sprites\tile_wall_W</sprite>
+        <sprite>sprites\tile_wall_E</sprite>
+        <sprite>sprites\tile_concave_SE</sprite>
+        <sprite>sprites\tile_concave_SW</sprite>
+        <sprite>sprites\tile_concave_NE</sprite>
+        <sprite>sprites\tile_concave_NW</sprite>
+        <sprite>sprites\tile_convex_SE</sprite>
+        <sprite>sprites\tile_convex_SW</sprite>
+        <sprite>sprites\tile_convex_NE</sprite>
+        <sprite>sprites\tile_convex_NW</sprite>
+        <sprite>sprites\tile_wall_N2</sprite>
+        <sprite>sprites\tile_wall_E2</sprite>
+        <sprite>sprites\tile_wall_S2</sprite>
+        <sprite>sprites\tile_wall_W2</sprite>
+        <sprite>sprites\tile_concave_NE2</sprite>
+        <sprite>sprites\tile_concave_SE2</sprite>
+        <sprite>sprites\tile_concave_SW2</sprite>
+        <sprite>sprites\tile_concave_NW2</sprite>
+        <sprite>sprites\tile_convex_NE2</sprite>
+        <sprite>sprites\tile_convex_SE2</sprite>
+        <sprite>sprites\tile_convex_SW2</sprite>
+        <sprite>sprites\tile_convex_NW2</sprite>
+      </sprites>
     </sprites>
     <sprite>sprites\spr_redLine</sprite>
     <sprite>sprites\spr_rhy_base</sprite>
