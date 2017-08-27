@@ -42,6 +42,7 @@
     </sprites>
     <sprite>sprites\spr_redLine</sprite>
     <sprite>sprites\spr_rhy_base</sprite>
+    <sprite>sprites\state_ani</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
