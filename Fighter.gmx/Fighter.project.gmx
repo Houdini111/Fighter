@@ -12,7 +12,7 @@
       <sprite>sprites\tile_ERR</sprite>
       <sprite>sprites\tile_void</sprite>
       <sprite>sprites\tile_tiled</sprite>
-      <sprite>sprites\tile_cobble</sprite>
+      <sprite>sprites\old_tile_cobble</sprite>
       <sprites name="wall">
         <sprite>sprites\tile_wall_S</sprite>
         <sprite>sprites\tile_wall_N</sprite>
@@ -45,6 +45,7 @@
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
+    <background>background\tile_cobble</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -86,10 +87,6 @@
       <object>objects\obj_convex_SW</object>
       <object>objects\obj_convex_NW</object>
       <object>objects\obj_wall</object>
-    </objects>
-    <objects name="floors">
-      <object>objects\obj_cobble</object>
-      <object>objects\obj_void</object>
     </objects>
     <object>objects\obj_player</object>
     <object>objects\obj_master</object>
