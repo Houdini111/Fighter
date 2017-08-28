@@ -31,6 +31,8 @@ offsetX = 0;
 //offsetY = 0;
 
 magnitude = 10;
+
+bg_paralax_spd = 0.05;
 </string>
           </argument>
         </arguments>
@@ -101,8 +103,14 @@ alarm[1] = 15;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = global.player.x;
-y = global.player.y;
+            <string>var xDiff = global.player.x - x;
+var yDiff = global.player.y - y;
+
+x += xDiff;
+y += yDiff;
+
+background_x -= xDiff*bg_paralax_spd;
+background_y -= yDiff*bg_paralax_spd;
 
 //Move view
 view_xview = x - view_wview/2;

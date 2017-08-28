@@ -1,7 +1,7 @@
 ///check_move(who, x, y)
-_i = argument0;
-_x = argument1;
-_y = argument2;
+var _i = argument0;
+var _x = argument1;
+var _y = argument2;
 
 
 if(_i == global.player)

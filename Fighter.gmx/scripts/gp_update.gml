@@ -2,7 +2,7 @@
 
 //CONTROLLER SUPPORT
 show_debug_message("++++++++++++++++++++++++");
-gp_num = gamepad_get_device_count();
+var gp_num = gamepad_get_device_count();
 show_debug_message("DEVICE SLOTS: " + string(gp_num));
 global.gp_slot = -1;
 show_debug_message("++++++++++++++++++++++++");
@@ -23,7 +23,7 @@ if(global.gp_slot != -1)
 {
     show_debug_message("GAMEPAD SLOT: " + string(global.gp_slot));
     show_debug_message("++++++++++++++++++++++++");
-    deadzone = 0.25;
+    var deadzone = 0.25;
     gamepad_set_axis_deadzone(global.gp_slot, deadzone);
     show_debug_message("SET DEADZONE TO: " + string(deadzone));
     show_debug_message("++++++++++++++++++++++++");

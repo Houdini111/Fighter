@@ -1,6 +1,6 @@
 ///e_attack(attackingEnemy)
-e = argument0;
-p = e.pattern;
+var e = argument0;
+var p = e.pattern;
 
 if(p == 1) { peice(obj_rhy_1, e, (1-(global.master.time%1))*1000 ); }
 else if(p == 2) { peice(obj_rhy_2, e, (1-(global.master.time%1))*1000); }

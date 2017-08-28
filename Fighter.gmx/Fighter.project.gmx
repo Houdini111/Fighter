@@ -60,7 +60,6 @@
     <script>scripts\draw_gradient_line.gml</script>
     <script>scripts\draw_text_shadow.gml</script>
     <script>scripts\e_attack.gml</script>
-    <script>scripts\e_pathfind.gml</script>
     <script>scripts\judgement_line.gml</script>
     <script>scripts\nextState.gml</script>
     <script>scripts\p_attack.gml</script>

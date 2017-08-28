@@ -1,7 +1,7 @@
 ///damage_calculation(attacker, defender[, bonus_attack_mult])
-a = argument[0];
-d = argument[1];
-b = 1;
+var a = argument[0];
+var d = argument[1];
+var b = 1;
 
 if( argument_count == 3 ) { b = argument[2]; }
 
