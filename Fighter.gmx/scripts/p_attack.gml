@@ -25,7 +25,7 @@ if( _pa == 1 )
         var damage = 0;
         if( _b == "n/a" ) { damage = damage_calculation(_pl, e); }
         else { damage = damage_calculation(_pl, e, _b); }
-        show_debug_message(damage);
+        //show_debug_message(damage);
         e.myHealth -= damage;
     } 
 }
@@ -48,7 +48,7 @@ else if( _pa == 2 )
         var damage = 0;
         if( _b == "n/a" ) { damage = damage_calculation(_pl, e); }
         else { damage = damage_calculation(_pl, e, _b); }
-        show_debug_message(damage);
+        //show_debug_message(damage);
         e.myHealth -= damage;
     }
 }
@@ -84,7 +84,7 @@ else if( _pa == 3 )
         { 
             if( _b == "n/a" ) { damage = damage_calculation(_pl, e); }
             else { damage = damage_calculation(_pl, e, _b); }
-            show_debug_message(damage);
+            //show_debug_message(damage);
             e.myHealth -= damage;
         }
     }
