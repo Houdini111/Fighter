@@ -27,11 +27,6 @@
             <kind>1</kind>
             <string>path = path_add();
 
-maxHealth = 100;
-myHealth = maxHealth;
-atk = 100;
-def = 100;
-
 in_attack_pos = false;
 timeSinceMove = 0;
 time_since_attack = 0;
@@ -43,7 +38,29 @@ onspot = true; //Default true
 mp_potential_settings(maxrot, rotstep, ahead, onspot);
 
 seen = true;
-enemy_surf = surface_create(sprite_width, sprite_height);
+
+startX = x;
+startY = y;
+nextX = x;
+nextY = y;
+
+
+//SET THE FOLLOWING FOR EACH UNIQUE ENEMY
+maxHealth = 100;
+myHealth = maxHealth;
+atk = 100;
+def = 100;
+
+move_tick = 0.25; //In seconds
+attackSpeed = 1; //In seconds
+MAX_SPEED = global.gridSize/8; //How much to move divded by how may frames it should take
+
+pattern = 1;
+range = 1;
+
+sightRange = 360; //In pixels (half of the width of the screen)
+
+
 
 </string>
           </argument>
@@ -90,9 +107,11 @@ enemy_surf = surface_create(sprite_width, sprite_height);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if( path_speed &gt; 0 ) { path_speed = 0; }
-mp_grid_clear_cell(global.grid, floor(startX/global.gridSize), floor(startY/global.gridSize));
-mp_grid_add_cell(global.grid, floor(x/global.gridSize), floor(y/global.gridSize));
+            <string>if( x == nextX )
+{
+    mp_grid_clear_cell(global.grid, floor(startX/global.gridSize), floor(startY/global.gridSize));
+    mp_grid_add_cell(global.grid, floor(x/global.gridSize), floor(y/global.gridSize));
+}
 </string>
           </argument>
         </arguments>
@@ -140,14 +159,21 @@ seen = "n/a";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>startX = x;
-startY = y;
-
-if( global.master.turn == 'e')
+            <string>if( global.master.turn == 'e')
 {
     timeSinceMove += delta_time/1000000;
     
-    if( timeSinceMove &gt;= moveSpeed )
+    if( (nextX != x) or (nextY != y) )
+    {
+        if( nextX &gt; x ) { x += min( MAX_SPEED, nextX-x ); }
+        else { x -= min( MAX_SPEED, x-nextX ); }
+        
+        if( nextY &gt; y ) { y += min( MAX_SPEED, nextY-y ); }
+        else { y -= min( MAX_SPEED, y-nextY ); }
+    }
+    
+    
+    if( timeSinceMove &gt;= move_tick )
     {
         if ( !path_exists(path) )
             { path = path_add(); }   
@@ -164,104 +190,57 @@ if( global.master.turn == 'e')
             path_delete(path);
             path = path_add();
             
-            placesX = ds_list_create();
-            placesY = ds_list_create();
-            
-            _x = global.player.x;
-            _y = global.player.y;
-            
-            //Check the top to right side (not including the right side)
-            for(_y = global.player.y - range*global.gridSize; _y &lt; global.player.y; _y += global.gridSize)
-            {
-                if( mp_grid_get_cell(global.grid, floor(_x/global.gridSize), floor(_y/global.gridSize)) == 0 )
-                { 
-                    ds_list_add( placesX, _x);
-                    ds_list_add( placesY, _y);
-                }
-            
-                _x += global.gridSize;
-            }
-            //Check the right to bottom side (not including the bottom side)
-            for(_x = global.player.x + range*global.gridSize; _x &gt; global.player.x; _x -= global.gridSize)
-            {
-                if( mp_grid_get_cell(global.grid, floor(_x/global.gridSize), floor(_y/global.gridSize)) == 0 )
-                { 
-                    ds_list_add( placesX, _x);
-                    ds_list_add( placesY, _y);
-                }
-            
-                _y += global.gridSize;
-            }
-            //Check the bottom to left side (not including the left side)
-            for(_y = global.player.y + range*global.gridSize; _y &gt; global.player.y; _y -= global.gridSize)
-            {
-                if( mp_grid_get_cell(global.grid, floor(_x/global.gridSize), floor(_y/global.gridSize)) == 0 )
-                { 
-                    ds_list_add( placesX, _x);
-                    ds_list_add( placesY, _y);
-                }
-                _x -= global.gridSize;
-            }
-            
-            //Check the right to bottom side (not including the bottom side)
-            for(_x = global.player.x - range*global.gridSize; _x &lt; global.player.x; _x += global.gridSize)
-            {
-                if( mp_grid_get_cell(global.grid, floor(_x/global.gridSize), floor(_y/global.gridSize)) == 0 )
-                { 
-                    ds_list_add( placesX, _x);
-                    ds_list_add( placesY, _y);
-                }
-                _y -= global.gridSize;
-            }
+            var places = e_check_spots(global.player, global.gridSize, range, global.grid);            
             
             //If there is an available spot
-            if(ds_list_size(placesX) &gt; 0)
+            if(ds_list_size(places[0]) &gt; 0)
             {
-                goalX = ds_list_find_value(placesX, 0);
-                goalY = ds_list_find_value(placesY, 0);
+                goalX = ds_list_find_value(places[0], 0);
+                goalY = ds_list_find_value(places[1], 0);
                 //Find the closest open spot   
-                for(i = 0; i &lt; ds_list_size(placesX); i++)
+                for(i = 0; i &lt; ds_list_size(places[1]); i++)
                 {
-                    if( distance_to_point(goalX, goalY) &gt; distance_to_point( ds_list_find_value(placesX, i), ds_list_find_value(placesY, i) ) )
+                    if( distance_to_point(goalX, goalY) &gt; distance_to_point( ds_list_find_value(places[0], i), ds_list_find_value(places[1], i) ) )
                     {
-                        goalX = ds_list_find_value(placesX, i);
-                        goalY = ds_list_find_value(placesY, i)
+                        goalX = ds_list_find_value(places[0], i);
+                        goalY = ds_list_find_value(places[1], i)
                     }
                 }
                 
                 
                 if( mp_grid_path(global.grid, path, x, y, goalX, goalY, false) )
                 { 
-                    path_start(path, 32, path_action_stop, false); 
                     timeSinceMove = 0;
-                    path_speed = global.tileSize;
                     
-                    len = path_get_length(path);
+                    var len = path_get_length(path); 
+                    startX = x;
+                    startY = y;
                     nextX = path_get_x(path, 32/len);
                     nextY = path_get_y(path, 32/len);
                     mp_grid_add_cell(global.grid, floor(nextX/global.gridSize), floor(nextY/global.gridSize));
                 }
+                    
             }
               
             mp_grid_add_cell(global.grid, floor(x/global.gridSize), floor(y/global.gridSize));  
-            ds_list_destroy(placesX);
-            ds_list_destroy(placesY);
+            ds_list_destroy(places[0]);
+            ds_list_destroy(places[1]);
         }
     }
     
-    if(!in_attack_pos)
+
+    
+    var myGridX = floor(x/global.tileSize);
+    var myGridY = floor(y/global.tileSize);
+    var pGridX = floor(global.player.x/global.tileSize);
+    var pGridY = floor(global.player.y/global.tileSize);
+    
+    if( abs(myGridX - pGridX) + abs(myGridY - pGridY) &lt;= range )
     {
-        myGridX = floor(x/global.tileSize);
-        myGridY = floor(y/global.tileSize);
-        pGridX = floor(global.player.x/global.tileSize);
-        pGridY = floor(global.player.y/global.tileSize);
-        
-        if( abs(myGridX - pGridX) + abs(myGridY - pGridY) &lt;= range )
-        {
-            in_attack_pos = true;
-            time_since_attack = attackSpeed;
-        }   
-    }
+        in_attack_pos = true;
+        //time_since_attack = attackSpeed;
+    }   
+    
     
     if(in_attack_pos)
     {

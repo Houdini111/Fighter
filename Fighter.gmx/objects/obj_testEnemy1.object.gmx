@@ -32,7 +32,7 @@ myHealth = maxHealth;
 atk = 70;
 def = 100;
 
-moveSpeed = 0.25; //In seconds
+move_tick = 0.25; //In seconds
 attackSpeed = 1; //In seconds
 
 pattern = 1;

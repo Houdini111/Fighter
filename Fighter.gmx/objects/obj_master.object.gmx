@@ -53,6 +53,10 @@ global.rhy = ds_list_create();
 
 
 global.wall_surf = surface_create(room_width, room_height);
+
+
+
+frame = 0;
 </string>
           </argument>
         </arguments>
@@ -108,6 +112,8 @@ else if (turn == 'e')
 
 
 
+
+frame++;
 </string>
           </argument>
         </arguments>

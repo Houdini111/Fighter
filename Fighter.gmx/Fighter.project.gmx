@@ -67,6 +67,7 @@
     <script>scripts\damage_calculation.gml</script>
     <script>scripts\collision_line_point.gml</script>
     <script>scripts\fov.gml</script>
+    <script>scripts\e_check_spots.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_myFont</font>
