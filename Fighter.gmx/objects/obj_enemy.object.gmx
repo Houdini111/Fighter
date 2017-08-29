@@ -41,6 +41,8 @@ rotstep = 10; //Default 10
 ahead = 3; //Default 5
 onspot = true; //Default true
 mp_potential_settings(maxrot, rotstep, ahead, onspot);
+
+
 </string>
           </argument>
         </arguments>

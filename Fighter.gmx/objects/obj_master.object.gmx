@@ -50,6 +50,9 @@ my_red = make_color_hsv(2, 191, 210); //Red
 my_orange = make_color_hsv(20, 191, 210); //Orange 
 
 global.rhy = ds_list_create();
+
+
+global.wall_surf = surface_create(room_width, room_height);
 </string>
           </argument>
         </arguments>
@@ -129,8 +132,36 @@ else if (turn == 'e')
             <kind>1</kind>
             <string>if( gamepad_button_check_pressed(global.gp_slot, gp_select)
     or keyboard_check_pressed(vk_f3) )
-    { debug_ui = !debug_ui; }
+{ 
+    debug_ui = !debug_ui; 
+    show_debug_overlay(debug_ui);
+}
 if( keyboard_check_pressed(vk_f4) ) { ui = !ui; }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="73">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_set_alpha(0.4);
+draw_surface(global.wall_surf, 0, 0);
+draw_set_alpha(1);
 </string>
           </argument>
         </arguments>
@@ -199,6 +230,9 @@ if(debug_ui)
         text+="RSTK_Y: "+string(gamepad_axis_value(global.gp_slot, gp_axisrv))+"#";
         text+="RSTK_DIR: "+string( gp_direction(global.gp_slot, "r") )+"#";
         text+="#";
+        text+="L_STK: "+string(gamepad_button_check(global.gp_slot, gp_stickl))+"#";
+        text+="R_STK: "+string(gamepad_button_check(global.gp_slot, gp_stickr))+"#";
+        text+="#";
         text+="BTN_LB: "+string(gamepad_button_check(global.gp_slot, gp_shoulderl))+"#";
         text+="BTN_RB: "+string(gamepad_button_check(global.gp_slot, gp_shoulderr))+"#";
         text+="#";
@@ -240,6 +274,7 @@ if(debug_ui)
     draw_text_shadow(view_wport[0]-10, 10, text, fnt_debug, 2, c_black, c_white);
     draw_set_halign(fa_left);
 }
+
 /*
 text=""
 for(i = 0; i &lt; ds_list_size(global.rhy); i++)
