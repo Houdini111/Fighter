@@ -66,7 +66,7 @@
     <script>scripts\peice.gml</script>
     <script>scripts\damage_calculation.gml</script>
     <script>scripts\collision_line_point.gml</script>
-    <script>scripts\draw_fov_primitive.gml</script>
+    <script>scripts\fov.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_myFont</font>

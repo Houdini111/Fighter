@@ -1,4 +1,4 @@
-///draw_fov_primitive(x, y, radius, dir, angle_width_in_deg, circle_precision_dec, precise, obj)
+///fov(x, y, radius, dir, angle_width_in_deg, circle_precision_dec, precise, obj)
 var x_1 = argument0;
 var y_1 = argument1;
 var r = argument2;
@@ -15,7 +15,10 @@ draw_vertex(x_1, y_1);
 for( i=dir-ang/2; i < dir+ang/2; i += ang/c_prec )
 {
     var p = collision_line_point(x_1, y_1, x_1+lengthdir_x(r, i), y_1+lengthdir_y(r, i), obj, prec, true);
+    var e = collision_line(x_1, y_1, p[1], p[2], obj_enemy, false, true);
     draw_vertex(p[1], p[2]);
+    if( e != noone )
+        { if ( object_is_ancestor(e.object_index, obj_enemy) ) { e.seen = true; } }
 }
 draw_primitive_end();
 

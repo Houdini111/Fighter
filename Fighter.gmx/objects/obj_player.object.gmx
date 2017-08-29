@@ -52,7 +52,7 @@ MOVE_REPEAT_DELAY = 0.25;
 
 
 fov_surf = surface_create(room_width, room_height);
-fov = 90;
+fov_size = 120;
 
 
 
@@ -185,7 +185,9 @@ else
 {
     if(!surface_exists(fov_surf)) { fov_surf = surface_create(room_width, room_height); }
     surface_set_target(fov_surf);
-    draw_clear(c_white);
+    draw_clear(c_ltgray);
+    draw_set_color(c_black);
+    fov(x, y, 1000, rot, fov_size, fov_size/1, false, obj_wall);
     surface_reset_target();
     
     if(global.master.turn == 'p')
@@ -561,13 +563,7 @@ else
           <argument>
             <kind>1</kind>
             <string>if( surface_exists( fov_surf ) ) 
-{
-    draw_set_color(c_black);
-    surface_set_target(fov_surf);
-    draw_fov_primitive(x, y, 1000, rot, fov, fov/1, false, obj_wall);
-    surface_reset_target();
-    
-    
+{    
     draw_set_blend_mode(bm_subtract); 
     draw_surface(fov_surf, 0, 0); 
     draw_set_blend_mode(bm_normal);
