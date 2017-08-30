@@ -13,36 +13,40 @@
       <sprite>sprites\tile_void</sprite>
       <sprite>sprites\tile_tiled</sprite>
       <sprite>sprites\old_tile_cobble</sprite>
-      <sprites name="wall">
-        <sprite>sprites\tile_wall_S</sprite>
-        <sprite>sprites\tile_wall_N</sprite>
-        <sprite>sprites\tile_wall_W</sprite>
-        <sprite>sprites\tile_wall_E</sprite>
-        <sprite>sprites\tile_concave_SE</sprite>
-        <sprite>sprites\tile_concave_SW</sprite>
-        <sprite>sprites\tile_concave_NE</sprite>
-        <sprite>sprites\tile_concave_NW</sprite>
-        <sprite>sprites\tile_convex_SE</sprite>
-        <sprite>sprites\tile_convex_SW</sprite>
-        <sprite>sprites\tile_convex_NE</sprite>
-        <sprite>sprites\tile_convex_NW</sprite>
-        <sprite>sprites\tile_wall_N2</sprite>
-        <sprite>sprites\tile_wall_E2</sprite>
-        <sprite>sprites\tile_wall_S2</sprite>
-        <sprite>sprites\tile_wall_W2</sprite>
-        <sprite>sprites\tile_concave_NE2</sprite>
-        <sprite>sprites\tile_concave_SE2</sprite>
-        <sprite>sprites\tile_concave_SW2</sprite>
-        <sprite>sprites\tile_concave_NW2</sprite>
-        <sprite>sprites\tile_convex_NE2</sprite>
-        <sprite>sprites\tile_convex_SE2</sprite>
-        <sprite>sprites\tile_convex_SW2</sprite>
-        <sprite>sprites\tile_convex_NW2</sprite>
-      </sprites>
+    </sprites>
+    <sprites name="wall">
+      <sprite>sprites\tile_wall_S</sprite>
+      <sprite>sprites\tile_wall_N</sprite>
+      <sprite>sprites\tile_wall_W</sprite>
+      <sprite>sprites\tile_wall_E</sprite>
+      <sprite>sprites\tile_concave_SE</sprite>
+      <sprite>sprites\tile_concave_SW</sprite>
+      <sprite>sprites\tile_concave_NE</sprite>
+      <sprite>sprites\tile_concave_NW</sprite>
+      <sprite>sprites\tile_convex_SE</sprite>
+      <sprite>sprites\tile_convex_SW</sprite>
+      <sprite>sprites\tile_convex_NE</sprite>
+      <sprite>sprites\tile_convex_NW</sprite>
+      <sprite>sprites\tile_wall_N2</sprite>
+      <sprite>sprites\tile_wall_E2</sprite>
+      <sprite>sprites\tile_wall_S2</sprite>
+      <sprite>sprites\tile_wall_W2</sprite>
+      <sprite>sprites\tile_concave_NE2</sprite>
+      <sprite>sprites\tile_concave_SE2</sprite>
+      <sprite>sprites\tile_concave_SW2</sprite>
+      <sprite>sprites\tile_concave_NW2</sprite>
+      <sprite>sprites\tile_convex_NE2</sprite>
+      <sprite>sprites\tile_convex_SE2</sprite>
+      <sprite>sprites\tile_convex_SW2</sprite>
+      <sprite>sprites\tile_convex_NW2</sprite>
     </sprites>
     <sprite>sprites\spr_redLine</sprite>
     <sprite>sprites\spr_rhy_base</sprite>
     <sprite>sprites\state_ani</sprite>
+    <sprites name="puzzle_peices">
+      <sprite>sprites\spr_switch</sprite>
+      <sprite>sprites\spr_toggle_wall</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -68,6 +72,9 @@
     <script>scripts\collision_line_point.gml</script>
     <script>scripts\fov.gml</script>
     <script>scripts\e_check_spots.gml</script>
+    <scripts name="puzzle logic">
+      <script>scripts\create_toggle.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_myFont</font>
@@ -109,6 +116,12 @@
       <object>objects\obj_rhy_4</object>
     </objects>
     <object>objects\obj_camera</object>
+    <objects name="puzzle peices">
+      <object>objects\obj_toggle_wall</object>
+      <object>objects\obj_toggle</object>
+      <object>objects\obj_interactable</object>
+    </objects>
+    <object>objects\obj_impassable</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_testDungeon</room>
