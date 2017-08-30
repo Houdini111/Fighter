@@ -50,9 +50,9 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
-    <scripts name="gp">
-      <script>scripts\gp_direction.gml</script>
-      <script>scripts\gp_update.gml</script>
+    <scripts name="input">
+      <script>scripts\gp_check.gml</script>
+      <script>scripts\in_update.gml</script>
     </scripts>
     <script>scripts\array.gml</script>
     <script>scripts\check_move.gml</script>

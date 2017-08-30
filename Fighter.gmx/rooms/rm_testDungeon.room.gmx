@@ -32,7 +32,7 @@ instance_create(656, 176, obj_testEnemy4);
 
 
 //Check and get controller 
-gp_update();</code>
+gp_check();</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>

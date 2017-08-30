@@ -53,10 +53,6 @@ global.rhy = ds_list_create();
 
 
 global.wall_surf = surface_create(room_width, room_height);
-
-
-
-frame = 0;
 </string>
           </argument>
         </arguments>
@@ -79,7 +75,9 @@ frame = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if( global.gp_slot != -1 and gamepad_button_check_pressed(global.gp_slot, gp_start) )
+            <string>in_update();
+
+if( global.in[? "start_p"] )
 { 
     if(turn == 'pause') { turn = previousTurn; }
     else
@@ -109,11 +107,6 @@ else if (turn == 'e')
         turn = 'p';
     }
 }
-
-
-
-
-frame++;
 </string>
           </argument>
         </arguments>
@@ -136,8 +129,7 @@ frame++;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if( gamepad_button_check_pressed(global.gp_slot, gp_select)
-    or keyboard_check_pressed(vk_f3) )
+            <string>if( global.in[? "select_p"] )
 { 
     debug_ui = !debug_ui; 
     show_debug_overlay(debug_ui);
@@ -191,44 +183,53 @@ if(debug_ui)
     */
     
     text="";
-    if(global.gp_slot != -1)
+    if(global.gp_slot != -1) //CONTROLLER
     {   
-        text+="DPAD_UP: "+string(gamepad_button_check(global.gp_slot, gp_padu))+"#";
-        text+="DPAD_LEFT: "+string(gamepad_button_check(global.gp_slot, gp_padl))+"#";
-        text+="DPAD_RIGHT: "+string(gamepad_button_check(global.gp_slot, gp_padr))+"#";
-        text+="DPAD_DOWN: "+string(gamepad_button_check(global.gp_slot, gp_padd))+"#";
+        text+="SLOT: "+string(global.gp_slot)+"#";
+        text+="DESC: "+string(gamepad_get_description(global.gp_slot))+"#";
         text+="#";
-        text+="BTN_A: "+string(gamepad_button_check(global.gp_slot, gp_face1))+"#";
-        text+="BTN_B: "+string(gamepad_button_check(global.gp_slot, gp_face2))+"#";
-        text+="BTN_X: "+string(gamepad_button_check(global.gp_slot, gp_face3))+"#";
-        text+="BTN_Y: "+string(gamepad_button_check(global.gp_slot, gp_face4))+"#";
-        text+="#";
-        text+="LSTK_X: "+string(gamepad_axis_value(global.gp_slot, gp_axislh))+"#";
-        text+="LSTK_Y: "+string(gamepad_axis_value(global.gp_slot, gp_axislv))+"#";
-        text+="LSTK_DIR: "+string( gp_direction(global.gp_slot, "l") )+"#";
-        text+="#";
-        text+="RSTK_X: "+string(gamepad_axis_value(global.gp_slot, gp_axisrh))+"#";
-        text+="RSTK_Y: "+string(gamepad_axis_value(global.gp_slot, gp_axisrv))+"#";
-        text+="RSTK_DIR: "+string( gp_direction(global.gp_slot, "r") )+"#";
-        text+="#";
-        text+="L_STK: "+string(gamepad_button_check(global.gp_slot, gp_stickl))+"#";
-        text+="R_STK: "+string(gamepad_button_check(global.gp_slot, gp_stickr))+"#";
-        text+="#";
-        text+="BTN_LB: "+string(gamepad_button_check(global.gp_slot, gp_shoulderl))+"#";
-        text+="BTN_RB: "+string(gamepad_button_check(global.gp_slot, gp_shoulderr))+"#";
-        text+="#";
-        text+="L_TRIGGR: "+string(gamepad_button_check(global.gp_slot, gp_shoulderlb))+"#";
-        text+="R_TRIGGER: "+string(gamepad_button_check(global.gp_slot, gp_shoulderrb))+"#";
-        text+="#";
-        text+="START: "+string(gamepad_button_check(global.gp_slot, gp_start))+"#";
-        text+="SELECT: "+string(gamepad_button_check(global.gp_slot, gp_select))+"#";
-        text+="#";
-        text+="HELD_UP: "+string(global.player.dPad[0])+"/"+string(global.player.MOVE_REPEAT_DELAY)+"#";
-        text+="HELD_RIGHT: "+string(global.player.dPad[1])+"/"+string(global.player.MOVE_REPEAT_DELAY)+"#";
-        text+="HELD_DOWN: "+string(global.player.dPad[2])+"/"+string(global.player.MOVE_REPEAT_DELAY)+"#";
-        text+="HELD_LEFT: "+string(global.player.dPad[3])+"/"+string(global.player.MOVE_REPEAT_DELAY)+"#";
     }
-    else { text = "NO GAMEPAD FOUND"; }
+    else //KEYBOARD
+    { 
+        text+="NO GAMEPAD FOUND"+"#";
+        text+="USING KEYBOARD"+"#"; 
+        text+="#";
+    }
+    
+    text+="MOVE_UP: "+string(global.in[? "m_up"])+" ["+string(global.in[? "m_up_p"])+"]#";
+    text+="MOVE_LEFT: "+string(global.in[? "m_left"])+" ["+string(global.in[? "m_left_p"])+"]#";
+    text+="MOVE_RIGHT: "+string(global.in[? "m_up"])+" ["+string(global.in[? "m_right_p"])+"]#";
+    text+="MOVE_DOWN: "+string(global.in[? "m_down"])+" ["+string(global.in[? "m_down_p"])+"]#";
+    text+="#";
+    text+="HELD_UP: "+string(global.in[? "m_up_h"])+"/"+string(global.player.MOVE_REPEAT_DELAY)+"#";
+    text+="HELD_RIGHT: "+string(global.in[? "m_right_h"])+"/"+string(global.player.MOVE_REPEAT_DELAY)+"#";
+    text+="HELD_DOWN: "+string(global.in[? "m_down_h"])+"/"+string(global.player.MOVE_REPEAT_DELAY)+"#";
+    text+="HELD_LEFT: "+string(global.in[? "m_left_h"])+"/"+string(global.player.MOVE_REPEAT_DELAY)+"#";
+    text+="#";
+    text+="DODGE_1: "+string(global.in[? "d_1"])+" ["+string(global.in[? "d_1_p"])+"]#";
+    text+="DODGE_2: "+string(global.in[? "d_2"])+" ["+string(global.in[? "d_2_p"])+"]#";
+    text+="DODGE_3: "+string(global.in[? "d_3"])+" ["+string(global.in[? "d_3_p"])+"]#";
+    text+="DODGE_4: "+string(global.in[? "d_4"])+" ["+string(global.in[? "d_4_p"])+"]#";
+    text+="#";
+    text+="LSTK_X: "+string(global.in[? "l_x"])+"#";
+    text+="LSTK_Y: "+string(global.in[? "l_y"])+"#";
+    text+="LSTK_DIR: "+string(global.in[? "l_dir"])+"#";
+    text+="LSTK: "+string(global.in[? "l_press"])+"#";
+    text+="#";
+    text+="RSTK_X: "+string(global.in[? "r_x"])+"#";
+    text+="RSTK_Y: "+string(global.in[? "r_y"])+"#";
+    text+="RSTK_DIR: "+string(global.in[? "r_dir"])+"#";
+    text+="RSTK: "+string(global.in[? "r_press"])+"#";
+    text+="#";
+    text+="ACT_1: "+string(global.in[? "a_1"])+" ["+string(global.in[? "a_1_p"])+"]#";
+    text+="ACT_2: "+string(global.in[? "a_2"])+" ["+string(global.in[? "a_2_p"])+"]#";
+    text+="ACT_3: "+string(global.in[? "a_3"])+" ["+string(global.in[? "a_3_p"])+"]#";
+    text+="ACT_4: "+string(global.in[? "a_4"])+" ["+string(global.in[? "a_4_p"])+"]#";
+    text+="#";
+    text+="START: "+string(global.in[? "start"])+"#";
+    text+="SELECT: "+string(global.in[? "select"])+"#";
+        
+    
     
     draw_set_color(c_white);
     draw_text_shadow(10, 25, text, fnt_debug, 2, c_black, c_white);
