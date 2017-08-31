@@ -73,8 +73,13 @@
     <script>scripts\fov.gml</script>
     <script>scripts\e_check_spots.gml</script>
     <scripts name="puzzle logic">
-      <script>scripts\create_toggle.gml</script>
+      <script>scripts\create_basic_toggle.gml</script>
+      <script>scripts\create_fake_wall_toggle.gml</script>
     </scripts>
+    <script>scripts\prompt.gml</script>
+    <script>scripts\player_teleport.gml</script>
+    <script>scripts\room_change.gml</script>
+    <script>scripts\master_initialize_room.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_myFont</font>
@@ -83,6 +88,9 @@
     <font>fonts\fnt_debug</font>
   </fonts>
   <objects name="objects">
+    <object>objects\obj_player</object>
+    <object>objects\obj_master</object>
+    <object>objects\obj_camera</object>
     <objects name="walls">
       <object>objects\obj_wall_N</object>
       <object>objects\obj_wall_S</object>
@@ -98,8 +106,6 @@
       <object>objects\obj_convex_NW</object>
       <object>objects\obj_wall</object>
     </objects>
-    <object>objects\obj_player</object>
-    <object>objects\obj_master</object>
     <objects name="enemies">
       <object>objects\obj_enemy</object>
       <object>objects\obj_testEnemy1</object>
@@ -115,16 +121,19 @@
       <object>objects\obj_rhy_3</object>
       <object>objects\obj_rhy_4</object>
     </objects>
-    <object>objects\obj_camera</object>
     <objects name="puzzle peices">
       <object>objects\obj_toggle_wall</object>
-      <object>objects\obj_toggle</object>
+      <object>objects\obj_basic_toggle</object>
       <object>objects\obj_interactable</object>
+      <object>objects\obj_multiwall_toggle</object>
     </objects>
     <object>objects\obj_impassable</object>
+    <object>objects\obj_btn_prompt</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\_rm_initialize</room>
     <room>rooms\rm_testDungeon</room>
+    <room>rooms\rm_tutorial</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

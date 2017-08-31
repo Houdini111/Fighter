@@ -26,6 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>mp_grid_add_cell(global.grid, x/global.gridSize, y/global.gridSize);
+
+passthrough = false;
 </string>
           </argument>
         </arguments>

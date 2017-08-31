@@ -39,6 +39,9 @@ pattern = 1;
 range = 1;
 
 sightRange = 360; //In pixels (half of the width of the screen)
+
+my_col = merge_color(c_white, global.master.my_blue, 0.7 );
+my_shade = merge_color(global.darkened, my_col, 0.5 );
 </string>
           </argument>
         </arguments>

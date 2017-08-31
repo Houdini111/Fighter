@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>-20</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -41,7 +41,6 @@ time = timeLimit;
 global.gridSize = 32;
 
 global.grid = mp_grid_create(0, 0, room_width/global.gridSize, room_height/global.gridSize, global.gridSize, global.gridSize);
-mp_grid_add_instances(global.grid, obj_wall, false);
 
 
 rhy_speed = 1.5;
@@ -51,9 +50,6 @@ my_red = make_color_hsv(2, 191, 210); //Red
 my_orange = make_color_hsv(20, 191, 210); //Orange 
 
 global.rhy = ds_list_create();
-
-
-global.wall_surf = surface_create(room_width, room_height);
 </string>
           </argument>
         </arguments>

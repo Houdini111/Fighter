@@ -4,7 +4,7 @@
   <solid>-1</solid>
   <visible>-1</visible>
   <depth>-10</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -55,7 +55,7 @@ MOVE_STEPS = 8;
 MAX_SPEED = global.gridSize/MOVE_STEPS;
 
 
-fov_surf = surface_create(room_width, room_height);
+fov_surf = surface_create(view_wview[0], view_wview[0]);
 fov_size = 120;
 
 
@@ -217,7 +217,8 @@ else
             }
         }
     
-        
+        var old_goal_x = goal_x;
+        var old_goal_y = goal_y;
         //Move around
         if(global.in[? "m_up_p"]) //dpad_up first press
             { goal_y-=32; }
@@ -267,11 +268,11 @@ else
         }
         
         
-        if( !check_move(id, goal_x, oldY) ) //Can they move to the new x?
-            { goal_x = oldX; }   //If not, move back
+        if( !check_move(id, goal_x, old_goal_y) ) //Can they move to the new x?
+            { goal_x = old_goal_x; }   //If not, move back
         
-        if( !check_move(id, oldX, goal_y) ) //Can they move to the new Y?
-            { goal_y = oldY; }
+        if( !check_move(id, old_goal_x, goal_y) ) //Can they move to the new Y?
+            { goal_y = old_goal_y; }
             
         
             
@@ -318,21 +319,25 @@ else
             }            
         }
         
-        if( global.in[? "a_4_p"] )
-        {
-            var h;
-            //Interactable in front of player?
-            if( rot &gt;= 315 or rot &lt;= 45 ) //rot == 0
-                { h = collision_point(x+global.gridSize, y, obj_interactable, false, true); }
-            else if( rot &gt; 45 and rot &lt; 135 ) //rot == 90
-                { h = collision_point(x, y-global.gridSize, obj_interactable, false, true); }
-            else if( rot &gt;= 135 and rot &lt;= 225 ) //rot == 180
-                { h = collision_point(x-global.gridSize, y, obj_interactable, false, true); }   
-            else if( rot &gt; 225 and rot  &lt; 315 ) //rot == 270
-                { h = collision_point(x, y+global.gridSize, obj_interactable, false, true); }
-            
-            if ( h != noone ) { h.state = !h.state; }
+        var h;
+        //Interactable in front of player?
+        if( rot &gt;= 315 or rot &lt;= 45 ) //rot == 0
+            { h = collision_point(x+global.gridSize, y, obj_interactable, false, true); }
+        else if( rot &gt; 45 and rot &lt; 135 ) //rot == 90
+            { h = collision_point(x, y-global.gridSize, obj_interactable, false, true); }
+        else if( rot &gt;= 135 and rot &lt;= 225 ) //rot == 180
+            { h = collision_point(x-global.gridSize, y, obj_interactable, false, true); }   
+        else if( rot &gt; 225 and rot  &lt; 315 ) //rot == 270
+            { h = collision_point(x, y+global.gridSize, obj_interactable, false, true); }
+        
+        if( h != noone) 
+        {  
+            instance_activate_object( h.my_prompt );
+            if( global.in[? "a_4_p"] ) { h.state = !h.state; }
         }
+        
+        
+        
     }
     else if( global.master.turn == 'e' ) 
     { 
@@ -597,6 +602,7 @@ else
     draw_set_blend_mode(bm_subtract); 
     draw_surface(fov_surf, 0, 0); 
     draw_set_blend_mode(bm_normal);
+    
 }
 
 if(global.master.turn == 'p') 

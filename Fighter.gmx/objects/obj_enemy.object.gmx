@@ -60,7 +60,8 @@ range = 1;
 
 sightRange = 360; //In pixels (half of the width of the screen)
 
-
+my_col = merge_color(c_white, c_green, 0.7 );
+my_shade = merge_color(global.darkened, my_col, 0.5 );
 
 </string>
           </argument>
@@ -301,8 +302,9 @@ else if( global.master.turn == 'p' )
 
 if( seen or !global.master.fow )
 {
-    if(global.master.turn == 'p' or global.master.turn == 'pause') { draw_sprite_ext( sprite_index, 0, x, y, 1, 1, 0, global.darkened, 1 ); }
-    else if (global.master.turn == 'e') { draw_self(); }
+    if(global.master.turn == 'p' or global.master.turn == 'pause') { image_blend = my_shade; }
+    else if (global.master.turn == 'e') { image_blend = my_col; }
+    draw_self();
     
     if(global.master.ui)
     {
