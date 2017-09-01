@@ -22,7 +22,16 @@ if(_orient == "vertical")
 }
 else if(_orient == "horizontal")
 {
-
+    for(var i = 0; i < _len*2; i++)
+    {
+        walls[| i] = instance_create(_x+floor(i/2)*global.gridSize, _y, obj_wall);
+        walls[| i].sprite_index = asset_get_index("tile_wall_S2");
+        walls[| i].state = _toggle.state;
+        i++;
+        walls[| i] = instance_create(_x+floor(i/2)*global.gridSize, _y+global.gridSize, obj_wall);
+        walls[| i].sprite_index = asset_get_index("tile_wall_N2");
+        walls[| i].state = _toggle.state;
+    }
 }
 
 _toggle.orient = _orient;

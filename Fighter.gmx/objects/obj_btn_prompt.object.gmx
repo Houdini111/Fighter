@@ -8,7 +8,7 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="3" enumb="0">
+    <event eventtype="3" enumb="2">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,8 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.gp_slot == -1) { key = "U"; } 
-else { key = "Y"; }
+            <string>if(global.gp_slot == -1 ) { key = "U"; } 
+else { key = "RT"; }
+size = (r*2*.7)/string_width(key);
+
 </string>
           </argument>
         </arguments>
@@ -56,10 +58,12 @@ draw_circle(x, y, r, true);
 draw_set_color(color);
 draw_set_valign(fa_middle);
 draw_set_halign(fa_center);
-draw_text(x, y, key);
+draw_set_font(fnt_gp_sym);
+draw_text_transformed(x, y, key, size, size, 0);
 draw_set_valign(fa_top);
 draw_set_halign(fa_left);
 instance_deactivate_object(id);
+
 </string>
           </argument>
         </arguments>

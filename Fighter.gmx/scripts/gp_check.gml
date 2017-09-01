@@ -23,7 +23,7 @@ if(global.gp_slot != -1)
 {
     show_debug_message("GAMEPAD SLOT: " + string(global.gp_slot));
     show_debug_message("++++++++++++++++++++++++");
-    var deadzone = 0.25;
+    var deadzone = 0.3;
     gamepad_set_axis_deadzone(global.gp_slot, deadzone);
     show_debug_message("SET DEADZONE TO: " + string(deadzone));
     show_debug_message("++++++++++++++++++++++++");

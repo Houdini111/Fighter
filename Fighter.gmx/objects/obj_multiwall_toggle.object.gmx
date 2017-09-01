@@ -59,6 +59,14 @@ targets = ds_list_create();
         targets[| ds_list_size(targets)-2].sprite_index = asset_get_index("tile_convex_SE2");
         targets[| ds_list_size(targets)-1].sprite_index = asset_get_index("tile_convex_SW2");
     }
+    else if(orient == "horizontal")
+    {
+        targets[| 0].sprite_index = asset_get_index("tile_convex_SW2");
+        targets[| 1].sprite_index = asset_get_index("tile_convex_NW2");
+        targets[| ds_list_size(targets)-2].sprite_index = asset_get_index("tile_convex_SE2");
+        targets[| ds_list_size(targets)-1].sprite_index = asset_get_index("tile_convex_NE2");
+    }
+    
     for(var i = 2; i &lt; ds_list_size(targets)-2; i++)
     {
         mp_grid_clear_cell(global.grid, targets[| i].x/global.gridSize, targets[| i].y/global.gridSize);
@@ -67,6 +75,20 @@ targets = ds_list_create();
 }
 else
 {
+    if(orient == "vertical")
+    {
+        targets[| 0].sprite_index = asset_get_index("tile_wall_E2");
+        targets[| 1].sprite_index = asset_get_index("tile_wall_W2");
+        targets[| ds_list_size(targets)-2].sprite_index = asset_get_index("tile_wall_E2");
+        targets[| ds_list_size(targets)-1].sprite_index = asset_get_index("tile_wall_W2");
+    }
+    else if(orient == "horizontal")
+    {
+        targets[| 0].sprite_index = asset_get_index("tile_convex_S2");
+        targets[| 1].sprite_index = asset_get_index("tile_convex_N2");
+        targets[| ds_list_size(targets)-2].sprite_index = asset_get_index("tile_convex_S2");
+        targets[| ds_list_size(targets)-1].sprite_index = asset_get_index("tile_convex_N2");
+    }
     for(var i = 0; i &lt; ds_list_size(targets); i++)
     {
         mp_grid_add_cell(global.grid, targets[| i].x/global.gridSize, targets[| i].y/global.gridSize);

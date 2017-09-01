@@ -14,15 +14,23 @@ draw_vertex(x_1, y_1);
 
 for( var i = dir-ang/2; i < dir+ang/2; i += ang/c_prec )
 {
-    /*var p;
-    with( obj )
-    {
-        if(!passthrough)
-        { p = collision_line_point(x_1, y_1, x_1+lengthdir_x(r, i), y_1+lengthdir_y(r, i), object_index, prec, true); }
-    }*/
     var p = collision_line_point(x_1, y_1, x_1+lengthdir_x(r, i), y_1+lengthdir_y(r, i), obj, prec, true);
     var e = collision_line(x_1, y_1, p[1], p[2], obj_enemy, false, true);
-    draw_vertex(p[1], p[2]);
+    
+    if(global.master.fow_pen)
+    {
+        if(i < 22.5) { draw_vertex(p[1]+32, p[2]); }
+        else if(i < 67.5) { draw_vertex(p[1]+32, p[2]-32); }
+        else if(i < 112.5) { draw_vertex(p[1], p[2]-32); }
+        else if(i < 157.5) { draw_vertex(p[1]-32, p[2]-32); }
+        else if(i < 202.5) { draw_vertex(p[1]-32, p[2]); }
+        else if(i < 247.5) { draw_vertex(p[1]-32, p[2]+32); }
+        else if(i < 292.5) { draw_vertex(p[1], p[2]+32); }
+        else if(i < 337.5) { draw_vertex(p[1]+32, p[2]+32); }
+        else { draw_vertex(p[1]+32, p[2]); }
+    }
+    else { draw_vertex(p[1], p[2]); }
+    
     if( p[0] != noone ) { p[0].seen = true; }
     if( e != noone )
         { if ( object_is_ancestor(e.object_index, obj_enemy) ) { e.seen = true; } }

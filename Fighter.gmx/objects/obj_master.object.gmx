@@ -28,6 +28,7 @@
             <string>ui = true;
 debug_ui = false;
 fow = true;
+fow_pen = true;
 
 turn = 'p';
 previousTurn = 'n/a';
@@ -134,6 +135,7 @@ else if (turn == 'e')
     show_debug_overlay(debug_ui);
 }
 if( keyboard_check_pressed(vk_f4) ) { ui = !ui; }
+if( keyboard_check_pressed(vk_f7) ) { fow_pen = !fow_pen; }
 </string>
           </argument>
         </arguments>
