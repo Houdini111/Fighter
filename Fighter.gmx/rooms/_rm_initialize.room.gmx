@@ -27,8 +27,8 @@ global.camera = instance_create(0, 0, obj_camera);
 gp_check();
 
 
-//room_goto(asset_get_index("rm_tutorial"));
-room_goto(asset_get_index("rm_testDungeon"));</code>
+room_goto(asset_get_index("rm_tutorial"));
+//room_goto(asset_get_index("rm_testDungeon"));</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>

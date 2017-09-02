@@ -50,7 +50,33 @@ targets = ds_list_create();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(state)
+            <string>if(reusable)
+{
+    if(!state)
+    {
+        if(orient == "vertical")
+        {
+            targets[| 0].sprite_index = asset_get_index("tile_wall_E2");
+            targets[| 1].sprite_index = asset_get_index("tile_wall_W2");
+            targets[| ds_list_size(targets)-2].sprite_index = asset_get_index("tile_wall_E2");
+            targets[| ds_list_size(targets)-1].sprite_index = asset_get_index("tile_wall_W2");
+        }
+        else if(orient == "horizontal")
+        {
+            targets[| 0].sprite_index = asset_get_index("tile_wall_S2");
+            targets[| 1].sprite_index = asset_get_index("tile_wall_N2");
+            targets[| ds_list_size(targets)-2].sprite_index = asset_get_index("tile_wall_S2");
+            targets[| ds_list_size(targets)-1].sprite_index = asset_get_index("tile_wall_N2");
+        }
+        for(var i = 0; i &lt; ds_list_size(targets); i++)
+        {
+            mp_grid_add_cell(global.grid, targets[| i].x/global.gridSize, targets[| i].y/global.gridSize);
+            instance_activate_object(targets[| i]);
+        }
+    }
+}
+
+if(state)
 {
     if(orient == "vertical")
     {
@@ -72,28 +98,6 @@ targets = ds_list_create();
         mp_grid_clear_cell(global.grid, targets[| i].x/global.gridSize, targets[| i].y/global.gridSize);
         instance_deactivate_object(targets[| i]);
     } 
-}
-else
-{
-    if(orient == "vertical")
-    {
-        targets[| 0].sprite_index = asset_get_index("tile_wall_E2");
-        targets[| 1].sprite_index = asset_get_index("tile_wall_W2");
-        targets[| ds_list_size(targets)-2].sprite_index = asset_get_index("tile_wall_E2");
-        targets[| ds_list_size(targets)-1].sprite_index = asset_get_index("tile_wall_W2");
-    }
-    else if(orient == "horizontal")
-    {
-        targets[| 0].sprite_index = asset_get_index("tile_convex_S2");
-        targets[| 1].sprite_index = asset_get_index("tile_convex_N2");
-        targets[| ds_list_size(targets)-2].sprite_index = asset_get_index("tile_convex_S2");
-        targets[| ds_list_size(targets)-1].sprite_index = asset_get_index("tile_convex_N2");
-    }
-    for(var i = 0; i &lt; ds_list_size(targets); i++)
-    {
-        mp_grid_add_cell(global.grid, targets[| i].x/global.gridSize, targets[| i].y/global.gridSize);
-        instance_activate_object(targets[| i]);
-    }
 }
 </string>
           </argument>

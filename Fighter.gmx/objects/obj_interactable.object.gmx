@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>my_prompt = prompt(x, y-10, 15, "U", global.master.my_orange, 5);
+            <string>my_prompt = prompt(x+sprite_width/2, y+sprite_height/2-10, 15, "U", global.master.my_orange, 5);
 instance_deactivate_object(my_prompt);
 </string>
           </argument>

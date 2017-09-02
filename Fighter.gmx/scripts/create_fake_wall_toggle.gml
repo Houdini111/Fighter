@@ -1,9 +1,12 @@
-///create_fake_wall_toggle( toggle_id, wall_orientation, wall_x, wall_y, wall_length )
+///create_fake_wall_toggle( toggle_id, wall_orientation, wall_x, wall_y, wall_length, reusable )
 var _toggle = argument0;
 var _orient = argument1;
 var _x = argument2;
 var _y = argument3;
 var _len = argument4;
+var _use = argument5;
+
+_toggle.reusable = _use;
 
 var walls = ds_list_create();   
 

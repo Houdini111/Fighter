@@ -128,6 +128,8 @@ emit = part_emitter_create(mySys);
 
 
 turnStart = current_time;
+
+show_debug_message("ROOM CREATED IN: " + string(room_get_name(room))+"  pos: " + string(x) + ", "+ string(y) + "  ID: " + string(id));
 </string>
           </argument>
         </arguments>
@@ -188,7 +190,7 @@ if(global.master.turn == 'pause')
     
 }
 else
-{
+{   
     if( global.master.fow )
     {
         if(!surface_exists(fov_surf)) { fov_surf = surface_create(room_width, room_height); }
@@ -198,7 +200,7 @@ else
         fov(x, y, 1000, rot, fov_size, fov_size/1, false, obj_impassable);
         surface_reset_target();
     }
-    
+
     if(global.master.turn == 'p')
     {
         //Look around

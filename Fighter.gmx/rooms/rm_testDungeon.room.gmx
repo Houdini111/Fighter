@@ -11,6 +11,7 @@
   <colour>0</colour>
   <showcolour>-1</showcolour>
   <code>player_teleport(208, 336);
+master_initialize_room();
 
 
 instance_create(528, 304, obj_testEnemy1);
@@ -18,10 +19,10 @@ instance_create(528, 560, obj_testEnemy2);
 instance_create(208, 624, obj_testEnemy3);
 instance_create(656, 176, obj_testEnemy4);
 
-create_basic_toggle(432, 528, obj_basic_toggle, 768, 416, obj_toggle_wall, false);
-var t = instance_create(848 , 496, obj_multiwall_toggle);
+create_door_toggle(416, 512, obj_basic_toggle, 768, 416, obj_toggle_wall, false);
+var t = instance_create(832 , 480, obj_multiwall_toggle);
 t.state = false;
-create_fake_wall_toggle(t , "vertical", 448, 32, 6);
+create_fake_wall_toggle(t , "vertical", 448, 32, 6, true);
 
 
 
