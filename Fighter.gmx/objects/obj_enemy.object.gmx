@@ -63,6 +63,8 @@ sightRange = 360; //In pixels (half of the width of the screen)
 my_col = merge_color(c_white, c_green, 0.7 );
 my_shade = merge_color(global.darkened, my_col, 0.5 );
 
+health_float_height = 5;
+
 </string>
           </argument>
         </arguments>
@@ -309,9 +311,9 @@ if( seen or !global.master.fow )
     if(global.master.ui)
     {
         draw_set_color(c_black);
-        draw_rectangle(x-sprite_width/2, y-sprite_height/2, x+sprite_width/2, y-sprite_height/2+3, false);
+        draw_rectangle(x-sprite_width/2, y-health_float_height-sprite_height/2, x+sprite_width/2, y-health_float_height-sprite_height/2+3, false);
         draw_set_color(c_red);
-        draw_rectangle(x-sprite_width/2, y-sprite_height/2, x-sprite_width/2+(sprite_width*myHealth/maxHealth), y-sprite_height/2+3, false);
+        draw_rectangle(x-sprite_width/2, y-health_float_height-sprite_height/2, x-sprite_width/2+(sprite_width*myHealth/maxHealth), y-health_float_height-sprite_height/2+3, false);
     }
 }
 
