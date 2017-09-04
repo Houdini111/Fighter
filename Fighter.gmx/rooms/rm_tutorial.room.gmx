@@ -10,7 +10,21 @@
   <persistent>0</persistent>
   <colour>0</colour>
   <showcolour>-1</showcolour>
-  <code>player_teleport(112, 112);
+  <code>var player_rot = global.save[? "player_rot"];
+if( player_rot ) { global.player.rot = player_rot; }
+var player_rot = global.save[? "player_rot"];
+if( player_rot ) { global.player.rot = player_rot; }
+
+var player_x = global.save[? "player_x"];
+var player_y = global.save[? "player_y"];
+if( player_x and player_y ) { player_teleport(player_x, player_y); }
+else { player_teleport(112, 112); }
+
+var time = global.save[? "time"];
+if( time ) { global.master.time = time; }
+
+
+
 master_initialize_room();
 
 global.master.fow = false;

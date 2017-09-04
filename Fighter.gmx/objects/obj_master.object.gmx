@@ -51,6 +51,9 @@ my_red = make_color_hsv(2, 191, 210); //Red
 my_orange = make_color_hsv(20, 191, 210); //Orange 
 
 global.rhy = ds_list_create();
+
+
+global.save = ds_map_create();
 </string>
           </argument>
         </arguments>
@@ -79,12 +82,8 @@ if(keyboard_check_pressed(vk_f6)) { fow = !fow; }
 
 if( global.in[? "start_p"] )
 { 
-    if(turn == 'pause') { turn = previousTurn; }
-    else
-    { 
-        previousTurn = turn;
-        turn = 'pause'; 
-    }
+    if(turn == 'pause') { unpause(); }
+    else { pause(); }
 }
 
 if(turn == 'p')
@@ -231,7 +230,6 @@ if(debug_ui)
     text+="START: "+string(global.in[? "start"])+"#";
     text+="SELECT: "+string(global.in[? "select"])+"#";
     */    
-    
     
     draw_set_color(c_white);
     draw_text_shadow(10, 40, text, fnt_debug, 2, c_black, c_white);

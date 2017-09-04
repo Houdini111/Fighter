@@ -93,6 +93,8 @@
     <script>scripts\player_teleport.gml</script>
     <script>scripts\prompt.gml</script>
     <script>scripts\room_change.gml</script>
+    <script>scripts\pause.gml</script>
+    <script>scripts\unpause.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_myFont</font>
@@ -151,6 +153,7 @@
     <room>rooms\_rm_initialize</room>
     <room>rooms\rm_testDungeon</room>
     <room>rooms\rm_tutorial</room>
+    <room>rooms\rm_pause</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
