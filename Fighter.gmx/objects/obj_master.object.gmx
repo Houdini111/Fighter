@@ -28,7 +28,7 @@
             <string>ui = true;
 debug_ui = false;
 fow = true;
-fow_pen = true;
+fow_pen = false;
 
 turn = 'p';
 previousTurn = 'n/a';
@@ -197,7 +197,7 @@ if(debug_ui)
         text+="USING KEYBOARD"+"#"; 
         text+="#";
     }
-    
+    /*
     text+="MOVE_UP: "+string(global.in[? "m_up"])+" ["+string(global.in[? "m_up_p"])+"]#";
     text+="MOVE_LEFT: "+string(global.in[? "m_left"])+" ["+string(global.in[? "m_left_p"])+"]#";
     text+="MOVE_RIGHT: "+string(global.in[? "m_up"])+" ["+string(global.in[? "m_right_p"])+"]#";
@@ -230,18 +230,19 @@ if(debug_ui)
     text+="#";
     text+="START: "+string(global.in[? "start"])+"#";
     text+="SELECT: "+string(global.in[? "select"])+"#";
-        
+    */    
     
     
     draw_set_color(c_white);
-    draw_text_shadow(10, 25, text, fnt_debug, 2, c_black, c_white);
+    draw_text_shadow(10, 40, text, fnt_debug, 2, c_black, c_white);
+    
     
     draw_set_halign(fa_center);
     draw_set_valign(fa_middle);
     
-    draw_text( view_wview[0]/2, global.player.height*0.5, string(global.player.myHealth)+"/"+string(global.player.maxHealth) );
-    draw_text( view_wview[0]/2, global.player.height*1.5, string(time)+"/"+string(timeLimit) );
-    draw_text( (view_wview[0]+global.player.width+global.player.height)/2, global.player.height, turn );
+    draw_text( view_wview[0]/2, global.player.bar_height_margin*view_hport*0.5, string(global.player.myHealth)+"/"+string(global.player.maxHealth) );
+    draw_text( view_wview[0]/2, global.player.bar_height_margin*view_hport*1.5, string(time)+"/"+string(timeLimit) );
+    //draw_text( (view_wview[0]+global.player.width+global.player.height)/2, global.player.height, turn );
     
     draw_set_halign(fa_left);
     draw_set_valign(fa_top);
@@ -257,6 +258,7 @@ if(debug_ui)
     text = string(global.player.state);
     draw_text_shadow(view_wport[0]-10, 10, text, fnt_debug, 2, c_black, c_white);
     draw_set_halign(fa_left);
+    
 }
 
 /*

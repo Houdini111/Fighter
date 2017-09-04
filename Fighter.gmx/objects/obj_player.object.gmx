@@ -407,6 +407,7 @@ else
             <kind>1</kind>
             <string>if(global.master.ui)
 {
+    /*
     draw_set_color(c_gray);
     
     draw_set_alpha(1);
@@ -416,6 +417,7 @@ else
     draw_set_color(c_black);
     draw_line(rhythm_left, rhythm_top, rhythm_left+rhythm_width, rhythm_top);
     draw_line(rhythm_left, rhythm_top+rhythm_height, rhythm_left+rhythm_width, rhythm_top+rhythm_height);
+    */
 }        
 </string>
           </argument>
@@ -443,10 +445,17 @@ else
 {
     alpha = 0.7;
     
-    height = 20;
-    width = 500; 
+    //height = 20;
+    //width = 500; 
+    bar_width_margin = 0.1; //Decimal representation of the percentage of the margin size
+    bar_height_margin = 0.04;
+    bar_width = view_wport*(1-bar_width_margin*2);
+    
+    time = global.master.time;
+    timeLimit = global.master.timeLimit;
     
     //Health bar
+    /*
     draw_set_alpha(alpha);
     draw_set_colour(c_black);
     draw_rectangle( (view_wview[0]/2)-(width/2), 0, (view_wview[0]/2)+(width/2), height, false );
@@ -455,10 +464,21 @@ else
     draw_rectangle( (view_wview[0]/2)-(width/2), 0, (view_wview[0]/2)-(width/2)+(myHealth/maxHealth*width), height, false );
     draw_set_colour(c_black);
     draw_rectangle( (view_wview[0]/2)-(width/2), 0, (view_wview[0]/2)+(width/2), height, true );
+    */
+    draw_set_alpha(alpha);
+    draw_set_color(c_black);
+    draw_rectangle(view_wport*bar_width_margin, 0, view_wport*(1-bar_width_margin), view_hport*bar_height_margin, false);
     
-    time = global.master.time;
-    timeLimit = global.master.timeLimit;
+    draw_set_alpha(1);
+    draw_set_color(global.master.my_blue);
+    draw_rectangle(view_wport*bar_width_margin, 0, view_wport*bar_width_margin+(myHealth/maxHealth)*bar_width, view_hport*bar_height_margin, false);
+    
+    //draw_set_color(c_black);
+    //draw_rectangle(view_wport*bar_width_margin, 0, view_wport*(1-bar_width_margin), view_hport*bar_height_margin, true);
+    //show_debug_message(view_wport);
+    
     //Time
+    /*
     draw_set_alpha(alpha);
     draw_set_colour(c_black);
     draw_rectangle( (view_wview[0]/2)-(width/2), height, (view_wview[0]/2)+(width/2), height*2, false );
@@ -477,9 +497,26 @@ else
     draw_set_alpha(alpha);
     draw_set_colour(c_black);
     draw_rectangle( (view_wview[0]/2)-(width/2), height, (view_wview[0]/2)+(width/2), height*2, true );
+    */
+    draw_set_alpha(alpha);
+    draw_set_color(c_black);
+    draw_rectangle(view_wport*bar_width_margin, view_hport*bar_height_margin, view_wport*(1-bar_width_margin), view_hport*bar_height_margin*2, false);
+    
+    if( global.master.turn == 'p' ) { draw_set_color(global.master.my_green); } 
+    else if( global.master.turn == 'e') { draw_set_color(global.master.my_red); }
+    else if( global.master.previousTurn != 'n/a' )
+    {
+        if( global.master.previousTurn == 'p' ) { draw_set_color(global.master.my_green); } 
+        else if( global.master.previousTurn == 'e') { draw_set_color(global.master.my_red); }
+    }
+    
+    draw_set_alpha(1);
+    draw_rectangle(view_wport*bar_width_margin, view_hport*bar_height_margin, view_wport*bar_width_margin+(time/timeLimit)*bar_width, view_hport*bar_height_margin*2, false);
+    
     
     
     //Turn
+    /*
     draw_set_alpha(alpha);
     draw_set_color(c_black);
     draw_rectangle(view_wview[0]/2+width/2, 0, view_wview[0]/2+width/2+height, height*2, false);
@@ -511,8 +548,11 @@ else
     draw_set_color(c_black);
     draw_rectangle(view_wview[0]/2+width/2, 0, view_wview[0]/2+width/2+height, height*2, true);
     draw_line(view_wview[0]/2+width/2, height, view_wview[0]/2+width/2+height, height);
+    */
+    
     
     //Combo options
+    /*
     options = 0;
     size = 60
     
@@ -533,7 +573,7 @@ else
             options++;
         }
     }
-    
+    */
     
     
     
@@ -542,6 +582,7 @@ else
     draw_set_alpha(1);
     //TEST RHYTHM 
     //RECTANGLE
+    
     draw_set_color(c_black);
     
     draw_set_alpha(0.2);
@@ -571,6 +612,7 @@ else
     
     draw_set_valign(fa_top);
     draw_set_halign(fa_left);
+    
     //END TEST RHYTHM
 }
 
