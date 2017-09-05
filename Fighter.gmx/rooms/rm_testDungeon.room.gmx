@@ -10,7 +10,7 @@
   <persistent>0</persistent>
   <colour>0</colour>
   <showcolour>-1</showcolour>
-  <code>player_teleport(208, 336);
+  <code>load_player(208, 336);
 master_initialize_room();
 
 
@@ -27,7 +27,9 @@ create_fake_wall_toggle(t , "vertical", 448, 32, 6, true);
 
 
 //Check and get controller 
-gp_check();</code>
+gp_check();
+
+load_enemies();</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>

@@ -95,6 +95,9 @@
     <script>scripts\room_change.gml</script>
     <script>scripts\pause.gml</script>
     <script>scripts\unpause.gml</script>
+    <script>scripts\get_key.gml</script>
+    <script>scripts\load_enemies.gml</script>
+    <script>scripts\load_player.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_myFont</font>

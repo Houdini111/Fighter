@@ -82,6 +82,7 @@ if(keyboard_check_pressed(vk_f6)) { fow = !fow; }
 
 if( global.in[? "start_p"] )
 { 
+    show_debug_message(turn)
     if(turn == 'pause') { unpause(); }
     else { pause(); }
 }

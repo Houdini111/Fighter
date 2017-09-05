@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>path = path_add();
 
+key = get_key();
+
 in_attack_pos = false;
 timeSinceMove = 0;
 time_since_attack = 0;

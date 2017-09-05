@@ -321,7 +321,7 @@ else
             }            
         }
         
-        var h;
+        var h = noone;
         //Interactable in front of player?
         if( rot &gt;= 315 or rot &lt;= 45 ) //rot == 0
             { h = collision_point(x+global.gridSize, y, obj_interactable, false, true); }
@@ -648,6 +648,8 @@ else
     draw_set_blend_mode(bm_normal);
     
 }
+
+//show_debug_message(rot);
 
 if(global.master.turn == 'p') 
     { draw_sprite_ext( spr_p, 0, x, y, 1, 1, rot, c_white, 1); }
