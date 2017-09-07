@@ -33,7 +33,11 @@ create_floor_trigger(480, 96, toggle_attacks, true, false);
 create_floor_trigger(800, 96, toggle_fow, true, false);
 
 var t1 = instance_create(1120, 32, obj_multiwall_toggle);
-t1.state = false;
+with(t1)
+{
+    state = false;
+    init_state = state;
+}
 create_fake_wall_toggle( t1, "horizontal", 960, 192, 5, true );
 
 create_floor_trigger( 992, 192, to_test, false, false, 1, 3);

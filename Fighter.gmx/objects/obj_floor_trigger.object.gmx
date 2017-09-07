@@ -26,6 +26,13 @@
           <argument>
             <kind>1</kind>
             <string>if( collision_point(x, y, obj_player, false, true) == noone ) { ready = true; }
+
+key = get_key();
+
+var me = ds_map_create();
+me[? "alive"] = true;
+global.save[? key] = ds_map_write(me);
+ds_map_destroy(me);
 </string>
           </argument>
         </arguments>
@@ -55,7 +62,15 @@ else
     {   
         ready = false;
         script_execute(action); 
-        if(!reusable) { instance_destroy(); }
+        if(!reusable) 
+        { 
+            var me = ds_map_create();
+            global.key[? "alive"] = false;
+            global.save[? key] = ds_map_write(me);
+            ds_map_destroy(me);
+            
+            instance_destroy(); 
+        }
     }
 }
 </string>

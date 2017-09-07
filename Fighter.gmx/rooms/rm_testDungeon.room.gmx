@@ -22,6 +22,7 @@ instance_create(656, 176, obj_testEnemy4);
 create_door_toggle(416, 512, 768, 416, false);
 var t = instance_create(832 , 480, obj_multiwall_toggle);
 t.state = false;
+t.init_state = t.state;
 create_fake_wall_toggle(t , "vertical", 448, 32, 6, true);
 
 load_enemies();

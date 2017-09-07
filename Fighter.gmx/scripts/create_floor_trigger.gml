@@ -18,9 +18,6 @@ with(t)
             image_xscale = argument[6];
         case 6:
             image_yscale = argument[5];
-            //my_spr = sprite_duplicate(sprite_index);
-            //sprite_collision_mask(my_spr, false, 2, 0, 0, 1000000, global.gridSize*1, 1, 255);
-            //sprite_index = my_spr;
         case 5:
             visible = argument[4];
         case 4: 

@@ -53,12 +53,38 @@ with(obj_enemy)
 
 with(obj_basic_toggle)
 {
-    var key = "obj_basic_toggle_"+string(x)+"_"+string(y);
     var me = ds_map_create();
     me[? "state"] = state;
     me[? "target_type"] = object_get_name(target.object_index);
     me[? "target_x"] = target.x;
     me[? "target_y"] = target.y;
+    global.save[? key] = ds_map_write(me);
+    ds_map_destroy(me);
+}
+
+with(obj_floor_trigger)
+{
+    var me = ds_map_create();
+    me[? "alive"] = true;
+    me[? "ready"] = ready;
+    /*
+    me[? "action"] = action;
+    me[? "resuable"] = resuable;
+    me[? "visible"] = visible;
+    me[? "image_xscale"] = image_xscale;
+    me[? "image_yscale"] = image_yscale;
+    */
+    global.save[? key] = ds_map_write(me);
+    ds_map_destroy(me);
+}
+
+with(obj_multiwall_toggle)
+{
+    var me = ds_map_create();
+    me[? "alive"] = true;
+    me[? "init_state"] = init_state;
+    me[? "state"] = state;
+    
     global.save[? key] = ds_map_write(me);
     ds_map_destroy(me);
 }
