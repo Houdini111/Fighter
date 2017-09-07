@@ -19,17 +19,14 @@ instance_create(528, 560, obj_testEnemy2);
 instance_create(208, 624, obj_testEnemy3);
 instance_create(656, 176, obj_testEnemy4);
 
-create_door_toggle(416, 512, obj_basic_toggle, 768, 416, obj_toggle_wall, false);
+create_door_toggle(416, 512, 768, 416, false);
 var t = instance_create(832 , 480, obj_multiwall_toggle);
 t.state = false;
 create_fake_wall_toggle(t , "vertical", 448, 32, 6, true);
 
+load_enemies();
 
-
-//Check and get controller 
-gp_check();
-
-load_enemies();</code>
+load_puzzles();</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
@@ -70,8 +67,6 @@ load_enemies();</code>
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
   </views>
   <instances>
-    <instance objName="obj_master" x="0" y="0" name="inst_ABB0FB2F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_camera" x="0" y="32" name="inst_D113FE65" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_wall_N" x="160" y="256" name="inst_88115829" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_wall_N" x="192" y="256" name="inst_68C3C596" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_wall_N" x="224" y="256" name="inst_617B91BA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>

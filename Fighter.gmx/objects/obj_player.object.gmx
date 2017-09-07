@@ -128,8 +128,6 @@ emit = part_emitter_create(mySys);
 
 
 turnStart = current_time;
-
-show_debug_message("ROOM CREATED IN: " + string(room_get_name(room))+"  pos: " + string(x) + ", "+ string(y) + "  ID: " + string(id));
 </string>
           </argument>
         </arguments>
@@ -362,7 +360,7 @@ else
     {  
         h = collision_point(rhythm_left+((rhythm_width/lanes)*.5), judgement.y, obj_rhy_base, false, true);
         if( h != noone) //Check if there is a peice in the judgement line
-            { show_debug_message("HERE"); with(h) { instance_destroy(); } }
+            { with(h) { instance_destroy(); } }
     }
     if( global.in[? "d_2_p"] ) //A
     {  

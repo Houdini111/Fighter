@@ -23,9 +23,7 @@ global.master = instance_create(0, 0, obj_master);
 global.player = instance_create(0, 0, obj_player);
 global.camera = instance_create(0, 0, obj_camera);
 
-
 gp_check();
-
 
 room_goto(asset_get_index("rm_tutorial"));
 //room_goto(asset_get_index("rm_testDungeon"));</code>

@@ -11,6 +11,7 @@ with(obj_player)
         y = p[? "y"];
         rot = p[? "rot"];
         myHealth = p[? "myHealth"];
+        ds_map_destroy(p);
     }
     else 
     {
