@@ -22,25 +22,29 @@ master_initialize_room();
 global.master.fow = false;
 global.player.state = 6;
 
-create_door_toggle( 448, 160, 480, 96, false);
+
+create_toggle(480, 96, spr_switch, false, noone, false, false, false, player_step_on, always, toggle_attacks);
+create_toggle(800, 96, spr_switch, false, noone, false, false, false, player_step_on, always, toggle_fow);
+create_toggle(992, 192, spr_switch_1x5, false, noone, false, false, false, player_step_on, always, to_test);
+
+var d = instance_create(480, 96, obj_door);
+var tar = ds_list_create();
+ds_list_add(tar, d);
+create_toggle( 448, 160, spr_switch, true, tar, true, true, true, targeted_action, always, toggle_door);
+ds_list_destroy(tar);
 
 var e1 = instance_create(736+16, 96+16, obj_tut_en_1);
+var opt = ds_map_create();
+opt[? "activate_condition"] = e1;
+var _opt = ds_map_write(opt);
+ds_map_destroy(opt);
+var wall = make_fake_wall_objects(768, 64, "vertical", 3);
+create_toggle(736+16, 96+16, spr_switch, false, wall, true, false, false, object_destroyed, always, toggle_fake_wall, _opt);
 
-create_fake_wall_toggle( create_enemy_wall_toggle(e1), "vertical", 768, 64, 3, false );
 
+var wall2 = make_fake_wall_objects(960, 192, "horizontal", 5);
+create_toggle(1120, 32, spr_switch, true, wall2, true, true, true, targeted_action, always, toggle_fake_wall);
 
-create_floor_trigger(480, 96, toggle_attacks, true, false);
-create_floor_trigger(800, 96, toggle_fow, true, false);
-
-var t1 = instance_create(1120, 32, obj_multiwall_toggle);
-with(t1)
-{
-    state = false;
-    init_state = state;
-}
-create_fake_wall_toggle( t1, "horizontal", 960, 192, 5, true );
-
-create_floor_trigger( 992, 192, to_test, false, false, 1, 3);
 
 
 

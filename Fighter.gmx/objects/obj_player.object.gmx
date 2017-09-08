@@ -59,6 +59,8 @@ fov_surf = surface_create(view_wview[0], view_wview[0]);
 fov_size = 120;
 
 
+action_target = noone;
+
 
 //Language
 // 0 == a1 (lb)
@@ -332,9 +334,14 @@ else
         
         if( h != noone) 
         {  
-            instance_activate_object( h.my_prompt );
-            if( global.in[? "a_4_p"] ) { h.state = !h.state; }
+            if( script_get_name(h.condition) != "player_step_on" )
+            {
+                action_target = h;
+                //instance_activate_object( h.my_prompt );
+                //if( global.in[? "a_4_p"] ) { h.state = !h.state; }
+            }
         }
+        else { action_target = noone; }
         
         
         
@@ -550,7 +557,7 @@ else
     
     
     //Combo options
-    /*
+    
     options = 0;
     size = 60
     
@@ -571,7 +578,7 @@ else
             options++;
         }
     }
-    */
+    
     
     
     
