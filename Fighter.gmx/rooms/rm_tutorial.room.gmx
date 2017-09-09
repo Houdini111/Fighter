@@ -28,10 +28,13 @@ create_toggle(800, 96, spr_switch, false, noone, false, false, false, player_ste
 create_toggle(992, 192, spr_switch_1x5, false, noone, false, false, false, player_step_on, always, to_test);
 
 var d = instance_create(480, 96, obj_door);
+d.active = true;
 var tar = ds_list_create();
 ds_list_add(tar, d);
-create_toggle( 448, 160, spr_switch, true, tar, true, true, true, targeted_action, always, toggle_door);
+var test = create_toggle( 448, 160, spr_switch, true, tar, true, true, true, targeted_action, always, toggle_door);
 ds_list_destroy(tar);
+
+//show_debug_message(test.alive);
 
 var e1 = instance_create(736+16, 96+16, obj_tut_en_1);
 var opt = ds_map_create();

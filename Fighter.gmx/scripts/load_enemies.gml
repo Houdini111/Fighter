@@ -5,7 +5,7 @@ with(obj_enemy)
     if( typeof(global.save[? key1]) == "string" )
     {
         var me = ds_map_create();
-        ds_map_read(me, global.save[? key]);
+        ds_map_read(me, global.save[? key1]);
         x = me[? "x"];
         y = me[? "y"];
         startX = x;

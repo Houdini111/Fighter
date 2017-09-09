@@ -21,6 +21,7 @@ instance_create(656, 176, obj_testEnemy4);
 
 
 var d = instance_create(768, 416, obj_door);
+d.active = true;
 var tar = ds_list_create();
 ds_list_add(tar, d);
 create_toggle( 416, 512, spr_switch, true, tar, true, true, true, targeted_action, always, toggle_door);

@@ -33,6 +33,7 @@ init_state = true;
 state = true;
 reusable = true;
 ready = false;
+alive = true;
 
 
 if(ds_map_exists(global.save, key))
@@ -50,11 +51,10 @@ if(ds_map_exists(global.save, key))
 else //If it's the first time loading the room, mark it as alive
 {
     var temp = ds_map_create();
-    temp[? "alive"] = true;
+    temp[? "alive"] = alive;
     global.save[? key] = ds_map_write(temp);
     ds_map_destroy(temp);    
 }
-
 /*
 alive = true;
 temp[? "alive"] = alive;

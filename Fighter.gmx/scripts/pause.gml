@@ -51,6 +51,7 @@ with(obj_enemy)
     ds_map_destroy(me);
 }
 
+/*
 with(obj_basic_toggle)
 {
     var me = ds_map_create();
@@ -67,13 +68,13 @@ with(obj_floor_trigger)
     var me = ds_map_create();
     me[? "alive"] = true;
     me[? "ready"] = ready;
-    /*
-    me[? "action"] = action;
-    me[? "resuable"] = resuable;
-    me[? "visible"] = visible;
-    me[? "image_xscale"] = image_xscale;
-    me[? "image_yscale"] = image_yscale;
-    */
+    
+    //me[? "action"] = action;
+    //me[? "resuable"] = resuable;
+    //me[? "visible"] = visible;
+    //me[? "image_xscale"] = image_xscale;
+    //me[? "image_yscale"] = image_yscale;
+    
     global.save[? key] = ds_map_write(me);
     ds_map_destroy(me);
 }
@@ -84,6 +85,50 @@ with(obj_multiwall_toggle)
     me[? "alive"] = true;
     me[? "init_state"] = init_state;
     me[? "state"] = state;
+    
+    global.save[? key] = ds_map_write(me);
+    ds_map_destroy(me);
+}
+*/
+
+with(obj_toggle)
+{
+    var me = ds_map_create();
+    
+    me[? "alive"] = true;
+    //me[? "sprite"] = sprite_index;
+    me[? "solid"] = solid;
+    //if(targets == noone) { me[? "targets"] = noone; }
+    //else { me[? "targets"] = ds_list_write(targets); }
+    //me[? "initial_state"] = init_state;
+    me[? "state"] = state;
+    //me[? "reusable"] = reusable;
+    me[? "visible"] = visible;
+    //me[? "condition"] = condition;
+    //me[? "prepare"] = prepare;
+    //me[? "action"] = action;
+    
+    //me[? "act_con_arg"] = act_con_arg;
+    //me[? "prep_con_arg"] = prep_con_arg;
+    //me[? "act_arg"] = act_arg;
+    
+    
+    if(targets != noone)
+    {
+        var temp = ds_list_create();
+        
+        for(var i = 0; i < ds_list_size(targets); i++)
+        {
+            var this = ds_map_create();
+            this[? "active"] = targets[| i].active;
+            this[? "sprite"] = targets[| i].sprite_index;
+            ds_list_add(temp, ds_map_write(this));
+            ds_map_destroy(this);
+        }
+        me[? "targets_info"] = ds_list_write(temp);
+        ds_list_destroy(temp);
+    }
+    
     
     global.save[? key] = ds_map_write(me);
     ds_map_destroy(me);

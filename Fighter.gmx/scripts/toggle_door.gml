@@ -3,6 +3,14 @@ if( ds_list_size(targets) > 1 ) { show_debug_message("TOO MANY TARGETS FOR TOGGL
 else
 {
     state = !state;
-    if(!state) { instance_deactivate_object(targets[| 0]); }
-    else { instance_activate_object(targets[| 0]); }
+    if(!state) 
+    {   
+        targets[| 0].active = false;
+        instance_deactivate_object(targets[| 0]); 
+    }
+    else 
+    {
+        targets[| 0].active = true; 
+        instance_activate_object(targets[| 0]); 
+    }
 }

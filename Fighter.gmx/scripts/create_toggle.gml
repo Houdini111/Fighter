@@ -58,3 +58,5 @@ if( script_get_name(_cond) == "targeted_action" )
     //If there is somemthing there, make the toggle a faux child
 if(_at != noone) { _s.parent = _at; } 
 else { _s.parent = "none"; }
+
+return _s;
