@@ -38,6 +38,7 @@ if(_tar == noone)
 else { for(var i = 0; i < ds_list_size(_tar); i++) { ds_list_add(_s.targets, _tar[| i]); } }
 _s.sprite_index = _spr;
 _s.solid = _sol;
+if(_sol) { mp_grid_add_cell(global.grid, _x/global.gridSize, _y/global.gridSize); }
 _s.init_state = _init;
 _s.state = _init;
 _s.reusable = _reuse;

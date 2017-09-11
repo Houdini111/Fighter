@@ -43,6 +43,8 @@ global.gridSize = 32;
 
 global.grid = mp_grid_create(0, 0, room_width/global.gridSize, room_height/global.gridSize, global.gridSize, global.gridSize);
 
+grid_surf = surface_create(room_width, room_height);
+
 
 rhy_speed = 1.5;
 my_blue = make_color_hsv(154, 191, 210); //Blue
@@ -177,11 +179,17 @@ if(debug_ui)
     //pathfinding grid 
     //WARNING: VERY GPU INTENSIVE
     //Doesn't even move with the camera properly
-    /*
-    draw_set_alpha(0.4);
+    
+    if( surface_exists(grid_surf) ) { surface_free(grid_surf); }
+    grid_surf = surface_create(room_width, room_height);
+    surface_set_target(grid_surf);
+    draw_set_alpha(0.7);
     mp_grid_draw(global.grid);
     draw_set_alpha(1);
-    */
+    surface_reset_target();
+    draw_surface(grid_surf, -view_xview[0], -view_yview[0]);
+    //surface_free(grid_surf);
+    
     
     text="";
     if(global.gp_slot != -1) //CONTROLLER

@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>mp_grid_add_cell(global.grid, x/global.gridSize, y/global.gridSize);
+//show_debug_message( object_get_name(object_index) )
 
 passthrough = false;
 </string>

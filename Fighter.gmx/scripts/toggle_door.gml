@@ -6,11 +6,13 @@ else
     if(!state) 
     {   
         targets[| 0].active = false;
+        mp_grid_clear_cell(global.grid, targets[| 0].x/global.gridSize, targets[| 0].y/global.gridSize);
         instance_deactivate_object(targets[| 0]); 
     }
     else 
     {
         targets[| 0].active = true; 
         instance_activate_object(targets[| 0]); 
+        mp_grid_add_cell(global.grid, targets[| 0].x/global.gridSize, targets[| 0].y/global.gridSize);
     }
 }

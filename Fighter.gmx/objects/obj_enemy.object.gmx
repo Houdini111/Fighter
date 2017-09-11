@@ -90,6 +90,12 @@ health_float_height = 5;
           <argument>
             <kind>1</kind>
             <string>with(obj_rhy_base) { if( parent == other.id ) { instance_destroy(); } }
+mp_grid_clear_cell(global.grid, x/global.gridSize, y/global.gridSize); 
+
+var temp = ds_map_create();
+temp[? "alive"] = false;
+global.save[? key1] = ds_map_write(temp);
+ds_map_destroy(temp);
 </string>
           </argument>
         </arguments>

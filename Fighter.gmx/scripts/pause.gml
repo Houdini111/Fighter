@@ -26,6 +26,7 @@ global.master.fow = false;
 with(obj_enemy)
 {
     var me = ds_map_create();
+    me[? "alive"] = true;
     ds_map_replace(me, "x", x);
     ds_map_replace(me, "y", y);
     ds_map_replace(me, "myHealth", myHealth);

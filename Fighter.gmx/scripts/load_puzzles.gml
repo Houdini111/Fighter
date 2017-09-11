@@ -95,7 +95,11 @@ with(obj_toggle)
                             ds_map_read(this, temp[| i]);
                             targets[| i].active = this[? "active"];
                             targets[| i].sprite_index = this[? "sprite"];
-                            if(targets[| i].active == false) { instance_deactivate_object(targets[| i]); }
+                            if(targets[| i].active == false) 
+                            { 
+                                mp_grid_clear_cell(global.grid, targets[| i].x/global.gridSize, targets[| i].y/global.gridSize);
+                                instance_deactivate_object(targets[| i]); 
+                            }
                         }
                     }
                 }
