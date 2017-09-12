@@ -52,7 +52,8 @@ image_speed = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(state)
+            <string>/*
+if(state)
 {
     mp_grid_clear_cell(global.grid, x/global.gridSize, y/global.gridSize);
     instance_deactivate_object(target);
@@ -62,6 +63,7 @@ else
     mp_grid_add_cell(global.grid, x/global.gridSize, y/global.gridSize);
     instance_activate_object(target);
 }
+*/
 </string>
           </argument>
         </arguments>
