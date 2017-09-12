@@ -124,6 +124,7 @@
   <fonts name="fonts">
     <font>fonts\fnt_myFont</font>
     <font>fonts\fnt_title</font>
+    <font>fonts\fnt_menu</font>
     <font>fonts\fnt_gp_sym</font>
     <font>fonts\fnt_debug</font>
   </fonts>
@@ -174,6 +175,7 @@
     </objects>
     <object>objects\obj_impassable</object>
     <object>objects\obj_btn_prompt</object>
+    <object>objects\obj_pause_logic</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\_rm_initialize</room>
