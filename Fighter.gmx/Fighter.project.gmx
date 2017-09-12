@@ -44,10 +44,11 @@
     <sprite>sprites\spr_rhy_base</sprite>
     <sprite>sprites\state_ani</sprite>
     <sprites name="puzzle_peices">
-      <sprite>sprites\spr_switch</sprite>
+      <sprite>sprites\spr_switch_placeholder</sprite>
       <sprite>sprites\spr_switch_1x3</sprite>
       <sprite>sprites\spr_switch_1x5</sprite>
       <sprite>sprites\spr_toggle_wall</sprite>
+      <sprite>sprites\spr_switch</sprite>
     </sprites>
     <sprite>sprites\spr_skeleton</sprite>
   </sprites>
