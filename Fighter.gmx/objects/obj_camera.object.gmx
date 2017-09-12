@@ -260,8 +260,8 @@ else if(keyboard_check_pressed(vk_f2))
     }
 }
 
-if(keyboard_check(vk_up)) { view_zoom+=zoom_speed; }
-else if(keyboard_check(vk_down)) { view_zoom-=zoom_speed; }
+//if(keyboard_check(vk_up)) { view_zoom+=zoom_speed; }
+//else if(keyboard_check(vk_down)) { view_zoom-=zoom_speed; }
 view_zoom=clamp(view_zoom, 1, view_max_zoom);
 view_wview=ideal_width/view_zoom;
 view_hview=ideal_height/view_zoom;

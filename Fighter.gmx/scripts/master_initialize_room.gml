@@ -5,3 +5,5 @@ if( surface_exists(global.player.fov_surf) ) { surface_resize(global.player.fov_
 if( surface_exists(global.master.grid_surf) ) { surface_resize(global.master.grid_surf, room_width, room_height); }
 
 mp_grid_add_instances(global.grid, obj_impassable, false);
+
+global.master.fow = global.save[? "fow"];

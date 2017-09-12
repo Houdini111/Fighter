@@ -7,6 +7,8 @@ p[? "x"] = global.player.x;
 p[? "y"] = global.player.y;
 p[? "rot"] = global.player.rot;
 p[? "myHealth"] = global.player.myHealth;
+if( global.player.state == 6 ) { p[? "state"] = 6; }
+else { p[? "state"] = 0; }
 global.save[? "player"] = ds_map_write(p);
 ds_map_destroy(p);
 

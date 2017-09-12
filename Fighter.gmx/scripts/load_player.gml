@@ -9,8 +9,13 @@ with(obj_player)
 
         x = p[? "x"];
         y = p[? "y"];
+        goal_x = x;
+        goal_y = y;
+        oldX = x;
+        oldY = y;
         rot = p[? "rot"];
         myHealth = p[? "myHealth"];
+        state = p[? "state"];
         ds_map_destroy(p);
     }
     else 

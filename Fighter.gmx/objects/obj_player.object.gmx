@@ -197,7 +197,7 @@ else
         surface_set_target(fov_surf);
         draw_clear(c_ltgray);
         draw_set_color(c_black);
-        fov(x, y, 1000, rot, fov_size, fov_size/1, false, obj_impassable);
+        fov(x, y, 1000, rot, fov_size, fov_size/1, false, obj_wall);
         surface_reset_target();
     }
 

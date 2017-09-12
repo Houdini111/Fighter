@@ -103,6 +103,7 @@
       <script>scripts\toggle_fow.gml</script>
       <script>scripts\toggle_attacks.gml</script>
       <script>scripts\to_test.gml</script>
+      <script>scripts\fow_on.gml</script>
     </scripts>
     <script>scripts\array.gml</script>
     <script>scripts\check_move.gml</script>
