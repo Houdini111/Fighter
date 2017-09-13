@@ -66,6 +66,10 @@
     <scripts name="input">
       <script>scripts\gp_check.gml</script>
       <script>scripts\in_update.gml</script>
+      <script>scripts\create_input_map.gml</script>
+      <script>scripts\gp_return_press.gml</script>
+      <script>scripts\kb_return_press.gml</script>
+      <script>scripts\translate.gml</script>
     </scripts>
     <scripts name="player">
       <script>scripts\judgement_line.gml</script>
@@ -127,6 +131,7 @@
     <font>fonts\fnt_myFont</font>
     <font>fonts\fnt_title</font>
     <font>fonts\fnt_menu</font>
+    <font>fonts\fnt_small</font>
     <font>fonts\fnt_gp_sym</font>
     <font>fonts\fnt_debug</font>
   </fonts>

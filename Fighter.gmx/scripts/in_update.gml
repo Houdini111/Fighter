@@ -2,20 +2,20 @@
 
 if(global.gp_slot != -1)
 {
-    ds_map_replace(global.in, "m_up", gamepad_button_check(global.gp_slot, gp_padu));
-    ds_map_replace(global.in, "m_left", gamepad_button_check(global.gp_slot, gp_padl));    
-    ds_map_replace(global.in, "m_down", gamepad_button_check(global.gp_slot, gp_padd));
-    ds_map_replace(global.in, "m_right", gamepad_button_check(global.gp_slot, gp_padr));
-    
-    ds_map_replace(global.in, "m_up_p", gamepad_button_check_pressed(global.gp_slot, gp_padu));
-    ds_map_replace(global.in, "m_left_p", gamepad_button_check_pressed(global.gp_slot, gp_padl));    
-    ds_map_replace(global.in, "m_down_p", gamepad_button_check_pressed(global.gp_slot, gp_padd));
-    ds_map_replace(global.in, "m_right_p", gamepad_button_check_pressed(global.gp_slot, gp_padr));
-    
-    ds_map_replace(global.in, "m_up_h", 0);
-    ds_map_replace(global.in, "m_left_h", 0);    
-    ds_map_replace(global.in, "m_down_h", 0);
-    ds_map_replace(global.in, "m_right_h", 0);
+    global.in[? "m_up"] = gamepad_button_check( global.gp_slot, global.in_map[? "b_m_up"] ) ;
+    global.in[? "m_left"] = gamepad_button_check( global.gp_slot, global.in_map[? "b_m_left"] );
+    global.in[? "m_down"] = gamepad_button_check( global.gp_slot, global.in_map[? "b_m_down"] );
+    global.in[? "m_right"] = gamepad_button_check( global.gp_slot, global.in_map[? "b_m_right"] );
+   
+    global.in[? "m_up_p"] = gamepad_button_check_pressed( global.gp_slot, global.in_map[? "b_m_up"] );
+    global.in[? "m_left_p"] = gamepad_button_check_pressed( global.gp_slot, global.in_map[? "b_m_left"] );
+    global.in[? "m_down_p"] = gamepad_button_check_pressed( global.gp_slot, global.in_map[? "b_m_down"] );
+    global.in[? "m_right_p"] = gamepad_button_check_pressed( global.gp_slot, global.in_map[? "b_m_right"] );
+  
+    global.in[? "m_up_h"] = 0;
+    global.in[? "m_left_h"] = 0;
+    global.in[? "m_down_h"] = 0;
+    global.in[? "m_right_h"] = 0;
     
     ds_map_replace(global.in, "d_1", gamepad_button_check(global.gp_slot, gp_face3));
     ds_map_replace(global.in, "d_2", gamepad_button_check(global.gp_slot, gp_face1));    
@@ -54,20 +54,20 @@ if(global.gp_slot != -1)
 }
 else
 {
-    ds_map_replace(global.in, "m_up", keyboard_check(ord("W")));
-    ds_map_replace(global.in, "m_left", keyboard_check(ord("A")));
-    ds_map_replace(global.in, "m_down", keyboard_check(ord("S")));
-    ds_map_replace(global.in, "m_right", keyboard_check(ord("D")));
+    global.in[? "m_up"] = keyboard_check( global.in_map[? "k_m_up"] );
+    global.in[? "m_left"] = keyboard_check( global.in_map[? "k_m_left"] );
+    global.in[? "m_down"] = keyboard_check( global.in_map[? "k_m_down"] );
+    global.in[? "m_right"] = keyboard_check( global.in_map[? "k_m_right"] );
     
-    ds_map_replace(global.in, "m_up_p", keyboard_check_pressed(ord("W")));
-    ds_map_replace(global.in, "m_left_p", keyboard_check_pressed(ord("A")));
-    ds_map_replace(global.in, "m_down_p", keyboard_check_pressed(ord("S")));
-    ds_map_replace(global.in, "m_right_p", keyboard_check_pressed(ord("D")));
+    global.in[? "m_up_p"] = keyboard_check_pressed( global.in_map[? "k_m_up"] );
+    global.in[? "m_left_p"] = keyboard_check_pressed( global.in_map[? "k_m_left"] );
+    global.in[? "m_down_p"] = keyboard_check_pressed( global.in_map[? "k_m_down"] );
+    global.in[? "m_right_p"] = keyboard_check_pressed( global.in_map[? "k_m_right"] );
     
-    ds_map_replace(global.in, "m_up_h", 0);
-    ds_map_replace(global.in, "m_left_h", 0);    
-    ds_map_replace(global.in, "m_down_h", 0);
-    ds_map_replace(global.in, "m_right_h", 0);
+    global.in[? "m_up_h"] = 0;
+    global.in[? "m_left_h"] = 0;
+    global.in[? "m_down_h"] = 0;
+    global.in[? "m_right_h"] = 0;
     
     ds_map_replace(global.in, "d_1", keyboard_check(ord("C")));
     ds_map_replace(global.in, "d_2", keyboard_check(ord("V")));

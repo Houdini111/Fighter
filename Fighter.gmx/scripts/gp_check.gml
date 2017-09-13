@@ -35,4 +35,7 @@ else
 }
 //END CONTROLLER SUPPORT
 global.in = ds_map_create();
+
+create_input_map();
+
 in_update();
