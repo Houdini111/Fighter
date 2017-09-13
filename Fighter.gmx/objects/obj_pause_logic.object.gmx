@@ -102,10 +102,11 @@ if(x != goal_x or y != goal_y)
 }
 
 
-if( global.in[? "m_down_p"] ) { selection++; } 
-else if ( global.in[? "m_up_p"] ) { selection--; }   
+  
 if( place == "options" ) 
 { 
+    if( global.in[? "m_down_p"] ) { selection++; } 
+    else if ( global.in[? "m_up_p"] ) { selection--; } 
     selection = clamp(selection, 0, 3); 
       
     if( selection == 0 ) //Window Size
@@ -175,7 +176,27 @@ if( place == "options" )
 }
 else if( place == "keys" or place == "buttons" )
 {
-    selection = clamp(selection, 0, 3);    
+    if( global.in[? "m_down_p"] ) 
+    { 
+        selection++; 
+        if( selection == 8 ) { selection = 0; } 
+        else if( selection == 16 ) { selection = 8; } 
+    } 
+    else if ( global.in[? "m_up_p"] ) 
+    { 
+        selection--; 
+        if( selection == -1 ) { selection = 7; } 
+        else if( selection == 7 ) { selection = 15; } 
+    } 
+    else if ( global.in[? "m_right_p"] or global.in[? "m_left_p"] ) 
+    { 
+        selection+=8; 
+        if( selection &gt; 15 ) { selection -= 16; }
+    } 
+    //if( selection &lt; 0 ) { selection = 7; } 
+    //else if( selection  )
+    //else if( selection &gt; 15 ) { selection = 8; } 
+    //selection = clamp(selection, 0, 15);    
     
     if( global.in[? "d_2_p"] ) 
     { 
@@ -190,38 +211,17 @@ else if( place == "keys" or place == "buttons" )
         {
             if( global.gp_slot == -1 )
             {
-                if( selection == 0 ) //Move up
-                {                
-                    { 
-                        global.in_map[? "k_m_up"] = back; 
-                        keyboard_lastkey = -1;
-                        editing = false;
-                    }
-                }
-                if( selection == 1 ) //Move left
-                {                
-                    { 
-                        global.in_map[? "k_m_left"] = back; 
-                        keyboard_lastkey = -1;
-                        editing = false;
-                    }
-                }
-                if( selection == 2 ) //Move down
-                {                
-                    { 
-                        global.in_map[? "k_m_down"] = back; 
-                        keyboard_lastkey = -1;
-                        editing = false;
-                    }
-                }
-                if( selection == 3 ) //Move right
-                {                
-                    { 
-                        global.in_map[? "k_m_right"] = back; 
-                        keyboard_lastkey = -1;
-                        editing = false;
-                    }
-                }
+                if( selection == 0 ) { global.in_map[? "k_m_up"] = back; } //Move up
+                else if( selection == 1 ) { global.in_map[? "k_m_left"] = back; } //Move left
+                else if( selection == 2 ) { global.in_map[? "k_m_down"] = back; } //Move down
+                else if( selection == 3 ) { global.in_map[? "k_m_right"] = back; } //Move right
+                else if( selection == 4 ) { global.in_map[? "k_l_up"] = back; } //Look up
+                else if( selection == 5 ) { global.in_map[? "k_l_left"] = back; } //Look left
+                else if( selection == 6 ) { global.in_map[? "k_l_down"] = back; } //Look down
+                else if( selection == 7 ) { global.in_map[? "k_l_right"] = back; } //Look right
+                
+                keyboard_lastkey = -1;
+                editing = false;
             }
             
             /*else //Gamepad input
@@ -325,23 +325,38 @@ draw_set_font(fnt_small);
 if( !editing ) { draw_set_color(c_teal); }
 else{ draw_set_color(global.master.my_red); }
 
-if( place == "keys" ) { draw_rectangle( view_wview[0]+10-x, 10+50+35*(selection)+view_hview[0]-y, 1.5*view_wview[0]-x, 10+50+35*(selection)+view_hview[0]-y+string_height("Z"), false);}
-else if ( place == "buttons" ) { draw_rectangle( view_wview[0]+10-x, 10+50+35*(selection)-view_hview[0]-y, 1.5*view_wview[0]-x, 10+50+35*(selection)-view_hview[0]-y+string_height("Z"), false); }
-
-draw_set_halign(fa_left); 
+if( selection &gt;= 0 and selection  &lt;= 7 )
+{
+    if( place == "keys" ) { draw_rectangle( view_wview[0]+10-x, 10+50+35*(selection)+view_hview[0]-y, 1.5*view_wview[0]-20-x, 10+50+35*(selection)+view_hview[0]-y+string_height("Z"), false);}
+    else if ( place == "buttons" ) { draw_rectangle( view_wview[0]+10-x, 10+50+35*(selection)-view_hview[0]-y, 1.5*view_wview[0]-20-x, 10+50+35*(selection)-view_hview[0]-y+string_height("Z"), false); }
+}
+else 
+{
+    if( place == "keys" ) { draw_rectangle( 1.5*view_wview[0]+10-x, 10+50+35*(selection-8)+view_hview[0]-y, 1.5*view_wview[0]-20-x, 10+50+35*(selection-8)+view_hview[0]-y+string_height("Z"), false);}
+    else if ( place == "buttons" ) { draw_rectangle( 1.5*view_wview[0]+10-x, 10+50+35*(selection-8)-view_hview[0]-y, 1.5*view_wview[0]-20-x, 10+50+35*(selection-8)-view_hview[0]-y+string_height("Z"), false); }
+}
 draw_set_valign(fa_top);
 
+draw_set_halign(fa_left); 
 draw_text_shadow(1*view_wview[0]+10 -x, 10+50+view_hview[0] -y, "MOVE UP: ", fnt_small, 2, c_black, c_white); 
 draw_text_shadow(1*view_wview[0]+10 -x, 10+50+35+view_hview[0] -y, "MOVE LEFT: ", fnt_small, 2, c_black, c_white); 
 draw_text_shadow(1*view_wview[0]+10 -x, 10+50+70+view_hview[0] -y, "MOVE DOWN: ", fnt_small, 2, c_black, c_white); 
 draw_text_shadow(1*view_wview[0]+10 -x, 10+50+105+view_hview[0] -y, "MOVE RIGHT: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1*view_wview[0]+10 -x, 10+50+140+view_hview[0] -y, "LOOK UP: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1*view_wview[0]+10 -x, 10+50+175+view_hview[0] -y, "LOOK LEFT: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1*view_wview[0]+10 -x, 10+50+210+view_hview[0] -y, "LOOK DOWN: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1*view_wview[0]+10 -x, 10+50+245+view_hview[0] -y, "LOOK RIGHT: ", fnt_small, 2, c_black, c_white); 
+
 
 draw_set_halign(fa_right); 
-draw_text_shadow(1.5*view_wview[0] -x, 10+50+view_hview[0] -y, translate(global.in_map[? "k_m_up"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.5*view_wview[0] -x, 10+50+35+view_hview[0] -y, translate(global.in_map[? "k_m_left"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.5*view_wview[0] -x, 10+50+70+view_hview[0] -y, translate(global.in_map[? "k_m_down"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.5*view_wview[0] -x, 10+50+105+view_hview[0] -y, translate(global.in_map[? "k_m_right"]), fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(2*view_wview[0]-75 -x, 10+50+view_hview[0] -y, "ACTION 1: ", fnt_menu, 2, c_black, c_white); 
+draw_text_shadow(1.5*view_wview[0]-25 -x, 10+50+view_hview[0] -y, translate(global.in_map[? "k_m_up"]), fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.5*view_wview[0]-25 -x, 10+50+35+view_hview[0] -y, translate(global.in_map[? "k_m_left"]), fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.5*view_wview[0]-25 -x, 10+50+70+view_hview[0] -y, translate(global.in_map[? "k_m_down"]), fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.5*view_wview[0]-25 -x, 10+50+105+view_hview[0] -y, translate(global.in_map[? "k_m_right"]), fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.5*view_wview[0]-25 -x, 10+50+140+view_hview[0] -y, translate(global.in_map[? "k_l_up"]), fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.5*view_wview[0]-25 -x, 10+50+175+view_hview[0] -y, translate(global.in_map[? "k_l_left"]), fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.5*view_wview[0]-25 -x, 10+50+210+view_hview[0] -y, translate(global.in_map[? "k_l_down"]), fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.5*view_wview[0]-25 -x, 10+50+245+view_hview[0] -y, translate(global.in_map[? "k_l_right"]), fnt_small, 2, c_black, c_white); 
 
 
 draw_set_halign(fa_left); 

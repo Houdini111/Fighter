@@ -208,7 +208,7 @@ else
         var stickDist = point_distance(0, 0, global.in[? "r_x"], global.in[? "r_y"] );
         if( stickDist &gt; 0 ) 
         {
-            if( global.in[? "r_press"] )
+            if( global.in[? "r_stick"] )
                 { rot = global.in[? "r_dir"]; }
             else
             {

@@ -36,6 +36,11 @@ else
 //END CONTROLLER SUPPORT
 global.in = ds_map_create();
 
+global.in[? "m_up_h"] = 0;
+global.in[? "m_left_h"] = 0;
+global.in[? "m_down_h"] = 0;
+global.in[? "m_right_h"] = 0;
+
 create_input_map();
 
 in_update();
