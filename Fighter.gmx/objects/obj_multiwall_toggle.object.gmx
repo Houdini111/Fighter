@@ -56,8 +56,7 @@ ds_map_destroy(me);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>show_debug_message( string(object_get_name(object_index))+": "+string(init_state) + " " +string(state));
-if(init_state != state)
+            <string>if(init_state != state)
 {
     if(!state)
     {

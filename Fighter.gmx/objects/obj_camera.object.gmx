@@ -74,6 +74,7 @@ window_set_size(ideal_width, ideal_height);
 
 
 window_zoom = 1;
+before_max = window_zoom;
 max_window_zoom = floor(display_get_width()/ideal_width);
 
 view_zoom = 1;

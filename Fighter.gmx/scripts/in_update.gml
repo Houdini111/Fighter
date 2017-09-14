@@ -12,40 +12,40 @@ if(global.gp_slot != -1)
     global.in[? "m_down_p"] = gamepad_button_check_pressed( global.gp_slot, global.in_map[? "b_m_down"] );
     global.in[? "m_right_p"] = gamepad_button_check_pressed( global.gp_slot, global.in_map[? "b_m_right"] );
     
-    ds_map_replace(global.in, "d_1", gamepad_button_check(global.gp_slot, gp_face3));
-    ds_map_replace(global.in, "d_2", gamepad_button_check(global.gp_slot, gp_face1));    
-    ds_map_replace(global.in, "d_3", gamepad_button_check(global.gp_slot, gp_face2));
-    ds_map_replace(global.in, "d_4", gamepad_button_check(global.gp_slot, gp_face4));
+    global.in[? "d_1"] = gamepad_button_check(global.gp_slot, global.in_map[? "b_dodge_1"]);
+    global.in[? "d_2"] = gamepad_button_check(global.gp_slot, global.in_map[? "b_dodge_2"]);    
+    global.in[? "d_3"] = gamepad_button_check(global.gp_slot, global.in_map[? "b_dodge_3"]);
+    global.in[? "d_4"] = gamepad_button_check(global.gp_slot, global.in_map[? "b_dodge_4"]);
     
-    ds_map_replace(global.in, "d_1_p", gamepad_button_check_pressed(global.gp_slot, gp_face3));
-    ds_map_replace(global.in, "d_2_p", gamepad_button_check_pressed(global.gp_slot, gp_face1));    
-    ds_map_replace(global.in, "d_3_p", gamepad_button_check_pressed(global.gp_slot, gp_face2));
-    ds_map_replace(global.in, "d_4_p", gamepad_button_check_pressed(global.gp_slot, gp_face4));
+    global.in[? "d_1_p"] = gamepad_button_check_pressed(global.gp_slot, global.in_map[? "b_dodge_1"]);
+    global.in[? "d_2_p"] = gamepad_button_check_pressed(global.gp_slot, global.in_map[? "b_dodge_2"]);    
+    global.in[? "d_3_p"] = gamepad_button_check_pressed(global.gp_slot, global.in_map[? "b_dodge_3"]);
+    global.in[? "d_4_p"] = gamepad_button_check_pressed(global.gp_slot, global.in_map[? "b_dodge_4"]);
     
-    ds_map_replace(global.in, "l_x", gamepad_axis_value(global.gp_slot, gp_axislh));
-    ds_map_replace(global.in, "l_y", gamepad_axis_value(global.gp_slot, gp_axislv));
-    ds_map_replace(global.in, "l_dir", point_direction(0, 0, global.in[? "l_x"], global.in[? "l_y"]));
-    ds_map_replace(global.in, "l_press", gamepad_button_check(global.gp_slot, gp_stickl));
+    //global.in[? "l_x"] = gamepad_axis_value(global.gp_slot, gp_axislh);
+    //global.in[? "l_y"] = gamepad_axis_value(global.gp_slot, gp_axislv);
+    //global.in[? "l_dir"] = point_direction(0, 0, global.in[? "l_x"], global.in[? "l_y"]);
+    global.in[? "l_press"] = gamepad_button_check(global.gp_slot, global.in_map[? "b_l_stick"]);
     
-    ds_map_replace(global.in, "r_x", gamepad_axis_value(global.gp_slot, gp_axisrh));
-    ds_map_replace(global.in, "r_y", gamepad_axis_value(global.gp_slot, gp_axisrv));
-    ds_map_replace(global.in, "r_dir", point_direction(0, 0, global.in[? "r_x"], global.in[? "r_y"]));
-    ds_map_replace(global.in, "r_press", gamepad_button_check(global.gp_slot, gp_stickr));
+    global.in[? "r_x"] = gamepad_axis_value(global.gp_slot, global.in_map[? "look_stick_horizontal"]);
+    global.in[? "r_y"] = gamepad_axis_value(global.gp_slot, global.in_map[? "look_stick_vertical"]);
+    global.in[? "r_dir"] = point_direction(0, 0, global.in[? "r_x"], global.in[? "r_y"]);
+    global.in[? "r_press"] = gamepad_button_check(global.gp_slot, global.in_map[? "b_r_stick"]);
     
-    ds_map_replace(global.in, "a_1", gamepad_button_check(global.gp_slot, gp_shoulderl));
-    ds_map_replace(global.in, "a_2", gamepad_button_check(global.gp_slot, gp_shoulderr));    
-    ds_map_replace(global.in, "a_3", gamepad_button_check(global.gp_slot, gp_shoulderlb));
-    ds_map_replace(global.in, "a_4", gamepad_button_check(global.gp_slot, gp_shoulderrb));
+    global.in[? "a_1"] = gamepad_button_check(global.gp_slot, global.in_map[? "b_a_1"]);
+    global.in[? "a_2"] = gamepad_button_check(global.gp_slot, global.in_map[? "b_a_2"]);    
+    global.in[? "a_3"] = gamepad_button_check(global.gp_slot, global.in_map[? "b_a_3"]);
+    global.in[? "a_4"] = gamepad_button_check(global.gp_slot, global.in_map[? "b_a_4"]);
     
-    ds_map_replace(global.in, "a_1_p", gamepad_button_check_pressed(global.gp_slot, gp_shoulderl));
-    ds_map_replace(global.in, "a_2_p", gamepad_button_check_pressed(global.gp_slot, gp_shoulderr));    
-    ds_map_replace(global.in, "a_3_p", gamepad_button_check_pressed(global.gp_slot, gp_shoulderlb));
-    ds_map_replace(global.in, "a_4_p", gamepad_button_check_pressed(global.gp_slot, gp_shoulderrb));
+    global.in[? "a_1_p"] = gamepad_button_check_pressed(global.gp_slot, global.in_map[? "b_a_1"]);
+    global.in[? "a_2_p"] = gamepad_button_check_pressed(global.gp_slot, global.in_map[? "b_a_2"]);    
+    global.in[? "a_3_p"] = gamepad_button_check_pressed(global.gp_slot, global.in_map[? "b_a_3"]);
+    global.in[? "a_4_p"] = gamepad_button_check_pressed(global.gp_slot, global.in_map[? "b_a_4"]);
     
-    ds_map_replace(global.in, "select", gamepad_button_check(global.gp_slot, gp_select));
-    ds_map_replace(global.in, "start", gamepad_button_check(global.gp_slot, gp_start));
-    ds_map_replace(global.in, "select_p", gamepad_button_check_pressed(global.gp_slot, gp_select));
-    ds_map_replace(global.in, "start_p", gamepad_button_check_pressed(global.gp_slot, gp_start));   
+    global.in[? "start"] = gamepad_button_check(global.gp_slot, global.in_map[? "b_start"]);
+    global.in[? "select"] = gamepad_button_check(global.gp_slot, global.in_map[? "b_select"]);
+    global.in[? "start_p"] = gamepad_button_check_pressed(global.gp_slot, global.in_map[? "b_start"]);   
+    global.in[? "select_p"] = gamepad_button_check_pressed(global.gp_slot, global.in_map[? "b_select"]);
 }
 else
 {

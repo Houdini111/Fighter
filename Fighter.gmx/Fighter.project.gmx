@@ -67,8 +67,8 @@
       <script>scripts\gp_check.gml</script>
       <script>scripts\in_update.gml</script>
       <script>scripts\create_input_map.gml</script>
-      <script>scripts\gp_return_press.gml</script>
       <script>scripts\kb_return_press.gml</script>
+      <script>scripts\gp_press.gml</script>
       <script>scripts\translate.gml</script>
     </scripts>
     <scripts name="player">
@@ -94,12 +94,6 @@
           <script>scripts\player_step_on.gml</script>
           <script>scripts\object_destroyed.gml</script>
         </scripts>
-      </scripts>
-      <scripts name="OLD">
-        <script>scripts\create_floor_trigger.gml</script>
-        <script>scripts\create_enemy_wall_toggle.gml</script>
-        <script>scripts\create_door_toggle.gml</script>
-        <script>scripts\create_fake_wall_toggle.gml</script>
       </scripts>
     </scripts>
     <scripts name="trigger_events">
@@ -173,11 +167,7 @@
     </objects>
     <objects name="puzzle peices">
       <object>objects\obj_door</object>
-      <object>objects\obj_basic_toggle</object>
-      <object>objects\obj_floor_trigger</object>
       <object>objects\obj_interactable</object>
-      <object>objects\obj_multiwall_toggle</object>
-      <object>objects\obj_enemy_wall_toggle</object>
       <object>objects\obj_toggle</object>
     </objects>
     <object>objects\obj_impassable</object>

@@ -50,7 +50,7 @@ targets = ds_list_create();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(!instance_exists(parent)) { state = true;show_debug_message("TICK"); }
+            <string>if(!instance_exists(parent)) { state = true; }
 
 
 event_inherited();
