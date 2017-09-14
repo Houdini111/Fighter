@@ -83,8 +83,8 @@ else
     else if ( keyboard_check( global.in_map[? "k_l_down"] ) ) {  global.in[? "r_y"] = 1; }
     else {  global.in[? "r_y"] = 0; }
     ds_map_replace( global.in, "r_dir", point_direction(0, 0, global.in[? "r_x"], global.in[? "r_y"]) );
-    ds_map_replace( global.in, "r_stick", keyboard_check(ord("P")));
-    ds_map_replace( global.in, "r_stick_p", keyboard_check_pressed(ord("P")));
+    global.in[? "r_stick"] = keyboard_check(global.in_map[? "k_r_stick"]);
+    global.in[? "r_stick_p"] = keyboard_check_pressed(global.in_map[? "k_r_stick"]);
     
     global.in[? "a_1"] = keyboard_check( global.in_map[? "k_a_1"] );
     global.in[? "a_2"] = keyboard_check( global.in_map[? "k_a_2"] );

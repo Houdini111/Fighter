@@ -13,6 +13,7 @@ global.in_map[? "k_dodge_3"] = ord("B");
 global.in_map[? "k_dodge_4"] = ord("N");
 
 global.in_map[? "k_l_stick"] = ord("Q");
+global.in_map[? "k_r_stick"] = ord("P");
 
 global.in_map[? "k_l_up"] = ord("I");
 global.in_map[? "k_l_left"] = ord("J");
