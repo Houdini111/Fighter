@@ -49,6 +49,10 @@ views[? "keys_y"] = view_hview[0];
 
 views[? "buttons_x"] = view_wview[0];
 views[? "buttons_y"] = -view_hview[0];
+
+
+temp_keys = ds_map_create();
+ds_map_destroy(temp_keys);
 </string>
           </argument>
         </arguments>
@@ -185,6 +189,8 @@ if( place == "options" )
     {
         if( global.in[? "d_2_p"] )
         {
+            temp_keys = ds_map_create();
+            ds_map_copy(temp_keys, global.in_map);
             selection = 0;
             if( global.gp_slot == -1 )
             {
@@ -205,34 +211,58 @@ else if( place == "keys" or place == "buttons" )
 {
     if( global.in[? "m_down_p"] ) 
     { 
-        selection++; 
-        if( selection == 8 or selection == 16 or selection == 24) 
-            { selection-=8; } 
+        if(selection == -1) { selection = 16; }
+        else
+        {
+            selection++; 
+            if( selection == 8 or selection == 16 ) { selection -= 8; } 
+            else if( selection == 24 ) { selection = -1; }
+        }
     }   
     else if ( global.in[? "m_up_p"] ) 
     { 
-        selection--; 
-        if( selection == -1 or selection == 7 or selection == 15 ) 
-            { selection+=8; }
+        if(selection == -1) { selection = 23; }
+        else
+        {
+            selection--; 
+            if( selection == -1 or selection == 7 ) 
+                { selection+=8; }
+            else if( selection == 15 ) { selection = -1; }
+        }
     } 
     else if ( global.in[? "m_right_p"] ) 
     { 
-        selection+=8; 
-        if( selection &gt; 24 ) { selection -= 24; }
+        if(selection != -1)
+        {
+            selection+=8; 
+            if( selection &gt; 24 ) { selection -= 24; }
+        }
     } 
     else if ( global.in[? "m_left_p"] )
     {
-        selection-=8;
-        if( selection &lt; 0 ) { selection += 24; }
+        if(selection != -1)
+        {
+            selection-=8;
+            if( selection &lt; 0 ) { selection += 24; }
+        }
     }
     //if( selection &lt; 0 ) { selection = 7; } 
     //else if( selection  )
     //else if( selection &gt; 15 ) { selection = 8; } 
-    //selection = clamp(selection, 0, 15);    
+    selection = clamp(selection, -1, 23);    
     
     if( global.in[? "d_2_p"] ) 
     { 
-        if( ! (selection &gt;= 20 and selection &lt;= 22) )
+        if( selection == -1 ) //On use button
+        {
+            selection = 0;
+            place = "options";
+            goal_x = views[? "options_x"];
+            goal_y = views[? "options_y"];
+            ds_map_copy(global.in_map, temp_keys);
+            ds_map_destroy(temp_keys);            
+        }
+        if( ! (selection &gt;= 20 and selection &lt;= 22) ) //Not in the unused segment
         {
             if( global.gp_slot == -1 ) { keyboard_lastkey = -1; } 
             editing = true; 
@@ -250,26 +280,26 @@ else if( place == "keys" or place == "buttons" )
         {
             if( global.gp_slot == -1 )
             {
-                if( selection == 0 ) { global.in_map[? "k_m_up"] = back; } //Move up
-                else if( selection == 1 ) { global.in_map[? "k_m_left"] = back; } //Move left
-                else if( selection == 2 ) { global.in_map[? "k_m_down"] = back; } //Move down
-                else if( selection == 3 ) { global.in_map[? "k_m_right"] = back; } //Move right
-                else if( selection == 4 ) { global.in_map[? "k_l_up"] = back; } //Look up
-                else if( selection == 5 ) { global.in_map[? "k_l_left"] = back; } //Look left
-                else if( selection == 6 ) { global.in_map[? "k_l_down"] = back; } //Look down
-                else if( selection == 7 ) { global.in_map[? "k_l_right"] = back; } //Look right
-                else if( selection == 8 ) { global.in_map[? "k_a_4"] = back; } //Interact
-                else if( selection == 9 ) { global.in_map[? "k_a_1"] = back; } //Action 1
-                else if( selection == 10 ) { global.in_map[? "k_a_2"] = back; } //Action 2
-                else if( selection == 11 ) { global.in_map[? "k_a_3"] = back; } //Action 3
-                else if( selection == 12 ) { global.in_map[? "k_dodge_1"] = back; } //Dodge 1
-                else if( selection == 13 ) { global.in_map[? "k_dodge_2"] = back; } //Dodge 2
-                else if( selection == 14 ) { global.in_map[? "k_dodge_3"] = back; } //Dodge 3
-                else if( selection == 15 ) { global.in_map[? "k_dodge_4"] = back; } //Dodge 4
-                else if( selection == 16 ) { global.in_map[? "k_l_stick"] = back; } //Left stick press
-                else if( selection == 17 ) { global.in_map[? "k_r_stick"] = back; } //Right stick press
-                else if( selection == 18 ) { global.in_map[? "k_start"] = back; } //Start
-                else if( selection == 19 ) { global.in_map[? "k_select"] = back; } //Select
+                if( selection == 0 ) { temp_keys[? "k_m_up"] = back; } //Move up
+                else if( selection == 1 ) { temp_keys[? "k_m_left"] = back; } //Move left
+                else if( selection == 2 ) { temp_keys[? "k_m_down"] = back; } //Move down
+                else if( selection == 3 ) { temp_keys[? "k_m_right"] = back; } //Move right
+                else if( selection == 4 ) { temp_keys[? "k_l_up"] = back; } //Look up
+                else if( selection == 5 ) { temp_keys[? "k_l_left"] = back; } //Look left
+                else if( selection == 6 ) { temp_keys[? "k_l_down"] = back; } //Look down
+                else if( selection == 7 ) { temp_keys[? "k_l_right"] = back; } //Look right
+                else if( selection == 8 ) { temp_keys[? "k_a_4"] = back; } //Interact
+                else if( selection == 9 ) { temp_keys[? "k_a_1"] = back; } //Action 1
+                else if( selection == 10 ) { temp_keys[? "k_a_2"] = back; } //Action 2
+                else if( selection == 11 ) { temp_keys[? "k_a_3"] = back; } //Action 3
+                else if( selection == 12 ) { temp_keys[? "k_dodge_1"] = back; } //Dodge 1
+                else if( selection == 13 ) { temp_keys[? "k_dodge_2"] = back; } //Dodge 2
+                else if( selection == 14 ) { temp_keys[? "k_dodge_3"] = back; } //Dodge 3
+                else if( selection == 15 ) { temp_keys[? "k_dodge_4"] = back; } //Dodge 4
+                else if( selection == 16 ) { temp_keys[? "k_l_stick"] = back; } //Left stick press
+                else if( selection == 17 ) { temp_keys[? "k_r_stick"] = back; } //Right stick press
+                else if( selection == 18 ) { temp_keys[? "k_start"] = back; } //Start
+                else if( selection == 19 ) { temp_keys[? "k_select"] = back; } //Select
                 
                 keyboard_lastkey = -1;
                 editing = false;
@@ -277,32 +307,57 @@ else if( place == "keys" or place == "buttons" )
             
             else 
             {
-                if( selection == 0 ) { global.in_map[? "b_m_up"] = back; } //Move up
-                else if( selection == 1 ) { global.in_map[? "b_m_left"] = back; } //Move left
-                else if( selection == 2 ) { global.in_map[? "b_m_down"] = back; } //Move down
-                else if( selection == 3 ) { global.in_map[? "b_m_right"] = back; } //Move right
-                else if( selection == 4 ) { global.in_map[? "b_l_up"] = back; } //Look up
-                else if( selection == 5 ) { global.in_map[? "b_l_left"] = back; } //Look left
-                else if( selection == 6 ) { global.in_map[? "b_l_down"] = back; } //Look down
-                else if( selection == 7 ) { global.in_map[? "b_l_right"] = back; } //Look right
-                else if( selection == 8 ) { global.in_map[? "b_a_4"] = back; } //Interact
-                else if( selection == 9 ) { global.in_map[? "b_a_1"] = back; } //Action 1
-                else if( selection == 10 ) { global.in_map[? "b_a_2"] = back; } //Action 2
-                else if( selection == 11 ) { global.in_map[? "b_a_3"] = back; } //Action 3
-                else if( selection == 12 ) { global.in_map[? "b_dodge_1"] = back; } //Dodge 1
-                else if( selection == 13 ) { global.in_map[? "b_dodge_2"] = back; } //Dodge 2
-                else if( selection == 14 ) { global.in_map[? "b_dodge_3"] = back; } //Dodge 3
-                else if( selection == 15 ) { global.in_map[? "b_dodge_4"] = back; } //Dodge 4
-                else if( selection == 16 ) { global.in_map[? "b_l_stick"] = back; } //Left stick press
-                else if( selection == 17 ) { global.in_map[? "b_r_stick"] = back; } //Right stick press
-                else if( selection == 18 ) { global.in_map[? "b_start"] = back; } //Start
-                else if( selection == 19 ) { global.in_map[? "b_select"] = back; } //Select
+                if( selection == 0 ) { temp_keys[? "b_m_up"] = back; } //Move up
+                else if( selection == 1 ) { temp_keys[? "b_m_left"] = back; } //Move left
+                else if( selection == 2 ) { temp_keys[? "b_m_down"] = back; } //Move down
+                else if( selection == 3 ) { temp_keys[? "b_m_right"] = back; } //Move right
+                else if( selection == 4 ) { temp_keys[? "b_l_up"] = back; } //Look up
+                else if( selection == 5 ) { temp_keys[? "b_l_left"] = back; } //Look left
+                else if( selection == 6 ) { temp_keys[? "b_l_down"] = back; } //Look down
+                else if( selection == 7 ) { temp_keys[? "b_l_right"] = back; } //Look right
+                else if( selection == 8 ) { temp_keys[? "b_a_4"] = back; } //Interact
+                else if( selection == 9 ) { temp_keys[? "b_a_1"] = back; } //Action 1
+                else if( selection == 10 ) { temp_keys[? "b_a_2"] = back; } //Action 2
+                else if( selection == 11 ) { temp_keys[? "b_a_3"] = back; } //Action 3
+                else if( selection == 12 ) { temp_keys[? "b_dodge_1"] = back; } //Dodge 1
+                else if( selection == 13 ) { temp_keys[? "b_dodge_2"] = back; } //Dodge 2
+                else if( selection == 14 ) { temp_keys[? "b_dodge_3"] = back; } //Dodge 3
+                else if( selection == 15 ) { temp_keys[? "b_dodge_4"] = back; } //Dodge 4
+                else if( selection == 16 ) { temp_keys[? "b_l_stick"] = back; } //Left stick press
+                else if( selection == 17 ) { temp_keys[? "b_r_stick"] = back; } //Right stick press
+                else if( selection == 18 ) { temp_keys[? "b_start"] = back; } //Start
+                else if( selection == 19 ) { temp_keys[? "b_select"] = back; } //Select
                 
                 editing = false;
             }
         }
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Destroy temp_keys
+
+if( ds_exists(temp_keys, ds_type_map) ) { ds_map_destroy( temp_keys ); }
 </string>
           </argument>
         </arguments>
@@ -392,6 +447,9 @@ draw_set_halign(fa_right);
 draw_text_shadow(2*view_wview[0]-75 -x, 10+50+105 -y, "&gt;", fnt_small, 2, c_black, c_white); 
 
 
+draw_set_font(fnt_medium);
+var use_width = string_width("USE")*1.1;
+var use_height = string_height("USE")*1.1;
 
 
 draw_set_font(fnt_small);
@@ -408,13 +466,35 @@ else if( selection &gt;= 8 and selection  &lt;= 15 )
     if( place == "keys" ) { draw_rectangle( 1.333*view_wview[0]+10-x, 10+50+35*(selection-8)+view_hview[0]-y, 1.666*view_wview[0]-20-x, 10+50+35*(selection-8)+view_hview[0]-y+string_height("Z"), false);}
     else if ( place == "buttons" ) { draw_rectangle( 1.333*view_wview[0]+10-x, 10+50+35*(selection-8)-view_hview[0]-y, 1.666*view_wview[0]-20-x, 10+50+35*(selection-8)-view_hview[0]-y+string_height("Z"), false); }
 }
-else
+else if( selection &gt;= 16 and selection &lt;= 23 )
 {
     if( place == "keys" ) { draw_rectangle( 1.666*view_wview[0]+10-x, 10+50+35*(selection-16)+view_hview[0]-y, 2*view_wview[0]-20-x, 10+50+35*(selection-16)+view_hview[0]-y+string_height("Z"), false);}
     else if ( place == "buttons" ) { draw_rectangle( 1.666*view_wview[0]+10-x, 10+50+35*(selection-16)-view_hview[0]-y, 2*view_wview[0]-20-x, 10+50+35*(selection-16)-view_hview[0]-y+string_height("Z"), false); }
 }
-draw_set_valign(fa_top);
+else if( selection == -1 )
+{
+    if( place == "keys" ) { draw_rectangle( 2*view_wview[0]-20-use_width-x, 10+view_hview[0]-y, 2*view_wview[0]-20-x, 10+view_hview[0]-y+use_height, false);}
+    else if ( place == "buttons" ) { draw_rectangle( 2*view_wview[0]-20-use_width-x, 10-view_hview[0]-y, 2*view_wview[0]-20-x, 10-view_hview[0]-y+use_height, false); }
+}
 
+if( selection != -1 )
+{
+    draw_set_color( merge_color(c_ltgray, c_dkgray, 0.5) );
+    draw_rectangle( 2*view_wview[0]-20-use_width-x, 10+view_hview[0]-y, 2*view_wview[0]-20-x, 10+view_hview[0]-y+use_height, false);
+    draw_rectangle( 2*view_wview[0]-20-use_width-x, 10-view_hview[0]-y, 2*view_wview[0]-20-x, 10-view_hview[0]-y+use_height, false);
+}
+draw_set_color(c_black);
+draw_rectangle( 2*view_wview[0]-20-use_width-x, 10+view_hview[0]-y, 2*view_wview[0]-20-x, 10+view_hview[0]-y+use_height, true);
+draw_rectangle( 2*view_wview[0]-20-use_width-x, 10-view_hview[0]-y, 2*view_wview[0]-20-x, 10-view_hview[0]-y+use_height, true);
+draw_set_halign(fa_center);
+draw_set_valign(fa_middle);
+draw_text_shadow(2*view_wview[0]-20-(use_width/2)-x, 10+view_hview[0]+(use_height/2)-y, "USE", fnt_medium, 2, c_black, c_white);
+draw_text_shadow(2*view_wview[0]-20-(use_width/2)-x, 10-view_hview[0]+(use_height/2)-y, "USE", fnt_medium, 2, c_black, c_white);
+
+
+
+draw_set_valign(fa_top);
+draw_set_font(fnt_small);
 
 //KEYBOARD KEY CONFIG
 draw_set_halign(fa_left); 
@@ -445,99 +525,100 @@ draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+105+view_hview[0] -y, "SELECT:
 //draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+210+view_hview[0] -y, "DODGE 3: ", fnt_small, 2, c_black, c_white); 
 draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+245+view_hview[0] -y, "RESTORE DEAULTS", fnt_small, 2, c_black, c_white); 
 
-
-draw_set_halign(fa_right); 
-draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+view_hview[0] -y, translate(global.in_map[? "k_m_up"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+35+view_hview[0] -y, translate(global.in_map[? "k_m_left"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+70+view_hview[0] -y, translate(global.in_map[? "k_m_down"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+105+view_hview[0] -y, translate(global.in_map[? "k_m_right"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+140+view_hview[0] -y, translate(global.in_map[? "k_l_up"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+175+view_hview[0] -y, translate(global.in_map[? "k_l_left"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+210+view_hview[0] -y, translate(global.in_map[? "k_l_down"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+245+view_hview[0] -y, translate(global.in_map[? "k_l_right"]), fnt_small, 2, c_black, c_white); 
-
-draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+view_hview[0] -y, translate(global.in_map[? "k_a_4"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+35+view_hview[0] -y, translate(global.in_map[? "k_a_1"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+70+view_hview[0] -y, translate(global.in_map[? "k_a_2"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+105+view_hview[0] -y, translate(global.in_map[? "k_a_3"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+140+view_hview[0] -y, translate(global.in_map[? "k_dodge_1"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+175+view_hview[0] -y, translate(global.in_map[? "k_dodge_2"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+210+view_hview[0] -y, translate(global.in_map[? "k_dodge_3"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+245+view_hview[0] -y, translate(global.in_map[? "k_dodge_4"]), fnt_small, 2, c_black, c_white); 
-
-draw_text_shadow(2*view_wview[0]-25 -x, 10+50+view_hview[0] -y, translate(global.in_map[? "k_l_stick"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(2*view_wview[0]-25 -x, 10+50+35+view_hview[0] -y, translate(global.in_map[? "k_r_stick"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(2*view_wview[0]-25 -x, 10+50+70+view_hview[0] -y, translate(global.in_map[? "k_start"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(2*view_wview[0]-25 -x, 10+50+105+view_hview[0] -y, translate(global.in_map[? "k_select"]), fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(2*view_wview[0]-25 -x, 10+50+140+view_hview[0] -y, translate(global.in_map[? "k_dodge_1"]), fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(2*view_wview[0]-25 -x, 10+50+175+view_hview[0] -y, translate(global.in_map[? "k_dodge_2"]), fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(2*view_wview[0]-25 -x, 10+50+210+view_hview[0] -y, translate(global.in_map[? "k_dodge_3"]), fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(2*view_wview[0]-25 -x, 10+50+245+view_hview[0] -y, translate(global.in_map[? "k_dodge_4"]), fnt_small, 2, c_black, c_white); 
-
-
-
-//GAMEPAD KEY CONFIG
-draw_set_halign(fa_left); 
-draw_text_shadow(1*view_wview[0]+10 -x, 10+50-view_hview[0] -y, "MOVE UP: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1*view_wview[0]+10 -x, 10+50+35-view_hview[0] -y, "MOVE LEFT: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1*view_wview[0]+10 -x, 10+50+70-view_hview[0] -y, "MOVE DOWN: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1*view_wview[0]+10 -x, 10+50+105-view_hview[0] -y, "MOVE RIGHT: ", fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(1*view_wview[0]+10 -x, 10+50+140-view_hview[0] -y, "LOOK UP: ", fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(1*view_wview[0]+10 -x, 10+50+175-view_hview[0] -y, "LOOK LEFT: ", fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(1*view_wview[0]+10 -x, 10+50+210-view_hview[0] -y, "LOOK DOWN: ", fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(1*view_wview[0]+10 -x, 10+50+245-view_hview[0] -y, "LOOK RIGHT: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1*view_wview[0]+10 -x, 10+50+140-view_hview[0] -y, "LOOK HORIZONTAL: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1*view_wview[0]+10 -x, 10+50+175-view_hview[0] -y, "LOOK VERTICAL: ", fnt_small, 2, c_black, c_white); 
-
-draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50-view_hview[0] -y, "INTERACT: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+35-view_hview[0] -y, "ACTION 1: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+70-view_hview[0] -y, "ACTION 2: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+105-view_hview[0] -y, "ACTION 3: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+140-view_hview[0] -y, "DODGE 1: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+175-view_hview[0] -y, "DODGE 2: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+210-view_hview[0] -y, "DODGE 3: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+245-view_hview[0] -y, "DODGE 4: ", fnt_small, 2, c_black, c_white); 
-
-draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50-view_hview[0] -y, "L STK PRESS: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+35-view_hview[0] -y, "R STK PRESS: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+70-view_hview[0] -y, "START: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+105-view_hview[0] -y, "SELECT: ", fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+140-view_hview[0] -y, "DODGE 1: ", fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+175-view_hview[0] -y, "DODGE 2: ", fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+210-view_hview[0] -y, "DODGE 3: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+245-view_hview[0] -y, "RESTORE DEAULTS", fnt_small, 2, c_black, c_white); 
-
-
-draw_set_halign(fa_right); 
-draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50-view_hview[0] -y, translate(global.in_map[? "b_m_up"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+35-view_hview[0] -y, translate(global.in_map[? "b_m_left"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+70-view_hview[0] -y, translate(global.in_map[? "b_m_down"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+105-view_hview[0] -y, translate(global.in_map[? "b_m_right"]), fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+140-view_hview[0] -y, translate(global.in_map[? "b_l_up"]), fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+175-view_hview[0] -y, translate(global.in_map[? "b_l_left"]), fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+210-view_hview[0] -y, translate(global.in_map[? "b_l_down"]), fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+245-view_hview[0] -y, translate(global.in_map[? "b_l_right"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+140-view_hview[0] -y, translate(global.in_map[? "look_stick_horizontal"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+175-view_hview[0] -y, translate(global.in_map[? "look_stick_horizontal"]), fnt_small, 2, c_black, c_white); 
-
-draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50-view_hview[0] -y, translate(global.in_map[? "b_a_4"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+35-view_hview[0] -y, translate(global.in_map[? "b_a_1"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+70-view_hview[0] -y, translate(global.in_map[? "b_a_2"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+105-view_hview[0] -y, translate(global.in_map[? "b_a_3"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+140-view_hview[0] -y, translate(global.in_map[? "b_dodge_1"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+175-view_hview[0] -y, translate(global.in_map[? "b_dodge_2"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+210-view_hview[0] -y, translate(global.in_map[? "b_dodge_3"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+245-view_hview[0] -y, translate(global.in_map[? "b_dodge_4"]), fnt_small, 2, c_black, c_white); 
-
-draw_text_shadow(2*view_wview[0]-25 -x, 10+50-view_hview[0] -y, translate(global.in_map[? "b_l_stick"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(2*view_wview[0]-25 -x, 10+50+35-view_hview[0] -y, translate(global.in_map[? "b_r_stick"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(2*view_wview[0]-25 -x, 10+50+70-view_hview[0] -y, translate(global.in_map[? "b_start"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(2*view_wview[0]-25 -x, 10+50+105-view_hview[0] -y, translate(global.in_map[? "b_select"]), fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(2*view_wview[0]-25 -x, 10+50+140-view_hview[0] -y, translate(global.in_map[? "b_dodge_1"]), fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(2*view_wview[0]-25 -x, 10+50+175-view_hview[0] -y, translate(global.in_map[? "b_dodge_2"]), fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(2*view_wview[0]-25 -x, 10+50+210-view_hview[0] -y, translate(global.in_map[? "b_dodge_3"]), fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(2*view_wview[0]-25 -x, 10+50+245-view_hview[0] -y, translate(global.in_map[? "b_dodge_4"]), fnt_small, 2, c_black, c_white); 
-
+if( place == "keys" or place == "buttons" )
+{
+    draw_set_halign(fa_right); 
+    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+view_hview[0] -y, translate(temp_keys[? "k_m_up"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+35+view_hview[0] -y, translate(temp_keys[? "k_m_left"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+70+view_hview[0] -y, translate(temp_keys[? "k_m_down"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+105+view_hview[0] -y, translate(temp_keys[? "k_m_right"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+140+view_hview[0] -y, translate(temp_keys[? "k_l_up"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+175+view_hview[0] -y, translate(temp_keys[? "k_l_left"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+210+view_hview[0] -y, translate(temp_keys[? "k_l_down"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+245+view_hview[0] -y, translate(temp_keys[? "k_l_right"]), fnt_small, 2, c_black, c_white); 
+    
+    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+view_hview[0] -y, translate(temp_keys[? "k_a_4"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+35+view_hview[0] -y, translate(temp_keys[? "k_a_1"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+70+view_hview[0] -y, translate(temp_keys[? "k_a_2"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+105+view_hview[0] -y, translate(temp_keys[? "k_a_3"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+140+view_hview[0] -y, translate(temp_keys[? "k_dodge_1"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+175+view_hview[0] -y, translate(temp_keys[? "k_dodge_2"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+210+view_hview[0] -y, translate(temp_keys[? "k_dodge_3"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+245+view_hview[0] -y, translate(temp_keys[? "k_dodge_4"]), fnt_small, 2, c_black, c_white); 
+    
+    draw_text_shadow(2*view_wview[0]-25 -x, 10+50+view_hview[0] -y, translate(temp_keys[? "k_l_stick"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(2*view_wview[0]-25 -x, 10+50+35+view_hview[0] -y, translate(temp_keys[? "k_r_stick"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(2*view_wview[0]-25 -x, 10+50+70+view_hview[0] -y, translate(temp_keys[? "k_start"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(2*view_wview[0]-25 -x, 10+50+105+view_hview[0] -y, translate(temp_keys[? "k_select"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(2*view_wview[0]-25 -x, 10+50+140+view_hview[0] -y, translate(temp_keys[? "k_dodge_1"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(2*view_wview[0]-25 -x, 10+50+175+view_hview[0] -y, translate(temp_keys[? "k_dodge_2"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(2*view_wview[0]-25 -x, 10+50+210+view_hview[0] -y, translate(temp_keys[? "k_dodge_3"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(2*view_wview[0]-25 -x, 10+50+245+view_hview[0] -y, translate(temp_keys[? "k_dodge_4"]), fnt_small, 2, c_black, c_white); 
+    
+    
+    
+    //GAMEPAD KEY CONFIG
+    draw_set_halign(fa_left); 
+    draw_text_shadow(1*view_wview[0]+10 -x, 10+50-view_hview[0] -y, "MOVE UP: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1*view_wview[0]+10 -x, 10+50+35-view_hview[0] -y, "MOVE LEFT: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1*view_wview[0]+10 -x, 10+50+70-view_hview[0] -y, "MOVE DOWN: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1*view_wview[0]+10 -x, 10+50+105-view_hview[0] -y, "MOVE RIGHT: ", fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1*view_wview[0]+10 -x, 10+50+140-view_hview[0] -y, "LOOK UP: ", fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1*view_wview[0]+10 -x, 10+50+175-view_hview[0] -y, "LOOK LEFT: ", fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1*view_wview[0]+10 -x, 10+50+210-view_hview[0] -y, "LOOK DOWN: ", fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1*view_wview[0]+10 -x, 10+50+245-view_hview[0] -y, "LOOK RIGHT: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1*view_wview[0]+10 -x, 10+50+140-view_hview[0] -y, "LOOK HORIZONTAL: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1*view_wview[0]+10 -x, 10+50+175-view_hview[0] -y, "LOOK VERTICAL: ", fnt_small, 2, c_black, c_white); 
+    
+    draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50-view_hview[0] -y, "INTERACT: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+35-view_hview[0] -y, "ACTION 1: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+70-view_hview[0] -y, "ACTION 2: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+105-view_hview[0] -y, "ACTION 3: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+140-view_hview[0] -y, "DODGE 1: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+175-view_hview[0] -y, "DODGE 2: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+210-view_hview[0] -y, "DODGE 3: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+245-view_hview[0] -y, "DODGE 4: ", fnt_small, 2, c_black, c_white); 
+    
+    draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50-view_hview[0] -y, "L STK PRESS: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+35-view_hview[0] -y, "R STK PRESS: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+70-view_hview[0] -y, "START: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+105-view_hview[0] -y, "SELECT: ", fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+140-view_hview[0] -y, "DODGE 1: ", fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+175-view_hview[0] -y, "DODGE 2: ", fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+210-view_hview[0] -y, "DODGE 3: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+245-view_hview[0] -y, "RESTORE DEAULTS", fnt_small, 2, c_black, c_white); 
+    
+    
+    draw_set_halign(fa_right); 
+    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50-view_hview[0] -y, translate(temp_keys[? "b_m_up"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+35-view_hview[0] -y, translate(temp_keys[? "b_m_left"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+70-view_hview[0] -y, translate(temp_keys[? "b_m_down"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+105-view_hview[0] -y, translate(temp_keys[? "b_m_right"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+140-view_hview[0] -y, translate(temp_keys[? "b_l_up"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+175-view_hview[0] -y, translate(temp_keys[? "b_l_left"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+210-view_hview[0] -y, translate(temp_keys[? "b_l_down"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+245-view_hview[0] -y, translate(temp_keys[? "b_l_right"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+140-view_hview[0] -y, translate(temp_keys[? "look_stick_horizontal"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+175-view_hview[0] -y, translate(temp_keys[? "look_stick_horizontal"]), fnt_small, 2, c_black, c_white); 
+    
+    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50-view_hview[0] -y, translate(temp_keys[? "b_a_4"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+35-view_hview[0] -y, translate(temp_keys[? "b_a_1"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+70-view_hview[0] -y, translate(temp_keys[? "b_a_2"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+105-view_hview[0] -y, translate(temp_keys[? "b_a_3"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+140-view_hview[0] -y, translate(temp_keys[? "b_dodge_1"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+175-view_hview[0] -y, translate(temp_keys[? "b_dodge_2"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+210-view_hview[0] -y, translate(temp_keys[? "b_dodge_3"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+245-view_hview[0] -y, translate(temp_keys[? "b_dodge_4"]), fnt_small, 2, c_black, c_white); 
+    
+    draw_text_shadow(2*view_wview[0]-25 -x, 10+50-view_hview[0] -y, translate(temp_keys[? "b_l_stick"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(2*view_wview[0]-25 -x, 10+50+35-view_hview[0] -y, translate(temp_keys[? "b_r_stick"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(2*view_wview[0]-25 -x, 10+50+70-view_hview[0] -y, translate(temp_keys[? "b_start"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(2*view_wview[0]-25 -x, 10+50+105-view_hview[0] -y, translate(temp_keys[? "b_select"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(2*view_wview[0]-25 -x, 10+50+140-view_hview[0] -y, translate(temp_keys[? "b_dodge_1"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(2*view_wview[0]-25 -x, 10+50+175-view_hview[0] -y, translate(temp_keys[? "b_dodge_2"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(2*view_wview[0]-25 -x, 10+50+210-view_hview[0] -y, translate(temp_keys[? "b_dodge_3"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(2*view_wview[0]-25 -x, 10+50+245-view_hview[0] -y, translate(temp_keys[? "b_dodge_4"]), fnt_small, 2, c_black, c_white); 
+}
 
 draw_set_halign(fa_left); 
 </string>

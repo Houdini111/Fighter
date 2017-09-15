@@ -125,6 +125,7 @@
     <font>fonts\fnt_myFont</font>
     <font>fonts\fnt_title</font>
     <font>fonts\fnt_menu</font>
+    <font>fonts\fnt_medium</font>
     <font>fonts\fnt_small</font>
     <font>fonts\fnt_gp_sym</font>
     <font>fonts\fnt_debug</font>
