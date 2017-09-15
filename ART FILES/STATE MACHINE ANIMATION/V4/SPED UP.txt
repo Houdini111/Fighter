@@ -1,0 +1,2 @@
+
+ffmpeg -i "C:\Users\houdi\Documents\GameMaker\Projects\Fighter Repo\Fighter\ART FILES\STATE MACHINE ANIMATION\V4\Up\Up.avi" -filter:v "setpts=0.25*PTS" "C:\Users\houdi\Documents\GameMaker\Projects\Fighter Repo\Fighter\ART FILES\STATE MACHINE ANIMATION\V4\Up\Up_SpedUp.avi"
