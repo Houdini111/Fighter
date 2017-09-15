@@ -118,13 +118,14 @@ for(i = 0; i &lt; array_length_2d(st, state); i++)
     }
 }
 
-
+/*
 draw_set_color(c_black);
 
 draw_circle(x+circle_radius, y+circle_radius, circle_radius, false);
 draw_circle(x+circle_radius, y+circle_radius+ui_height/2, circle_radius, false);
 draw_circle(x+circle_radius, y+circle_radius+ui_height, circle_radius, false);
 draw_circle(x+circle_radius+ui_width, y+circle_radius+ui_height/2, circle_radius, false);
+*/
 </string>
           </argument>
         </arguments>

@@ -85,8 +85,22 @@ if(keyboard_check_pressed(vk_f6)) { fow = !fow; }
 
 if( global.in[? "start_p"] )
 {   
-    if(turn == "pause") { unpause(); }
-    else { pause(); }
+    if( room_get_name( room ) == "rm_pause" )
+    {
+        with(obj_pause_logic)
+        {
+            if( !editing )
+            {
+                if(other.turn == "pause") { unpause(); }
+                else { pause(); }
+            }
+        }
+    }
+    else
+    {
+        if(turn == "pause") { unpause(); }
+        else { pause(); }
+    }
 }
 
 if(turn == 'p')
@@ -133,8 +147,22 @@ else if (turn == 'e')
             <kind>1</kind>
             <string>if( global.in[? "select_p"] )
 { 
-    debug_ui = !debug_ui; 
-    show_debug_overlay(debug_ui);
+    if( room_get_name( room ) == "rm_pause" )
+    {
+        with(obj_pause_logic)
+        {
+            if( !editing )
+            {
+                global.master.debug_ui = !global.master.debug_ui; 
+                show_debug_overlay(global.master.debug_ui);
+            }
+        }
+    }
+    else
+    {
+        global.master.debug_ui = !global.master.debug_ui; 
+        show_debug_overlay(global.master.debug_ui);
+    }
 }
 if( keyboard_check_pressed(vk_f4) ) { ui = !ui; }
 if( keyboard_check_pressed(vk_f7) ) { fow_pen = !fow_pen; }
@@ -248,7 +276,7 @@ if( keyboard_check_pressed(vk_f7) ) { fow_pen = !fow_pen; }
     draw_line(global.player.rhythm_left+(global.player.rhythm_width*(time%1)), global.player.rhythm_top+global.player.rhythm_height, global.player.rhythm_left+(global.player.rhythm_width*(time%1)), view_hport[0]);
     
     draw_set_halign(fa_right);
-    text = string(global.player.state);
+    text = string(global.player.state_machine.state);
     draw_text_shadow(view_wport[0]-10, 10, text, fnt_debug, 2, c_black, c_white);
     draw_set_halign(fa_left);
     
