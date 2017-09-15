@@ -35,6 +35,8 @@ myHealth = maxHealth;
 atk = 100;
 def = 100;
 
+state_machine = instance_create(0, 0, obj_state);
+state_machine.parent = id;
 
 rhythm_left = view_wview[0]*.8;
 rhythm_width = view_wview[0]*.2-10;
@@ -61,7 +63,7 @@ fov_size = 120;
 
 action_target = noone;
 
-
+/*
 //Language
 // 0 == a1 (lb)
 // 1 == a2 (rb)
@@ -101,7 +103,7 @@ st[11, 0] = 0;//---
     
 //Reject states
 r[0] = 6; 
-
+*/
 
 
 /*
@@ -286,12 +288,13 @@ else
     
         if( global.in[? "a_1_p"] ) { key = 0; }
         else if( global.in[? "a_2_p"] ) { key = 1; }
+        else if( global.in[? "a_3_p"] ) { key = 2; }
         else { key = '$' }
         
         if ( key != '$' )
         {
-            state = st[state, key]; 
-            
+            state_transition(state_machine, key);//  state_machinestate = st[state, key]; 
+            /*
             switch (state)
             {
                 case 3:  
@@ -318,7 +321,8 @@ else
                     break;
                 default: 
                     break;
-            }            
+            }      
+            */      
         }
         
         var h = noone;
@@ -556,8 +560,8 @@ else
     */
     
     
+    /*
     //Combo options
-    
     options = 0;
     size = 60
     
@@ -567,7 +571,7 @@ else
         for(j = 0; j &lt; array_length_1d(r); j++)
         {
             if(st[state, i] == r[j])
-                { viable = false; }
+                { viable = false; }a
         }
         
         if(viable and global.master.turn == 'p') 
@@ -578,9 +582,7 @@ else
             options++;
         }
     }
-    
-    
-    
+    */
     
     
     

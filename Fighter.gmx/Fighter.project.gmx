@@ -76,6 +76,7 @@
       <script>scripts\nextState.gml</script>
       <script>scripts\p_attack.gml</script>
       <script>scripts\fov.gml</script>
+      <script>scripts\state_transition.gml</script>
     </scripts>
     <scripts name="puzzle logic">
       <script>scripts\create_toggle.gml</script>
@@ -131,8 +132,9 @@
     <font>fonts\fnt_debug</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_player</object>
     <object>objects\obj_master</object>
+    <object>objects\obj_player</object>
+    <object>objects\obj_state</object>
     <object>objects\obj_camera</object>
     <objects name="walls">
       <object>objects\obj_wall_N</object>

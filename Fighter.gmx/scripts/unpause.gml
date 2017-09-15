@@ -9,6 +9,15 @@ with(obj_player)
     ds_map_destroy(p);
 }
 
+with(obj_state)
+{
+    var temp = ds_map_create();
+    ds_map_read(temp, global.save[? "state_machine"]);
+    if( temp[? "state"] == 6 ) { state = 6; }
+    else { state = 0; }
+    //state = temp[? "state"];
+}
+
 global.master.time = global.save[? "time"];
 global.master.turn = global.save[? "turn"];
 

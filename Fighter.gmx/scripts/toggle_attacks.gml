@@ -1,3 +1,3 @@
 ///toggle_attacks
-if( global.player.state != 6 ) { global.player.state = 6; } 
-else { global.player.state = 0; }
+if( global.player.state_machine.state != 6 ) { global.player.state_machine.state = 6; } 
+else { global.player.state_machine.state = 0; }

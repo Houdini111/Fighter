@@ -7,10 +7,16 @@ p[? "x"] = global.player.x;
 p[? "y"] = global.player.y;
 p[? "rot"] = global.player.rot;
 p[? "myHealth"] = global.player.myHealth;
-if( global.player.state == 6 ) { p[? "state"] = 6; }
-else { p[? "state"] = 0; }
+//if( global.player.state == 6 ) { p[? "state"] = 6; }
+//else { p[? "state"] = 0; }
 global.save[? "player"] = ds_map_write(p);
 ds_map_destroy(p);
+
+
+var state = ds_map_create();
+state[? "state"] = global.player.state_machine.state;
+global.save[? "state_machine"] = ds_map_write(state);
+ds_map_destroy(state);
 
 global.save[? "time"] = global.master.time;
 
