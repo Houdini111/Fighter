@@ -40,5 +40,13 @@ else
             return "D_LEFT";
         case gp_padr:
             return "D_RIGHT";
+        case gp_axislh:
+            return "L_STK_HOR";
+        case gp_axislv:
+            return "L_STK_VER";
+        case gp_axisrh:
+            return "R_STK_HOR";
+        case gp_axisrv:
+            return "R_STK_VER";
     }
 }

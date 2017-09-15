@@ -54,6 +54,30 @@ views[? "buttons_y"] = -view_hview[0];
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///start responding to inputs after a duration
+input = true;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -159,7 +183,7 @@ if( place == "options" )
     }
     else if( selection == 3 ) //Key bindings selection
     {
-        if( global.in[? "d_1_p"] )
+        if( global.in[? "d_2_p"] )
         {
             selection = 0;
             if( global.gp_slot == -1 )
@@ -212,12 +236,14 @@ else if( place == "keys" or place == "buttons" )
         {
             if( global.gp_slot == -1 ) { keyboard_lastkey = -1; } 
             editing = true; 
+            input = false;
+            alarm[0] = 1;
         }
     }
     
-    if( editing )
+    if( editing and input )
     {
-        var back;
+        var back = -1;
         if( global.gp_slot == -1 ) { back = kb_return_press(); }
         else { back = gp_press(); }
         if( back != -1 ) 
@@ -244,7 +270,6 @@ else if( place == "keys" or place == "buttons" )
                 else if( selection == 17 ) { global.in_map[? "k_r_stick"] = back; } //Right stick press
                 else if( selection == 18 ) { global.in_map[? "k_start"] = back; } //Start
                 else if( selection == 19 ) { global.in_map[? "k_select"] = back; } //Select
-                
                 
                 keyboard_lastkey = -1;
                 editing = false;
@@ -273,8 +298,6 @@ else if( place == "keys" or place == "buttons" )
                 else if( selection == 18 ) { global.in_map[? "b_start"] = back; } //Start
                 else if( selection == 19 ) { global.in_map[? "b_select"] = back; } //Select
                 
-                
-                keyboard_lastkey = -1;
                 editing = false;
             }
         }
@@ -494,8 +517,8 @@ draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+105-view_hview[0] -y, translat
 //draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+175-view_hview[0] -y, translate(global.in_map[? "b_l_left"]), fnt_small, 2, c_black, c_white); 
 //draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+210-view_hview[0] -y, translate(global.in_map[? "b_l_down"]), fnt_small, 2, c_black, c_white); 
 //draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+245-view_hview[0] -y, translate(global.in_map[? "b_l_right"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+210-view_hview[0] -y, translate(global.in_map[? "look_stick_horizontal"]), fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+245-view_hview[0] -y, translate(global.in_map[? "look_stick_horizontal"]), fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+140-view_hview[0] -y, translate(global.in_map[? "look_stick_horizontal"]), fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+175-view_hview[0] -y, translate(global.in_map[? "look_stick_horizontal"]), fnt_small, 2, c_black, c_white); 
 
 draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50-view_hview[0] -y, translate(global.in_map[? "b_a_4"]), fnt_small, 2, c_black, c_white); 
 draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+35-view_hview[0] -y, translate(global.in_map[? "b_a_1"]), fnt_small, 2, c_black, c_white); 

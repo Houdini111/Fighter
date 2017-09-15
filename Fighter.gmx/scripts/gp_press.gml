@@ -22,7 +22,8 @@ var toTest =
     
 for(var i = 0; i < array_length_1d(toTest); i++)
 {
-    if( gamepad_button_check( global.gp_slot, toTest[i] ) )
+    if( gamepad_button_check_pressed( global.gp_slot, toTest[i] ) )
         { return toTest[i]; }
 }
 
+return -1;
