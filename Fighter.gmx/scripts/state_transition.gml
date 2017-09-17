@@ -36,8 +36,13 @@ switch (_sm.state)
 
 with(_sm) 
 {
-    show_debug_message("TRANSITION"); 
     state = st[state, _k]; 
+    
+    if( _k == 0 or _k == 1 or _k == 2 ) 
+    {
+        if( alarm[0] == -1 and alarm[1] == -1 and alarm[2] == -1 )
+            { alarm[_k] = t_speed; }
+    }
     
     switch (state)
     {

@@ -31,6 +31,7 @@ x = 0;
 y = 0;
 circle_radius = 15;
 
+t_speed = 10;
 
 
 
@@ -78,6 +79,97 @@ r[0] = 6;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="9">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>alarm[9] = t_speed;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>alarm[9] = t_speed;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>alarm[9] = t_speed;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -95,7 +187,7 @@ r[0] = 6;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>/*
 //Combo options
 options = 0;
 size = 60
@@ -117,15 +209,64 @@ for(i = 0; i &lt; array_length_2d(st, state); i++)
         options++;
     }
 }
-
-/*
-draw_set_color(c_black);
-
-draw_circle(x+circle_radius, y+circle_radius, circle_radius, false);
-draw_circle(x+circle_radius, y+circle_radius+ui_height/2, circle_radius, false);
-draw_circle(x+circle_radius, y+circle_radius+ui_height, circle_radius, false);
-draw_circle(x+circle_radius+ui_width, y+circle_radius+ui_height/2, circle_radius, false);
 */
+
+draw_set_color(c_black);
+/*
+draw_circle(x+circle_radius, y+circle_radius, circle_radius, false); //Top
+draw_circle(x+circle_radius, y+circle_radius+ui_height/2, circle_radius, false); //Center
+draw_circle(x+circle_radius, y+circle_radius+ui_height, circle_radius, false); //Bottom
+draw_circle(x+circle_radius+ui_width, y+circle_radius+ui_height/2, circle_radius, false); //Right
+*/
+if( alarm[0] != -1 )
+{
+    m_amt = ui_height/2*(t_speed-alarm[0])/t_speed;
+    s_amt = circle_radius*(1-((t_speed-alarm[0])/t_speed));
+    draw_circle(x+circle_radius, y+circle_radius+m_amt, circle_radius, false); //Top
+    draw_circle(x+circle_radius, y+circle_radius+ui_height/2, s_amt, false); //Center
+    draw_circle(x+circle_radius, y+circle_radius+ui_height-m_amt, s_amt, false); //Bottom
+    draw_circle(x+circle_radius+ui_width-m_amt, y+circle_radius+ui_height/2, s_amt, false); //Right
+}
+else if( alarm[1] != -1 )
+{
+    m_amt = ui_height/2*(t_speed-alarm[1])/t_speed;
+    s_amt = circle_radius*(1-((t_speed-alarm[1])/t_speed));
+    draw_circle(x+circle_radius, y+circle_radius+m_amt, s_amt, false); //Top
+    draw_circle(x+circle_radius, y+circle_radius+ui_height/2, s_amt, false); //Center
+    draw_circle(x+circle_radius, y+circle_radius+ui_height-m_amt, s_amt, false); //Bottom
+    draw_circle(x+circle_radius+ui_width-m_amt, y+circle_radius+ui_height/2, circle_radius, false); //Right
+}
+else if( alarm[2] != -1 )
+{
+    m_amt = ui_height/2*(t_speed-alarm[2])/t_speed;
+    s_amt = circle_radius*(1-((t_speed-alarm[2])/t_speed));
+    draw_circle(x+circle_radius, y+circle_radius+m_amt, s_amt, false); //Top
+    draw_circle(x+circle_radius, y+circle_radius+ui_height/2, s_amt, false); //Center
+    draw_circle(x+circle_radius, y+circle_radius+ui_height-m_amt, s_amt, false); //Bottom
+    draw_circle(x+circle_radius+ui_width-m_amt, y+circle_radius+ui_height/2, s_amt, false); //Right
+}
+else if( alarm[9] != -1 )
+{
+    s_amt = circle_radius*(1-(alarm[9]/t_speed));
+    draw_circle(x+circle_radius, y+circle_radius, s_amt, false); //Top
+    draw_circle(x+circle_radius, y+circle_radius+ui_height/2, circle_radius, false); //Center
+    draw_circle(x+circle_radius, y+circle_radius+ui_height, s_amt, false); //Bottom
+    draw_circle(x+circle_radius+ui_width, y+circle_radius+ui_height/2, s_amt, false); //Right
+
+}
+else
+{
+    draw_circle(x+circle_radius, y+circle_radius, circle_radius, false); //Top
+    draw_circle(x+circle_radius, y+circle_radius+ui_height/2, circle_radius, false); //Center
+    draw_circle(x+circle_radius, y+circle_radius+ui_height, circle_radius, false); //Bottom
+    draw_circle(x+circle_radius+ui_width, y+circle_radius+ui_height/2, circle_radius, false); //Right
+}
+show_debug_message( string(alarm[0]) + ": " + string(alarm[9]));
+//draw_circle(x+circle_radius, y+circle_radius+(ui_height/2*t_speed/alarm[0]), circle_radius, false); //Top
+//draw_circle(x+circle_radius, y+circle_radius+ui_height/2, circle_radius, false); //Center
+//draw_circle(x+circle_radius, y+circle_radius+ui_height, circle_radius, false); //Bottom
+//draw_circle(x+circle_radius+ui_width, y+circle_radius+ui_height/2, circle_radius, false); //Right
+
 </string>
           </argument>
         </arguments>
