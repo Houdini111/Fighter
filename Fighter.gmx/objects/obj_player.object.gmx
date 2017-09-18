@@ -392,6 +392,8 @@ else
             { with(h) { instance_destroy(); } }
     }
 }
+
+myHealth = clamp(myHealth, 0, maxHealth);
 </string>
           </argument>
         </arguments>

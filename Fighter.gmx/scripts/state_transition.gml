@@ -34,6 +34,7 @@ switch (_sm.state)
 }    
 */
 
+/*
 with(_sm) 
 {
     state = st[state, _k]; 
@@ -72,4 +73,45 @@ with(_sm)
             break;
     }           
 }
+*/
 
+with(_sm) 
+{
+    oldState = state;
+    state = st[state, _k]; 
+    
+    if( _k == 0 or _k == 1 or _k == 2 ) 
+    {
+        if( alarm[0] == -1 and alarm[1] == -1 and alarm[2] == -1 )
+            { alarm[_k] = t_speed; }
+    }
+    
+    switch (state)
+    {
+        case -1:
+            //time -= 50;
+            state = 0;
+            break;
+        case 7:     //Light physical combo
+            //0, 1, 4, 7, 
+            //0, 0, 0
+            p_attack(parent, 1);
+            state = 0;
+            break;
+        case 9:     //Light heal
+            //0, 3, 6, 9
+            //2, 0, 0 
+            //p_attack(parent, 3, 1.75);
+            parent.myHealth += parent.maxHealth*0.1;
+            state = 0;
+            break;
+        case 10:    //Light magic combo
+            //0, 2, 5, 8, 10 
+            //1, 0, 0, 1
+            p_attack(parent, 2, 1.3);
+            state = 0;
+            break;
+        default: 
+            break;
+    }           
+}

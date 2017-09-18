@@ -77,6 +77,8 @@
       <script>scripts\p_attack.gml</script>
       <script>scripts\fov.gml</script>
       <script>scripts\state_transition.gml</script>
+      <script>scripts\draw_state_circle.gml</script>
+      <script>scripts\state_second_half.gml</script>
     </scripts>
     <scripts name="puzzle logic">
       <script>scripts\create_toggle.gml</script>
