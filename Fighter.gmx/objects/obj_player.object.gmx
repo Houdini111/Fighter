@@ -32,7 +32,7 @@ rot = 0;
 maxHealth = 100;
 myHealth = maxHealth;
 
-atk = 100;
+atk = 70;
 def = 100;
 
 state_machine = instance_create(0, 0, obj_state);

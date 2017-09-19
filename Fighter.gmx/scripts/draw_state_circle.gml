@@ -3,9 +3,18 @@ var _state = argument0;
 var _pos = argument1;
 var _r = argument2;
 var _d = argument3;
-var _in = false;
 
-if( st[_state, _in] != -1 ) //Will it be drawn?
+if( _pos == 'c_t' )
+{
+    draw_set_font(fnt_small);
+    draw_set_color(c_white);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+    draw_text(x+circle_radius, y+circle_radius+ui_height/2, string(_state));
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_top);
+}
+else
 {
     if( _pos == 'c' ) { draw_set_color(c_black); } 
     else
@@ -27,10 +36,6 @@ if( st[_state, _in] != -1 ) //Will it be drawn?
                 } 
             }
         }
-        /*
-        if( _in ) { draw_set_color(c_orange); } 
-        else { draw_set_color(c_black); } 
-        */
     }
     
     if( _pos == 'c' ) //Center
