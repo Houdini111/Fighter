@@ -73,12 +73,14 @@
     </scripts>
     <scripts name="player">
       <script>scripts\judgement_line.gml</script>
-      <script>scripts\nextState.gml</script>
       <script>scripts\p_attack.gml</script>
       <script>scripts\fov.gml</script>
-      <script>scripts\state_transition.gml</script>
-      <script>scripts\draw_state_circle.gml</script>
-      <script>scripts\state_second_half.gml</script>
+      <scripts name="state">
+        <script>scripts\state_transition.gml</script>
+        <script>scripts\draw_state_triangles.gml</script>
+        <script>scripts\draw_state_circle.gml</script>
+        <script>scripts\state_second_half.gml</script>
+      </scripts>
     </scripts>
     <scripts name="puzzle logic">
       <script>scripts\create_toggle.gml</script>

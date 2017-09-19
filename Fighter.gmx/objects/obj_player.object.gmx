@@ -525,69 +525,6 @@ myHealth = clamp(myHealth, 0, maxHealth);
     draw_rectangle(view_wport*bar_width_margin, view_hport*bar_height_margin, view_wport*bar_width_margin+(time/timeLimit)*bar_width, view_hport*bar_height_margin*2, false);
     
     
-    
-    //Turn
-    /*
-    draw_set_alpha(alpha);
-    draw_set_color(c_black);
-    draw_rectangle(view_wview[0]/2+width/2, 0, view_wview[0]/2+width/2+height, height*2, false);
-    draw_set_alpha(1);
-    if(global.master.turn == 'p')
-    {
-        draw_set_color(global.master.my_green);
-        draw_rectangle(view_wview[0]/2+width/2, 0, view_wview[0]/2+width/2+height, height, false);
-    }
-    else if(global.master.turn == 'e')
-    {
-        draw_set_color(global.master.my_red);
-        draw_rectangle(view_wview[0]/2+width/2, height, view_wview[0]/2+width/2+height, height*2, false);
-    }
-    else if(global.master.previousTurn != 'n/a')
-    {
-        if(global.master.previousTurn == 'p')
-        {
-            draw_set_color(global.master.my_green);
-            draw_rectangle(view_wview[0]/2+width/2, 0, view_wview[0]/2+width/2+height, height, false);
-        }
-        else if(global.master.previousTurn == 'e')
-        {
-            draw_set_color(global.master.my_red);
-            draw_rectangle(view_wview[0]/2+width/2, height, view_wview[0]/2+width/2+height, height*2, false);
-        }
-    }
-    draw_set_alpha(alpha);
-    draw_set_color(c_black);
-    draw_rectangle(view_wview[0]/2+width/2, 0, view_wview[0]/2+width/2+height, height*2, true);
-    draw_line(view_wview[0]/2+width/2, height, view_wview[0]/2+width/2+height, height);
-    */
-    
-    
-    /*
-    //Combo options
-    options = 0;
-    size = 60
-    
-    for(i = 0; i &lt; array_length_2d(st, state); i++)
-    {
-        viable = true;
-        for(j = 0; j &lt; array_length_1d(r); j++)
-        {
-            if(st[state, i] == r[j])
-                { viable = false; }a
-        }
-        
-        if(viable and global.master.turn == 'p') 
-        {
-            if(i = 0) { comboItem("L", 0, size*(options+1), size); }
-            else if(i = 1) { comboItem("R", 0, size*(options+1), size); } 
-            
-            options++;
-        }
-    }
-    */
-    
-    
-    
     draw_set_alpha(1);
     //TEST RHYTHM 
     //RECTANGLE
@@ -604,10 +541,27 @@ myHealth = clamp(myHealth, 0, maxHealth);
     draw_set_halign(fa_center);
     draw_set_valign(fa_bottom);
     
+    /*
     rhy_sym[0] = "X";
     rhy_sym[1] = "A";
     rhy_sym[2] = "B";
     rhy_sym[3] = "Y";
+    */
+    if( global.gp_slot == -1 )
+    {
+        rhy_sym[0] = translate(global.in_map[? "k_dodge_1"]);
+        rhy_sym[1] = translate(global.in_map[? "k_dodge_2"]);
+        rhy_sym[2] = translate(global.in_map[? "k_dodge_3"]);
+        rhy_sym[3] = translate(global.in_map[? "k_dodge_4"]);
+    }
+    else
+    {
+        rhy_sym[0] = translate(global.in_map[? "b_dodge_1"]);
+        rhy_sym[1] = translate(global.in_map[? "b_dodge_2"]);
+        rhy_sym[2] = translate(global.in_map[? "b_dodge_3"]);
+        rhy_sym[3] = translate(global.in_map[? "b_dodge_4"]);
+    }
+    
     rhy_col[0] = global.master.my_blue;
     rhy_col[1] = global.master.my_green;
     rhy_col[2] = global.master.my_red;

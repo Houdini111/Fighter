@@ -253,53 +253,59 @@ a[3] = 12;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if( alarm[0] != -1 )
-{//show_debug_message("0");
-    h_amt = ui_height/2*(t_speed-alarm[0])/t_speed;
-    w_amt = ui_width*(t_speed-alarm[0])/t_speed;
-    s_amt = circle_radius*(1-((t_speed-alarm[0])/t_speed));
-    draw_state_circle( oldState, 'c', s_amt, 0 );
-    draw_state_circle( oldState, 0, circle_radius, h_amt );
-    if( st[oldState, 1] != -1 ) { draw_state_circle( oldState, 1, s_amt, w_amt ); } 
-    if( st[oldState, 2] != -1 ) { draw_state_circle( oldState, 2, s_amt, h_amt ); }
+            <string>if( global.master.turn != "pause" )
+{
+    if( global.master.turn == 'e' ) { draw_set_alpha(0.7); }
+    
+    if( alarm[0] != -1 )
+    {//show_debug_message("0");
+        h_amt = ui_height/2*(t_speed-alarm[0])/t_speed;
+        w_amt = ui_width*(t_speed-alarm[0])/t_speed;
+        s_amt = circle_radius*(1-((t_speed-alarm[0])/t_speed));
+        draw_state_circle( oldState, 'c', s_amt, 0 );
+        draw_state_circle( oldState, 0, circle_radius, h_amt );
+        if( st[oldState, 1] != -1 ) { draw_state_circle( oldState, 1, s_amt, w_amt ); } 
+        if( st[oldState, 2] != -1 ) { draw_state_circle( oldState, 2, s_amt, h_amt ); }
+    }
+    else if( alarm[1] != -1 )
+    {//show_debug_message("1");
+        h_amt = ui_height/2*(t_speed-alarm[1])/t_speed;
+        w_amt = ui_width*(t_speed-alarm[1])/t_speed;
+        s_amt = circle_radius*(1-((t_speed-alarm[1])/t_speed));
+        draw_state_circle( oldState, 'c', s_amt, 0 );
+        if( st[oldState, 0] != -1 ) { draw_state_circle( oldState, 0, s_amt, h_amt ); }
+        draw_state_circle( oldState, 1, circle_radius, w_amt ); 
+        if( st[oldState, 2] != -1 ) { draw_state_circle( oldState, 2, s_amt, h_amt ); }
+    }
+    else if( alarm[2] != -1 )
+    {//show_debug_message("2");
+        h_amt = ui_height/2*(t_speed-alarm[2])/t_speed;
+        w_amt = ui_width*(t_speed-alarm[2])/t_speed;
+        s_amt = circle_radius*(1-((t_speed-alarm[2])/t_speed));
+        draw_state_circle( oldState, 'c', s_amt, 0 );
+        if( st[oldState, 0] != -1 ) { draw_state_circle( oldState, 0, s_amt, h_amt ); }
+        if( st[oldState, 1] != -1 ) { draw_state_circle( oldState, 1, s_amt, w_amt ); }
+    }
+    else if( alarm[9] != -1 )
+    {//show_debug_message("3");
+        s_amt = circle_radius*(1-(alarm[9]/t_speed));
+        draw_state_circle( state, 'c', circle_radius, 0 );
+        if( st[state, 0] != -1 ) { draw_state_circle( state, 0, s_amt, 0 ); }
+        if( st[state, 1] != -1 ) { draw_state_circle( state, 1, s_amt, 0 ); }
+        if( st[state, 2] != -1 ) { draw_state_circle( state, 2, s_amt, 0 ); } 
+    }
+    else
+    {//show_debug_message("4");
+        //draw_state_triangles();
+        draw_state_circle( state, 'c', circle_radius, 0 );
+        if( st[state, 0] != -1 ) { draw_state_circle( state, 0, circle_radius, 0 ); }
+        if( st[state, 1] != -1 ) { draw_state_circle( state, 1, circle_radius, 0 ); }
+        if( st[state, 2] != -1 ) { draw_state_circle( state, 2, circle_radius, 0 ); } 
+        draw_state_circle( tree_depth, 'c_t', circle_radius, 0);
+    }
+    
+    //show_debug_message(state);
 }
-else if( alarm[1] != -1 )
-{//show_debug_message("1");
-    h_amt = ui_height/2*(t_speed-alarm[1])/t_speed;
-    w_amt = ui_width*(t_speed-alarm[1])/t_speed;
-    s_amt = circle_radius*(1-((t_speed-alarm[1])/t_speed));
-    draw_state_circle( oldState, 'c', s_amt, 0 );
-    if( st[oldState, 0] != -1 ) { draw_state_circle( oldState, 0, s_amt, h_amt ); }
-    draw_state_circle( oldState, 1, circle_radius, w_amt ); 
-    if( st[oldState, 2] != -1 ) { draw_state_circle( oldState, 2, s_amt, h_amt ); }
-}
-else if( alarm[2] != -1 )
-{//show_debug_message("2");
-    h_amt = ui_height/2*(t_speed-alarm[2])/t_speed;
-    w_amt = ui_width*(t_speed-alarm[2])/t_speed;
-    s_amt = circle_radius*(1-((t_speed-alarm[2])/t_speed));
-    draw_state_circle( oldState, 'c', s_amt, 0 );
-    if( st[oldState, 0] != -1 ) { draw_state_circle( oldState, 0, s_amt, h_amt ); }
-    if( st[oldState, 1] != -1 ) { draw_state_circle( oldState, 1, s_amt, w_amt ); }
-}
-else if( alarm[9] != -1 )
-{//show_debug_message("3");
-    s_amt = circle_radius*(1-(alarm[9]/t_speed));
-    draw_state_circle( state, 'c', circle_radius, 0 );
-    if( st[state, 0] != -1 ) { draw_state_circle( state, 0, s_amt, 0 ); }
-    if( st[state, 1] != -1 ) { draw_state_circle( state, 1, s_amt, 0 ); }
-    if( st[state, 2] != -1 ) { draw_state_circle( state, 2, s_amt, 0 ); } 
-}
-else
-{//show_debug_message("4");
-    draw_state_circle( state, 'c', circle_radius, 0 );
-    if( st[state, 0] != -1 ) { draw_state_circle( state, 0, circle_radius, 0 ); }
-    if( st[state, 1] != -1 ) { draw_state_circle( state, 1, circle_radius, 0 ); }
-    if( st[state, 2] != -1 ) { draw_state_circle( state, 2, circle_radius, 0 ); } 
-    draw_state_circle( tree_depth, 'c_t', circle_radius, 0);
-}
-
-//show_debug_message(state);
 </string>
           </argument>
         </arguments>

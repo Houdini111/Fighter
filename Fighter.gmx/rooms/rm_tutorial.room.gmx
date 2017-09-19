@@ -375,6 +375,25 @@ load_puzzles();</code>
     <tile bgName="tile_cobble" x="1056" y="32" w="32" h="32" xo="0" yo="32" id="10000923" name="inst_1629F383" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_cobble" x="1088" y="192" w="32" h="32" xo="0" yo="32" id="10000924" name="inst_A9AC5318" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_cobble" x="1216" y="128" w="32" h="32" xo="0" yo="32" id="10000925" name="inst_0DB6EE61" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="928" y="224" w="32" h="32" xo="0" yo="0" id="10000926" name="inst_506DCB7F" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="992" y="256" w="32" h="32" xo="0" yo="0" id="10000927" name="inst_86ACB29B" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="960" y="288" w="32" h="32" xo="0" yo="0" id="10000928" name="inst_8A8C1F0E" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1056" y="224" w="32" h="32" xo="0" yo="0" id="10000929" name="inst_7A66A78A" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1024" y="256" w="32" h="32" xo="0" yo="0" id="10000930" name="inst_463FE5E6" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1088" y="256" w="32" h="32" xo="0" yo="0" id="10000931" name="inst_62A65646" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1120" y="224" w="32" h="32" xo="32" yo="0" id="10000932" name="inst_AB30EB62" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1056" y="288" w="32" h="32" xo="32" yo="0" id="10000933" name="inst_E007DAEA" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1024" y="224" w="32" h="32" xo="32" yo="0" id="10000934" name="inst_7CFEFFD2" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="992" y="288" w="32" h="32" xo="32" yo="0" id="10000935" name="inst_B3A9FF5E" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="960" y="256" w="32" h="32" xo="0" yo="32" id="10000936" name="inst_A4D4476C" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="928" y="256" w="32" h="32" xo="0" yo="32" id="10000937" name="inst_D70D58C8" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1120" y="256" w="32" h="32" xo="0" yo="32" id="10000938" name="inst_D6242FE6" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="960" y="224" w="32" h="32" xo="32" yo="32" id="10000939" name="inst_87E9EA77" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="992" y="224" w="32" h="32" xo="32" yo="32" id="10000940" name="inst_B1D156CE" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1024" y="288" w="32" h="32" xo="32" yo="32" id="10000941" name="inst_E10AF66E" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1056" y="256" w="32" h="32" xo="32" yo="32" id="10000942" name="inst_0FE4F710" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1088" y="288" w="32" h="32" xo="32" yo="32" id="10000943" name="inst_B7F2A389" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1088" y="224" w="32" h="32" xo="32" yo="32" id="10000944" name="inst_D1298D2F" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
   </tiles>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>
