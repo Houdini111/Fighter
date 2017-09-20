@@ -94,10 +94,13 @@ if(y &lt;= top)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if( global.master.turn == 'p' or global.master.turn == 'e')
-    { y -= delta_time/10000*global.master.rhy_speed; }
-
-if(y+height &lt; top) { instance_destroy(); }
+            <string>if( global.player.dodge_go )
+{
+    if( global.master.turn == 'p' or global.master.turn == 'e')
+        { y -= delta_time/10000*global.master.rhy_speed; }
+    
+    if(y+height &lt; top) { instance_destroy(); }
+}
 </string>
           </argument>
         </arguments>
@@ -120,7 +123,7 @@ if(y+height &lt; top) { instance_destroy(); }
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.master.ui)
+            <string>if(global.master.ui and global.player.dodge_go)
 {
     h_top = max(y, top);
     if(y &gt; bottom) { h_bottom = h_top; }

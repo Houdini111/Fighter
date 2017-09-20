@@ -37,6 +37,8 @@ state = 0;
 oldState = 0;
 tree_depth = 0;
 
+enabled = true;
+
 //Language
 // 0 == a1 (LB / E)
 // 1 == a2 (RB / R)
@@ -253,7 +255,7 @@ a[3] = 12;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if( global.master.turn != "pause" )
+            <string>if( enabled )
 {
     if( global.master.turn == 'e' ) { draw_set_alpha(0.7); }
     

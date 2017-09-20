@@ -1,2 +1,2 @@
-///fow_on
+///fow_on()
 global.master.fow = true;

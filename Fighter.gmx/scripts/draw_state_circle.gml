@@ -39,11 +39,21 @@ else
     }
     
     if( _pos == 'c' ) //Center
-        { draw_circle(x+circle_radius, y+circle_radius+ui_height/2, _r, false); }
+    { draw_circle(x+circle_radius, y+circle_radius+ui_height/2, _r, false); }
     else if( _pos == 0 ) //Top
         { draw_circle(x+circle_radius, y+circle_radius+_d, _r, false); }
     else if( _pos == 1 ) //Right
         { draw_circle(x+circle_radius+ui_width-_d, y+circle_radius+ui_height/2, _r, false); }
     else if( _pos == 2 ) //Bottom
         { draw_circle(x+circle_radius, y+circle_radius+ui_height-_d, _r, false); }
+        
+    draw_set_color(c_white);
+    if( _pos == 'c' ) //Center
+    { draw_circle(x+circle_radius, y+circle_radius+ui_height/2, _r, true); }
+    else if( _pos == 0 ) //Top
+        { draw_circle(x+circle_radius, y+circle_radius+_d, _r, true); }
+    else if( _pos == 1 ) //Right
+        { draw_circle(x+circle_radius+ui_width-_d, y+circle_radius+ui_height/2, _r, true); }
+    else if( _pos == 2 ) //Bottom
+        { draw_circle(x+circle_radius, y+circle_radius+ui_height-_d, _r, true); }
 }

@@ -1,2 +1,2 @@
-///always
+///always()
 return true;

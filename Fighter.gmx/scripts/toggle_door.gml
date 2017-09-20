@@ -1,4 +1,4 @@
-///toggle_door
+///toggle_door()
 if( ds_list_size(targets) > 1 ) { show_debug_message("TOO MANY TARGETS FOR TOGGLE_DOOR FUNCTION"); }
 else
 {

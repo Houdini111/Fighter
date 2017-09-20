@@ -10,18 +10,20 @@
   <persistent>0</persistent>
   <colour>0</colour>
   <showcolour>-1</showcolour>
-  <code>//global.player.state_machine.state = 6;
+  <code>load_player(112, 112);
+global.player.state_machine.enabled = false;
+global.player.dodge_go = false;
 
-load_player(112, 112);
-
+global.master.time_go = false;
 var time = global.save[? "time"];
 if( time ) { global.master.time = time; }
 
 global.master.fow = false;
-
 master_initialize_room();
 
-//create_toggle(480, 96, spr_switch, false, noone, false, false, false, player_step_on, always, toggle_attacks);
+create_toggle(192, 96, spr_switch, false, noone, false, false, false, player_step_on, always, toggle_time);
+create_toggle(480, 96, spr_switch, false, noone, false, false, false, player_step_on, always, toggle_attacks);
+create_toggle(480, 96, spr_switch, false, noone, false, false, false, player_step_on, always, toggle_dodge);
 create_toggle(800, 96, spr_switch, false, noone, false, false, false, player_step_on, always, fow_on);
 create_toggle(992, 192, spr_switch_1x5, false, noone, false, false, false, player_step_on, always, to_test);
 

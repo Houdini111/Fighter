@@ -32,11 +32,11 @@ fow_pen = false;
 
 turn = 'p';
 previousTurn = 'n/a';
-
-global.tileSize = 32;
-
+time_go = true;
 timeLimit = 5; //5 seconds
 time = timeLimit;
+
+global.tileSize = 32;
 
 
 global.gridSize = 32;
@@ -103,24 +103,27 @@ if( global.in[? "start_p"] )
     }
 }
 
-if(turn == 'p')
+if(time_go)
 {
-    time -= delta_time/1000000; //Convert to full seconds and subtract
-    
-    if(time &lt;= 0)
+    if(turn == 'p')
     {
-        time = 0;
-        turn = 'e';
+        time -= delta_time/1000000; //Convert to full seconds and subtract
+        
+        if(time &lt;= 0)
+        {
+            time = 0;
+            turn = 'e';
+        }
     }
-}
-else if (turn == 'e')
-{
-    time += delta_time/1000000;
-    
-    if(time &gt;= timeLimit)
+    else if (turn == 'e')
     {
-        time = timeLimit;
-        turn = 'p';
+        time += delta_time/1000000;
+        
+        if(time &gt;= timeLimit)
+        {
+            time = timeLimit;
+            turn = 'p';
+        }
     }
 }
 </string>

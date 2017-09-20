@@ -100,13 +100,15 @@
           <script>scripts\object_destroyed.gml</script>
         </scripts>
       </scripts>
-    </scripts>
-    <scripts name="trigger_events">
-      <script>scripts\move_to_room.gml</script>
-      <script>scripts\toggle_fow.gml</script>
-      <script>scripts\toggle_attacks.gml</script>
-      <script>scripts\to_test.gml</script>
-      <script>scripts\fow_on.gml</script>
+      <scripts name="trigger_events">
+        <script>scripts\move_to_room.gml</script>
+        <script>scripts\toggle_fow.gml</script>
+        <script>scripts\toggle_attacks.gml</script>
+        <script>scripts\to_test.gml</script>
+        <script>scripts\fow_on.gml</script>
+        <script>scripts\toggle_time.gml</script>
+        <script>scripts\toggle_dodge.gml</script>
+      </scripts>
     </scripts>
     <script>scripts\array.gml</script>
     <script>scripts\check_move.gml</script>

@@ -1,3 +1,3 @@
-///toggle_fow
+///toggle_fow()
 
 global.master.fow = !global.master.fow;
