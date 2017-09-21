@@ -71,7 +71,15 @@ if(y &lt;= top)
 { 
     global.player.myHealth -= damage_calculation(parent, global.player);
     global.camera.alarm[0] = 1;
+    if( object_get_name( parent.object_index ) == "obj_tut_counter_enemy" )
+        { parent.myHealth = parent.maxHealth; }
 }
+else
+{
+    if( object_get_name( parent.object_index ) == "obj_tut_counter_enemy" )
+        { parent.myHealth -= parent.maxHealth/3; }
+}
+
 </string>
           </argument>
         </arguments>

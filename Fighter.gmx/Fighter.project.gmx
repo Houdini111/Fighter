@@ -45,8 +45,13 @@
     <sprite>sprites\state_ani</sprite>
     <sprites name="puzzle_peices">
       <sprite>sprites\spr_switch_placeholder</sprite>
-      <sprite>sprites\spr_switch_1x3</sprite>
-      <sprite>sprites\spr_switch_1x5</sprite>
+      <sprites name="switches">
+        <sprite>sprites\spr_switch_1x5</sprite>
+        <sprite>sprites\spr_switch_5x5</sprite>
+        <sprite>sprites\spr_switch_1x3</sprite>
+        <sprite>sprites\spr_switch_7x7</sprite>
+        <sprite>sprites\spr_switch_5x11</sprite>
+      </sprites>
       <sprite>sprites\spr_toggle_wall</sprite>
       <sprite>sprites\spr_switch</sprite>
     </sprites>
@@ -98,6 +103,7 @@
           <script>scripts\targeted_action.gml</script>
           <script>scripts\player_step_on.gml</script>
           <script>scripts\object_destroyed.gml</script>
+          <script>scripts\player_on_while_enemy_turn.gml</script>
         </scripts>
       </scripts>
       <scripts name="trigger_events">
@@ -108,6 +114,11 @@
         <script>scripts\fow_on.gml</script>
         <script>scripts\toggle_time.gml</script>
         <script>scripts\toggle_dodge.gml</script>
+        <scripts name="tutorial">
+          <script>scripts\tutorial_toggle_time.gml</script>
+          <script>scripts\tutorial_toggle_fight.gml</script>
+          <script>scripts\tutorial_toggle_dodge.gml</script>
+        </scripts>
       </scripts>
     </scripts>
     <script>scripts\array.gml</script>
@@ -165,6 +176,7 @@
       <object>objects\obj_testEnemy3</object>
       <object>objects\obj_testEnemy4</object>
       <object>objects\obj_tut_en_1</object>
+      <object>objects\obj_tut_counter_enemy</object>
     </objects>
     <objects name="rhythm_objs">
       <object>objects\obj_rhy_judgement_line</object>
@@ -182,6 +194,7 @@
     <object>objects\obj_impassable</object>
     <object>objects\obj_btn_prompt</object>
     <object>objects\obj_pause_logic</object>
+    <object>objects\obj_tutorial</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\_rm_initialize</room>
