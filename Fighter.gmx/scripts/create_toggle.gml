@@ -28,7 +28,7 @@ if(argument_count == 12)
 
 
 var _at = noone;
-_st = collision_point(_x, _y, all, false, true);
+_at = collision_point(_x, _y, all, false, true);
 
 var _s = instance_create(_x, _y, obj_toggle);
 if(_tar == noone) 
@@ -61,7 +61,7 @@ if( script_get_name(_cond) == "targeted_action" )
 }
 
     //If there is somemthing there, make the toggle a faux child
-if(_at != noone and !object_is_ancestor(_st, obj_toggle) ) { _s.parent = _at; } 
+if(_at != noone and !object_is_ancestor(_at, obj_toggle) ) { _s.parent = _at; } 
 else { _s.parent = "none"; }
 
 return _s;

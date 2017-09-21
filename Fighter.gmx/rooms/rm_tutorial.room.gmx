@@ -3,8 +3,8 @@
   <caption></caption>
   <width>2260</width>
   <height>720</height>
-  <vsnap>32</vsnap>
-  <hsnap>32</hsnap>
+  <vsnap>16</vsnap>
+  <hsnap>16</hsnap>
   <isometric>0</isometric>
   <speed>60</speed>
   <persistent>0</persistent>
@@ -31,6 +31,9 @@ var d = instance_create(768, 352, obj_door);
 d.active = true;
 create_toggle( 448, 288, spr_switch_5x11, false, d, true, false, false, player_on_while_enemy_turn, always, toggle_door);
 
+create_toggle( 1248, 352, spr_switch, false, noone, false, false, false, player_step_on, always, toggle_attacks );
+create_toggle( 1248, 352, spr_switch, false, noone, false, false, false, player_step_on, always, tutorial_toggle_fight );
+
 var e = instance_create(1184+16, 352+16, obj_tut_counter_enemy);
 var opt = ds_map_create();
 opt[? "activate_condition"] = e;
@@ -38,8 +41,7 @@ var _opt = ds_map_write(opt);
 ds_map_destroy(opt);
 d = instance_create( 1248, 352, obj_door );
 d.active = true;
-create_toggle(1184+16, 352+16, spr_switch, false, d, true, false, false, object_destroyed, always, toggle_fake_wall, _opt);
-
+var test = create_toggle(1184+16, 352+16, spr_switch, false, d, true, false, false, object_destroyed, always, toggle_door, _opt);
 
 
 
@@ -236,6 +238,26 @@ load_puzzles();</code>
     <instance objName="obj_convex_NE" x="1248" y="320" name="inst_601CECF9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_convex_SW" x="1280" y="384" name="inst_EE136FFB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_convex_NW" x="1280" y="320" name="inst_4A6169F8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_N" x="1408" y="256" name="inst_1027EDC8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_N" x="1440" y="256" name="inst_228D8AA4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_S" x="1408" y="448" name="inst_FEBB7986" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_S" x="1440" y="448" name="inst_3F4F9D43" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_N" x="1472" y="256" name="inst_01A0DB0F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_N" x="1504" y="256" name="inst_52D50EFC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_N" x="1536" y="256" name="inst_99F530C4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_N" x="1568" y="256" name="inst_31BA273A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_N" x="1600" y="256" name="inst_B40DC0A2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_S" x="1472" y="448" name="inst_9A851A5A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_S" x="1504" y="448" name="inst_D2B0743B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_S" x="1536" y="448" name="inst_A07B4207" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_S" x="1568" y="448" name="inst_7465FE6C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_S" x="1600" y="448" name="inst_CCE7F4D2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_concave" x="1648" y="272" name="inst_B6886CCC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_concave" x="1648" y="464" name="inst_E5122BB4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="270"/>
+    <instance objName="obj_wall_flat" x="1648" y="432" name="inst_A3541D93" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="270"/>
+    <instance objName="obj_wall_flat" x="1648" y="304" name="inst_FA775FC6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="270"/>
+    <instance objName="obj_wall_convex" x="1648" y="336" name="inst_74500689" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_wall_convex" x="1648" y="400" name="inst_499C4A37" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="270"/>
   </instances>
   <tiles>
     <tile bgName="tile_cobble" x="32" y="288" w="32" h="32" xo="0" yo="0" id="10000945" name="inst_BB43ED61" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
@@ -450,6 +472,19 @@ load_puzzles();</code>
     <tile bgName="tile_cobble" x="1312" y="384" w="32" h="32" xo="0" yo="0" id="10001212" name="inst_D042A278" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_cobble" x="1376" y="384" w="32" h="32" xo="0" yo="0" id="10001213" name="inst_4C72D555" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_cobble" x="1376" y="288" w="32" h="32" xo="0" yo="0" id="10001214" name="inst_901AD7C9" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1408" y="352" w="32" h="32" xo="32" yo="0" id="10001215" name="inst_5FE0EF8D" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1440" y="384" w="32" h="32" xo="32" yo="0" id="10001216" name="inst_F3F6B5C3" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1440" y="288" w="32" h="32" xo="32" yo="0" id="10001217" name="inst_F9D1CBD1" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1504" y="352" w="32" h="32" xo="32" yo="0" id="10001218" name="inst_8B337BB1" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1408" y="320" w="32" h="32" xo="0" yo="32" id="10001219" name="inst_1E738B09" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1440" y="416" w="32" h="32" xo="0" yo="32" id="10001220" name="inst_E00D48BC" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1472" y="352" w="32" h="32" xo="0" yo="32" id="10001221" name="inst_29C020CD" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1408" y="384" w="32" h="32" xo="32" yo="0" id="10001222" name="inst_9F0F3B9A" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1408" y="288" w="32" h="32" xo="32" yo="0" id="10001223" name="inst_CE6623C1" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1408" y="416" w="32" h="32" xo="0" yo="0" id="10001224" name="inst_981D0FD5" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1440" y="352" w="32" h="32" xo="0" yo="0" id="10001225" name="inst_ACEB9854" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1440" y="320" w="32" h="32" xo="0" yo="0" id="10001226" name="inst_EF8444AA" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tile_cobble" x="1472" y="288" w="32" h="32" xo="0" yo="0" id="10001227" name="inst_E8E0477C" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
   </tiles>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>
