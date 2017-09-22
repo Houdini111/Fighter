@@ -27,9 +27,6 @@
       <sprite>sprites\tile_convex_SW</sprite>
       <sprite>sprites\tile_convex_NE</sprite>
       <sprite>sprites\tile_convex_NW</sprite>
-      <sprite>sprites\spr_wall_flat</sprite>
-      <sprite>sprites\spr_wall_concave</sprite>
-      <sprite>sprites\spr_wall_convex</sprite>
       <sprite>sprites\tile_wall_N2</sprite>
       <sprite>sprites\tile_wall_E2</sprite>
       <sprite>sprites\tile_wall_S2</sprite>
@@ -120,6 +117,7 @@
           <script>scripts\tutorial_toggle_time.gml</script>
           <script>scripts\tutorial_toggle_fight.gml</script>
           <script>scripts\tutorial_toggle_dodge.gml</script>
+          <script>scripts\tutorial_toggle_interact.gml</script>
         </scripts>
       </scripts>
     </scripts>
@@ -156,9 +154,6 @@
     <object>objects\obj_state</object>
     <object>objects\obj_camera</object>
     <objects name="walls">
-      <object>objects\obj_wall_flat</object>
-      <object>objects\obj_wall_concave</object>
-      <object>objects\obj_wall_convex</object>
       <object>objects\obj_wall_N</object>
       <object>objects\obj_wall_S</object>
       <object>objects\obj_wall_E</object>

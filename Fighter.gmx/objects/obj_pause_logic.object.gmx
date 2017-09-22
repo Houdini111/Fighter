@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = 0; 
+            <string>view_xview[0] = 0;
+view_yview[0] = 0;
+x = 0; 
 y = 0;
 goal_x = x;
 goal_y = y;
@@ -34,7 +36,8 @@ selection = 0;
 
 editing = false;
 
-MAX_SPEED = view_wview[0]/room_speed*2;
+MAX_SPEED = view_wview[0]/room_speed*3; //view_wview[0]/room_speed will let it move a whole view in one second
+
 
 views = ds_map_create();
 
@@ -99,9 +102,7 @@ input = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>show_debug_message(editing);
-
-if(place == "main")
+            <string>if(place == "main")
 {
     if( global.in[? "a_4_p"] )
     {
@@ -391,10 +392,9 @@ draw_rectangle(0, 0, view_wport[0], view_hport[0], false);
 draw_set_alpha(1);
 */
 
-
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
-draw_text_shadow(view_wview[0]/2 -x, view_hview[0]/2 -y, "PAUSED", fnt_title, 5, c_black, c_white);
+draw_text_shadow(view_wport[0]/2 -x, view_hport[0]/2 -y, "PAUSED", fnt_title, 5, c_black, c_white);
 
 draw_set_halign(fa_right);
 draw_set_valign(fa_bottom);
@@ -402,20 +402,20 @@ var txt = "";
 if( global.gp_slot == -1 ) { txt = translate(global.in_map[? "k_a_4"]); }
 else { txt = translate(global.in_map[? "b_a_4"]); }
 txt += " &gt;";
-draw_text_shadow(view_wview[0]-10 -x, view_hview[0]-10 -y, txt, fnt_menu, 3, c_black, c_white);
+draw_text_shadow(view_wport[0]-10 -x, view_hport[0]-10 -y, txt, fnt_menu, 3, c_black, c_white);
 
 draw_set_halign(fa_left);
 txt = "&lt; ";
 if( global.gp_slot == -1 ) { txt += translate(global.in_map[? "k_a_3"]); }
 else { txt += translate(global.in_map[? "b_a_3"]);; }
-draw_text_shadow(view_wview[0]+10 -x, view_hview[0]-10 -y, txt, fnt_menu, 3, c_black, c_white);
+draw_text_shadow(view_wport[0]+10 -x, view_hport[0]-10 -y, txt, fnt_menu, 3, c_black, c_white);
 
 draw_set_valign(fa_top);
 
 draw_set_halign(fa_center);
-draw_text_shadow(view_wview[0]*1.5 -x, 10 -y, "OPTIONS", fnt_menu, 3, c_black, c_white);  
-draw_text_shadow(view_wview[0]*1.5 -x, 10+view_hview[0] -y, "KEYBOARD BINDINGS", fnt_menu, 3, c_black, c_white);  
-draw_text_shadow(view_wview[0]*1.5 -x, 10-view_hview[0] -y, "GAMEPAD BINDINGS", fnt_menu, 3, c_black, c_white);  
+draw_text_shadow(view_wport[0]*1.5 -x, 10 -y, "OPTIONS", fnt_menu, 3, c_black, c_white);  
+draw_text_shadow(view_wport[0]*1.5 -x, 10+view_hport[0] -y, "KEYBOARD BINDINGS", fnt_menu, 3, c_black, c_white);  
+draw_text_shadow(view_wport[0]*1.5 -x, 10-view_hport[0] -y, "GAMEPAD BINDINGS", fnt_menu, 3, c_black, c_white);  
 
 draw_set_halign(fa_left);
 
@@ -423,32 +423,32 @@ draw_set_font(fnt_small);
 if(place == "options")
 {
     draw_set_color(c_teal);
-    draw_rectangle( view_wview[0]+10-x, 10+50+35*(selection)-y, 2*view_wview[0]-x-50, 10+50+35*(selection)-y+string_height("Z"), false);
+    draw_rectangle( view_wport[0]+10-x, 10+50+35*(selection)-y, 2*view_wport[0]-x-50, 10+50+35*(selection)-y+string_height("Z"), false);
 }
 
-draw_text_shadow(view_wview[0]+10 -x, 10+50+0 -y, "Size", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(view_wport[0]+10 -x, 10+50+0 -y, "Size", fnt_small, 2, c_black, c_white); 
 draw_set_halign(fa_right);
 if( window_get_fullscreen() ) { global.camera.window_zoom = "Fullscreen"; }
 else { global.camera.window_zoom = global.camera.before_max; }
-draw_text_shadow(2*view_wview[0]-75 -x, 10+50+0 -y, string(global.camera.window_zoom), fnt_small, 2, c_black, c_white); 
+draw_text_shadow(2*view_wport[0]-75 -x, 10+50+0 -y, string(global.camera.window_zoom), fnt_small, 2, c_black, c_white); 
 
 draw_set_halign(fa_left);
-draw_text_shadow(view_wview[0]+10 -x, 10+50+35 -y, "Field of View", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(view_wport[0]+10 -x, 10+50+35 -y, "Field of View", fnt_small, 2, c_black, c_white); 
 draw_set_halign(fa_right);
-if( global.save[? "fow"] ) { draw_text_shadow(2*view_wview[0]-75 -x, 10+50+35 -y, "ON", fnt_small, 2, c_black, c_white); }
-else { draw_text_shadow(2*view_wview[0]-75 -x, 10+50+35 -y, "OFF", fnt_small, 2, c_black, c_white); }
+if( global.save[? "fow"] ) { draw_text_shadow(2*view_wport[0]-75 -x, 10+50+35 -y, "ON", fnt_small, 2, c_black, c_white); }
+else { draw_text_shadow(2*view_wport[0]-75 -x, 10+50+35 -y, "OFF", fnt_small, 2, c_black, c_white); }
 
 draw_set_halign(fa_left);
-draw_text_shadow(view_wview[0]+10 -x, 10+50+70 -y, "Sight Penetrate", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(view_wport[0]+10 -x, 10+50+70 -y, "Sight Penetrate", fnt_small, 2, c_black, c_white); 
 draw_set_halign(fa_right);
-if( global.save[? "fow_pen"] ) { draw_text_shadow(2*view_wview[0]-75 -x, 10+50+70 -y, "ON", fnt_small, 2, c_black, c_white); }
-else { draw_text_shadow(2*view_wview[0]-75 -x, 10+50+70 -y, "OFF", fnt_small, 2, c_black, c_white); }
+if( global.save[? "fow_pen"] ) { draw_text_shadow(2*view_wport[0]-75 -x, 10+50+70 -y, "ON", fnt_small, 2, c_black, c_white); }
+else { draw_text_shadow(2*view_wport[0]-75 -x, 10+50+70 -y, "OFF", fnt_small, 2, c_black, c_white); }
 
 
 draw_set_halign(fa_left);
-draw_text_shadow(view_wview[0]+10 -x, 10+50+105 -y, "Key Bindings", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(view_wport[0]+10 -x, 10+50+105 -y, "Key Bindings", fnt_small, 2, c_black, c_white); 
 draw_set_halign(fa_right);
-draw_text_shadow(2*view_wview[0]-75 -x, 10+50+105 -y, "&gt;", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(2*view_wport[0]-75 -x, 10+50+105 -y, "&gt;", fnt_small, 2, c_black, c_white); 
 
 
 draw_set_font(fnt_medium);
@@ -462,38 +462,38 @@ else{ draw_set_color(global.master.my_red); }
 
 if( selection &gt;= 0 and selection  &lt;= 7 )
 {
-    if( place == "keys" ) { draw_rectangle( view_wview[0]+10-x, 10+50+35*(selection)+view_hview[0]-y, 1.333*view_wview[0]-20-x, 10+50+35*(selection)+view_hview[0]-y+string_height("Z"), false);}
-    else if ( place == "buttons" ) { draw_rectangle( view_wview[0]+10-x, 10+50+35*(selection)-view_hview[0]-y, 1.333*view_wview[0]-20-x, 10+50+35*(selection)-view_hview[0]-y+string_height("Z"), false); }
+    if( place == "keys" ) { draw_rectangle( view_wport[0]+10-x, 10+50+35*(selection)+view_hport[0]-y, 1.333*view_wport[0]-20-x, 10+50+35*(selection)+view_hport[0]-y+string_height("Z"), false);}
+    else if ( place == "buttons" ) { draw_rectangle( view_wport[0]+10-x, 10+50+35*(selection)-view_hport[0]-y, 1.333*view_wport[0]-20-x, 10+50+35*(selection)-view_hport[0]-y+string_height("Z"), false); }
 }
 else if( selection &gt;= 8 and selection  &lt;= 15 )
 {
-    if( place == "keys" ) { draw_rectangle( 1.333*view_wview[0]+10-x, 10+50+35*(selection-8)+view_hview[0]-y, 1.666*view_wview[0]-20-x, 10+50+35*(selection-8)+view_hview[0]-y+string_height("Z"), false);}
-    else if ( place == "buttons" ) { draw_rectangle( 1.333*view_wview[0]+10-x, 10+50+35*(selection-8)-view_hview[0]-y, 1.666*view_wview[0]-20-x, 10+50+35*(selection-8)-view_hview[0]-y+string_height("Z"), false); }
+    if( place == "keys" ) { draw_rectangle( 1.333*view_wport[0]+10-x, 10+50+35*(selection-8)+view_hport[0]-y, 1.666*view_wport[0]-20-x, 10+50+35*(selection-8)+view_hport[0]-y+string_height("Z"), false);}
+    else if ( place == "buttons" ) { draw_rectangle( 1.333*view_wport[0]+10-x, 10+50+35*(selection-8)-view_hport[0]-y, 1.666*view_wport[0]-20-x, 10+50+35*(selection-8)-view_hport[0]-y+string_height("Z"), false); }
 }
 else if( selection &gt;= 16 and selection &lt;= 23 )
 {
-    if( place == "keys" ) { draw_rectangle( 1.666*view_wview[0]+10-x, 10+50+35*(selection-16)+view_hview[0]-y, 2*view_wview[0]-20-x, 10+50+35*(selection-16)+view_hview[0]-y+string_height("Z"), false);}
-    else if ( place == "buttons" ) { draw_rectangle( 1.666*view_wview[0]+10-x, 10+50+35*(selection-16)-view_hview[0]-y, 2*view_wview[0]-20-x, 10+50+35*(selection-16)-view_hview[0]-y+string_height("Z"), false); }
+    if( place == "keys" ) { draw_rectangle( 1.666*view_wport[0]+10-x, 10+50+35*(selection-16)+view_hport[0]-y, 2*view_wport[0]-20-x, 10+50+35*(selection-16)+view_hport[0]-y+string_height("Z"), false);}
+    else if ( place == "buttons" ) { draw_rectangle( 1.666*view_wport[0]+10-x, 10+50+35*(selection-16)-view_hport[0]-y, 2*view_wport[0]-20-x, 10+50+35*(selection-16)-view_hport[0]-y+string_height("Z"), false); }
 }
 else if( selection == -1 )
 {
-    if( place == "keys" ) { draw_rectangle( 2*view_wview[0]-20-use_width-x, 10+view_hview[0]-y, 2*view_wview[0]-20-x, 10+view_hview[0]-y+use_height, false);}
-    else if ( place == "buttons" ) { draw_rectangle( 2*view_wview[0]-20-use_width-x, 10-view_hview[0]-y, 2*view_wview[0]-20-x, 10-view_hview[0]-y+use_height, false); }
+    if( place == "keys" ) { draw_rectangle( 2*view_wport[0]-20-use_width-x, 10+view_hport[0]-y, 2*view_wport[0]-20-x, 10+view_hport[0]-y+use_height, false);}
+    else if ( place == "buttons" ) { draw_rectangle( 2*view_wport[0]-20-use_width-x, 10-view_hport[0]-y, 2*view_wport[0]-20-x, 10-view_hport[0]-y+use_height, false); }
 }
 
 if( selection != -1 )
 {
     draw_set_color( merge_color(c_ltgray, c_dkgray, 0.5) );
-    draw_rectangle( 2*view_wview[0]-20-use_width-x, 10+view_hview[0]-y, 2*view_wview[0]-20-x, 10+view_hview[0]-y+use_height, false);
-    draw_rectangle( 2*view_wview[0]-20-use_width-x, 10-view_hview[0]-y, 2*view_wview[0]-20-x, 10-view_hview[0]-y+use_height, false);
+    draw_rectangle( 2*view_wport[0]-20-use_width-x, 10+view_hport[0]-y, 2*view_wport[0]-20-x, 10+view_hport[0]-y+use_height, false);
+    draw_rectangle( 2*view_wport[0]-20-use_width-x, 10-view_hport[0]-y, 2*view_wport[0]-20-x, 10-view_hport[0]-y+use_height, false);
 }
 draw_set_color(c_black);
-draw_rectangle( 2*view_wview[0]-20-use_width-x, 10+view_hview[0]-y, 2*view_wview[0]-20-x, 10+view_hview[0]-y+use_height, true);
-draw_rectangle( 2*view_wview[0]-20-use_width-x, 10-view_hview[0]-y, 2*view_wview[0]-20-x, 10-view_hview[0]-y+use_height, true);
+draw_rectangle( 2*view_wport[0]-20-use_width-x, 10+view_hport[0]-y, 2*view_wport[0]-20-x, 10+view_hport[0]-y+use_height, true);
+draw_rectangle( 2*view_wport[0]-20-use_width-x, 10-view_hport[0]-y, 2*view_wport[0]-20-x, 10-view_hport[0]-y+use_height, true);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
-draw_text_shadow(2*view_wview[0]-20-(use_width/2)-x, 10+view_hview[0]+(use_height/2)-y, "USE", fnt_medium, 2, c_black, c_white);
-draw_text_shadow(2*view_wview[0]-20-(use_width/2)-x, 10-view_hview[0]+(use_height/2)-y, "USE", fnt_medium, 2, c_black, c_white);
+draw_text_shadow(2*view_wport[0]-20-(use_width/2)-x, 10+view_hport[0]+(use_height/2)-y, "USE", fnt_medium, 2, c_black, c_white);
+draw_text_shadow(2*view_wport[0]-20-(use_width/2)-x, 10-view_hport[0]+(use_height/2)-y, "USE", fnt_medium, 2, c_black, c_white);
 
 
 
@@ -502,126 +502,126 @@ draw_set_font(fnt_small);
 
 //KEYBOARD KEY CONFIG
 draw_set_halign(fa_left); 
-draw_text_shadow(1*view_wview[0]+10 -x, 10+50+view_hview[0] -y, "MOVE UP: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1*view_wview[0]+10 -x, 10+50+35+view_hview[0] -y, "MOVE LEFT: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1*view_wview[0]+10 -x, 10+50+70+view_hview[0] -y, "MOVE DOWN: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1*view_wview[0]+10 -x, 10+50+105+view_hview[0] -y, "MOVE RIGHT: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1*view_wview[0]+10 -x, 10+50+140+view_hview[0] -y, "LOOK UP: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1*view_wview[0]+10 -x, 10+50+175+view_hview[0] -y, "LOOK LEFT: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1*view_wview[0]+10 -x, 10+50+210+view_hview[0] -y, "LOOK DOWN: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1*view_wview[0]+10 -x, 10+50+245+view_hview[0] -y, "LOOK RIGHT: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1*view_wport[0]+10 -x, 10+50+view_hport[0] -y, "MOVE UP: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1*view_wport[0]+10 -x, 10+50+35+view_hport[0] -y, "MOVE LEFT: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1*view_wport[0]+10 -x, 10+50+70+view_hport[0] -y, "MOVE DOWN: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1*view_wport[0]+10 -x, 10+50+105+view_hport[0] -y, "MOVE RIGHT: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1*view_wport[0]+10 -x, 10+50+140+view_hport[0] -y, "LOOK UP: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1*view_wport[0]+10 -x, 10+50+175+view_hport[0] -y, "LOOK LEFT: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1*view_wport[0]+10 -x, 10+50+210+view_hport[0] -y, "LOOK DOWN: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1*view_wport[0]+10 -x, 10+50+245+view_hport[0] -y, "LOOK RIGHT: ", fnt_small, 2, c_black, c_white); 
 
-draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+view_hview[0] -y, "INTERACT: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+35+view_hview[0] -y, "ACTION 1: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+70+view_hview[0] -y, "ACTION 2: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+105+view_hview[0] -y, "ACTION 3: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+140+view_hview[0] -y, "DODGE 1: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+175+view_hview[0] -y, "DODGE 2: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+210+view_hview[0] -y, "DODGE 3: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+245+view_hview[0] -y, "DODGE 4: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.333*view_wport[0]+10 -x, 10+50+view_hport[0] -y, "INTERACT: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.333*view_wport[0]+10 -x, 10+50+35+view_hport[0] -y, "ACTION 1: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.333*view_wport[0]+10 -x, 10+50+70+view_hport[0] -y, "ACTION 2: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.333*view_wport[0]+10 -x, 10+50+105+view_hport[0] -y, "ACTION 3: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.333*view_wport[0]+10 -x, 10+50+140+view_hport[0] -y, "DODGE 1: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.333*view_wport[0]+10 -x, 10+50+175+view_hport[0] -y, "DODGE 2: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.333*view_wport[0]+10 -x, 10+50+210+view_hport[0] -y, "DODGE 3: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.333*view_wport[0]+10 -x, 10+50+245+view_hport[0] -y, "DODGE 4: ", fnt_small, 2, c_black, c_white); 
 
-draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+view_hview[0] -y, "L STK PRESS: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+35+view_hview[0] -y, "R STK PRESS: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+70+view_hview[0] -y, "START: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+105+view_hview[0] -y, "SELECT: ", fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+140+view_hview[0] -y, "DODGE 1: ", fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+175+view_hview[0] -y, "DODGE 2: ", fnt_small, 2, c_black, c_white); 
-//draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+210+view_hview[0] -y, "DODGE 3: ", fnt_small, 2, c_black, c_white); 
-draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+245+view_hview[0] -y, "RESTORE DEAULTS", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.666*view_wport[0]+10 -x, 10+50+view_hport[0] -y, "L STK PRESS: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.666*view_wport[0]+10 -x, 10+50+35+view_hport[0] -y, "R STK PRESS: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.666*view_wport[0]+10 -x, 10+50+70+view_hport[0] -y, "START: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.666*view_wport[0]+10 -x, 10+50+105+view_hport[0] -y, "SELECT: ", fnt_small, 2, c_black, c_white); 
+//draw_text_shadow(1.666*view_wport[0]+10 -x, 10+50+140+view_hport[0] -y, "DODGE 1: ", fnt_small, 2, c_black, c_white); 
+//draw_text_shadow(1.666*view_wport[0]+10 -x, 10+50+175+view_hport[0] -y, "DODGE 2: ", fnt_small, 2, c_black, c_white); 
+//draw_text_shadow(1.666*view_wport[0]+10 -x, 10+50+210+view_hport[0] -y, "DODGE 3: ", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(1.666*view_wport[0]+10 -x, 10+50+245+view_hport[0] -y, "RESTORE DEAULTS", fnt_small, 2, c_black, c_white); 
 
 if( place == "keys" or place == "buttons" )
 {
     draw_set_halign(fa_right); 
-    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+view_hview[0] -y, translate(temp_keys[? "k_m_up"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+35+view_hview[0] -y, translate(temp_keys[? "k_m_left"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+70+view_hview[0] -y, translate(temp_keys[? "k_m_down"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+105+view_hview[0] -y, translate(temp_keys[? "k_m_right"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+140+view_hview[0] -y, translate(temp_keys[? "k_l_up"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+175+view_hview[0] -y, translate(temp_keys[? "k_l_left"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+210+view_hview[0] -y, translate(temp_keys[? "k_l_down"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+245+view_hview[0] -y, translate(temp_keys[? "k_l_right"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+view_hport[0] -y, translate(temp_keys[? "k_m_up"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+35+view_hport[0] -y, translate(temp_keys[? "k_m_left"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+70+view_hport[0] -y, translate(temp_keys[? "k_m_down"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+105+view_hport[0] -y, translate(temp_keys[? "k_m_right"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+140+view_hport[0] -y, translate(temp_keys[? "k_l_up"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+175+view_hport[0] -y, translate(temp_keys[? "k_l_left"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+210+view_hport[0] -y, translate(temp_keys[? "k_l_down"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+245+view_hport[0] -y, translate(temp_keys[? "k_l_right"]), fnt_small, 2, c_black, c_white); 
     
-    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+view_hview[0] -y, translate(temp_keys[? "k_a_4"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+35+view_hview[0] -y, translate(temp_keys[? "k_a_1"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+70+view_hview[0] -y, translate(temp_keys[? "k_a_2"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+105+view_hview[0] -y, translate(temp_keys[? "k_a_3"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+140+view_hview[0] -y, translate(temp_keys[? "k_dodge_1"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+175+view_hview[0] -y, translate(temp_keys[? "k_dodge_2"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+210+view_hview[0] -y, translate(temp_keys[? "k_dodge_3"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+245+view_hview[0] -y, translate(temp_keys[? "k_dodge_4"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]-25 -x, 10+50+view_hport[0] -y, translate(temp_keys[? "k_a_4"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]-25 -x, 10+50+35+view_hport[0] -y, translate(temp_keys[? "k_a_1"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]-25 -x, 10+50+70+view_hport[0] -y, translate(temp_keys[? "k_a_2"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]-25 -x, 10+50+105+view_hport[0] -y, translate(temp_keys[? "k_a_3"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]-25 -x, 10+50+140+view_hport[0] -y, translate(temp_keys[? "k_dodge_1"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]-25 -x, 10+50+175+view_hport[0] -y, translate(temp_keys[? "k_dodge_2"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]-25 -x, 10+50+210+view_hport[0] -y, translate(temp_keys[? "k_dodge_3"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]-25 -x, 10+50+245+view_hport[0] -y, translate(temp_keys[? "k_dodge_4"]), fnt_small, 2, c_black, c_white); 
     
-    draw_text_shadow(2*view_wview[0]-25 -x, 10+50+view_hview[0] -y, translate(temp_keys[? "k_l_stick"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(2*view_wview[0]-25 -x, 10+50+35+view_hview[0] -y, translate(temp_keys[? "k_r_stick"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(2*view_wview[0]-25 -x, 10+50+70+view_hview[0] -y, translate(temp_keys[? "k_start"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(2*view_wview[0]-25 -x, 10+50+105+view_hview[0] -y, translate(temp_keys[? "k_select"]), fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(2*view_wview[0]-25 -x, 10+50+140+view_hview[0] -y, translate(temp_keys[? "k_dodge_1"]), fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(2*view_wview[0]-25 -x, 10+50+175+view_hview[0] -y, translate(temp_keys[? "k_dodge_2"]), fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(2*view_wview[0]-25 -x, 10+50+210+view_hview[0] -y, translate(temp_keys[? "k_dodge_3"]), fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(2*view_wview[0]-25 -x, 10+50+245+view_hview[0] -y, translate(temp_keys[? "k_dodge_4"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(2*view_wport[0]-25 -x, 10+50+view_hport[0] -y, translate(temp_keys[? "k_l_stick"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(2*view_wport[0]-25 -x, 10+50+35+view_hport[0] -y, translate(temp_keys[? "k_r_stick"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(2*view_wport[0]-25 -x, 10+50+70+view_hport[0] -y, translate(temp_keys[? "k_start"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(2*view_wport[0]-25 -x, 10+50+105+view_hport[0] -y, translate(temp_keys[? "k_select"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(2*view_wport[0]-25 -x, 10+50+140+view_hport[0] -y, translate(temp_keys[? "k_dodge_1"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(2*view_wport[0]-25 -x, 10+50+175+view_hport[0] -y, translate(temp_keys[? "k_dodge_2"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(2*view_wport[0]-25 -x, 10+50+210+view_hport[0] -y, translate(temp_keys[? "k_dodge_3"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(2*view_wport[0]-25 -x, 10+50+245+view_hport[0] -y, translate(temp_keys[? "k_dodge_4"]), fnt_small, 2, c_black, c_white); 
     
     
     
     //GAMEPAD KEY CONFIG
     draw_set_halign(fa_left); 
-    draw_text_shadow(1*view_wview[0]+10 -x, 10+50-view_hview[0] -y, "MOVE UP: ", fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1*view_wview[0]+10 -x, 10+50+35-view_hview[0] -y, "MOVE LEFT: ", fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1*view_wview[0]+10 -x, 10+50+70-view_hview[0] -y, "MOVE DOWN: ", fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1*view_wview[0]+10 -x, 10+50+105-view_hview[0] -y, "MOVE RIGHT: ", fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(1*view_wview[0]+10 -x, 10+50+140-view_hview[0] -y, "LOOK UP: ", fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(1*view_wview[0]+10 -x, 10+50+175-view_hview[0] -y, "LOOK LEFT: ", fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(1*view_wview[0]+10 -x, 10+50+210-view_hview[0] -y, "LOOK DOWN: ", fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(1*view_wview[0]+10 -x, 10+50+245-view_hview[0] -y, "LOOK RIGHT: ", fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1*view_wview[0]+10 -x, 10+50+140-view_hview[0] -y, "LOOK HORIZONTAL: ", fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1*view_wview[0]+10 -x, 10+50+175-view_hview[0] -y, "LOOK VERTICAL: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1*view_wport[0]+10 -x, 10+50-view_hport[0] -y, "MOVE UP: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1*view_wport[0]+10 -x, 10+50+35-view_hport[0] -y, "MOVE LEFT: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1*view_wport[0]+10 -x, 10+50+70-view_hport[0] -y, "MOVE DOWN: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1*view_wport[0]+10 -x, 10+50+105-view_hport[0] -y, "MOVE RIGHT: ", fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1*view_wport[0]+10 -x, 10+50+140-view_hport[0] -y, "LOOK UP: ", fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1*view_wport[0]+10 -x, 10+50+175-view_hport[0] -y, "LOOK LEFT: ", fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1*view_wport[0]+10 -x, 10+50+210-view_hport[0] -y, "LOOK DOWN: ", fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1*view_wport[0]+10 -x, 10+50+245-view_hport[0] -y, "LOOK RIGHT: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1*view_wport[0]+10 -x, 10+50+140-view_hport[0] -y, "LOOK HORIZONTAL: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1*view_wport[0]+10 -x, 10+50+175-view_hport[0] -y, "LOOK VERTICAL: ", fnt_small, 2, c_black, c_white); 
     
-    draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50-view_hview[0] -y, "INTERACT: ", fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+35-view_hview[0] -y, "ACTION 1: ", fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+70-view_hview[0] -y, "ACTION 2: ", fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+105-view_hview[0] -y, "ACTION 3: ", fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+140-view_hview[0] -y, "DODGE 1: ", fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+175-view_hview[0] -y, "DODGE 2: ", fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+210-view_hview[0] -y, "DODGE 3: ", fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]+10 -x, 10+50+245-view_hview[0] -y, "DODGE 4: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]+10 -x, 10+50-view_hport[0] -y, "INTERACT: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]+10 -x, 10+50+35-view_hport[0] -y, "ACTION 1: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]+10 -x, 10+50+70-view_hport[0] -y, "ACTION 2: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]+10 -x, 10+50+105-view_hport[0] -y, "ACTION 3: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]+10 -x, 10+50+140-view_hport[0] -y, "DODGE 1: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]+10 -x, 10+50+175-view_hport[0] -y, "DODGE 2: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]+10 -x, 10+50+210-view_hport[0] -y, "DODGE 3: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]+10 -x, 10+50+245-view_hport[0] -y, "DODGE 4: ", fnt_small, 2, c_black, c_white); 
     
-    draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50-view_hview[0] -y, "L STK PRESS: ", fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+35-view_hview[0] -y, "R STK PRESS: ", fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+70-view_hview[0] -y, "START: ", fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+105-view_hview[0] -y, "SELECT: ", fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+140-view_hview[0] -y, "DODGE 1: ", fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+175-view_hview[0] -y, "DODGE 2: ", fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+210-view_hview[0] -y, "DODGE 3: ", fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]+10 -x, 10+50+245-view_hview[0] -y, "RESTORE DEAULTS", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]+10 -x, 10+50-view_hport[0] -y, "L STK PRESS: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]+10 -x, 10+50+35-view_hport[0] -y, "R STK PRESS: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]+10 -x, 10+50+70-view_hport[0] -y, "START: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]+10 -x, 10+50+105-view_hport[0] -y, "SELECT: ", fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1.666*view_wport[0]+10 -x, 10+50+140-view_hport[0] -y, "DODGE 1: ", fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1.666*view_wport[0]+10 -x, 10+50+175-view_hport[0] -y, "DODGE 2: ", fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1.666*view_wport[0]+10 -x, 10+50+210-view_hport[0] -y, "DODGE 3: ", fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]+10 -x, 10+50+245-view_hport[0] -y, "RESTORE DEAULTS", fnt_small, 2, c_black, c_white); 
     
     
     draw_set_halign(fa_right); 
-    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50-view_hview[0] -y, translate(temp_keys[? "b_m_up"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+35-view_hview[0] -y, translate(temp_keys[? "b_m_left"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+70-view_hview[0] -y, translate(temp_keys[? "b_m_down"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+105-view_hview[0] -y, translate(temp_keys[? "b_m_right"]), fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+140-view_hview[0] -y, translate(temp_keys[? "b_l_up"]), fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+175-view_hview[0] -y, translate(temp_keys[? "b_l_left"]), fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+210-view_hview[0] -y, translate(temp_keys[? "b_l_down"]), fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+245-view_hview[0] -y, translate(temp_keys[? "b_l_right"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+140-view_hview[0] -y, translate(temp_keys[? "look_stick_horizontal"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.333*view_wview[0]-25 -x, 10+50+175-view_hview[0] -y, translate(temp_keys[? "look_stick_horizontal"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50-view_hport[0] -y, translate(temp_keys[? "b_m_up"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+35-view_hport[0] -y, translate(temp_keys[? "b_m_left"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+70-view_hport[0] -y, translate(temp_keys[? "b_m_down"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+105-view_hport[0] -y, translate(temp_keys[? "b_m_right"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+140-view_hport[0] -y, translate(temp_keys[? "b_l_up"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+175-view_hport[0] -y, translate(temp_keys[? "b_l_left"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+210-view_hport[0] -y, translate(temp_keys[? "b_l_down"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+245-view_hport[0] -y, translate(temp_keys[? "b_l_right"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+140-view_hport[0] -y, translate(temp_keys[? "look_stick_horizontal"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.333*view_wport[0]-25 -x, 10+50+175-view_hport[0] -y, translate(temp_keys[? "look_stick_horizontal"]), fnt_small, 2, c_black, c_white); 
     
-    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50-view_hview[0] -y, translate(temp_keys[? "b_a_4"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+35-view_hview[0] -y, translate(temp_keys[? "b_a_1"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+70-view_hview[0] -y, translate(temp_keys[? "b_a_2"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+105-view_hview[0] -y, translate(temp_keys[? "b_a_3"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+140-view_hview[0] -y, translate(temp_keys[? "b_dodge_1"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+175-view_hview[0] -y, translate(temp_keys[? "b_dodge_2"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+210-view_hview[0] -y, translate(temp_keys[? "b_dodge_3"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(1.666*view_wview[0]-25 -x, 10+50+245-view_hview[0] -y, translate(temp_keys[? "b_dodge_4"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]-25 -x, 10+50-view_hport[0] -y, translate(temp_keys[? "b_a_4"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]-25 -x, 10+50+35-view_hport[0] -y, translate(temp_keys[? "b_a_1"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]-25 -x, 10+50+70-view_hport[0] -y, translate(temp_keys[? "b_a_2"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]-25 -x, 10+50+105-view_hport[0] -y, translate(temp_keys[? "b_a_3"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]-25 -x, 10+50+140-view_hport[0] -y, translate(temp_keys[? "b_dodge_1"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]-25 -x, 10+50+175-view_hport[0] -y, translate(temp_keys[? "b_dodge_2"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]-25 -x, 10+50+210-view_hport[0] -y, translate(temp_keys[? "b_dodge_3"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(1.666*view_wport[0]-25 -x, 10+50+245-view_hport[0] -y, translate(temp_keys[? "b_dodge_4"]), fnt_small, 2, c_black, c_white); 
     
-    draw_text_shadow(2*view_wview[0]-25 -x, 10+50-view_hview[0] -y, translate(temp_keys[? "b_l_stick"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(2*view_wview[0]-25 -x, 10+50+35-view_hview[0] -y, translate(temp_keys[? "b_r_stick"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(2*view_wview[0]-25 -x, 10+50+70-view_hview[0] -y, translate(temp_keys[? "b_start"]), fnt_small, 2, c_black, c_white); 
-    draw_text_shadow(2*view_wview[0]-25 -x, 10+50+105-view_hview[0] -y, translate(temp_keys[? "b_select"]), fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(2*view_wview[0]-25 -x, 10+50+140-view_hview[0] -y, translate(temp_keys[? "b_dodge_1"]), fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(2*view_wview[0]-25 -x, 10+50+175-view_hview[0] -y, translate(temp_keys[? "b_dodge_2"]), fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(2*view_wview[0]-25 -x, 10+50+210-view_hview[0] -y, translate(temp_keys[? "b_dodge_3"]), fnt_small, 2, c_black, c_white); 
-    //draw_text_shadow(2*view_wview[0]-25 -x, 10+50+245-view_hview[0] -y, translate(temp_keys[? "b_dodge_4"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(2*view_wport[0]-25 -x, 10+50-view_hport[0] -y, translate(temp_keys[? "b_l_stick"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(2*view_wport[0]-25 -x, 10+50+35-view_hport[0] -y, translate(temp_keys[? "b_r_stick"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(2*view_wport[0]-25 -x, 10+50+70-view_hport[0] -y, translate(temp_keys[? "b_start"]), fnt_small, 2, c_black, c_white); 
+    draw_text_shadow(2*view_wport[0]-25 -x, 10+50+105-view_hport[0] -y, translate(temp_keys[? "b_select"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(2*view_wport[0]-25 -x, 10+50+140-view_hport[0] -y, translate(temp_keys[? "b_dodge_1"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(2*view_wport[0]-25 -x, 10+50+175-view_hport[0] -y, translate(temp_keys[? "b_dodge_2"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(2*view_wport[0]-25 -x, 10+50+210-view_hport[0] -y, translate(temp_keys[? "b_dodge_3"]), fnt_small, 2, c_black, c_white); 
+    //draw_text_shadow(2*view_wport[0]-25 -x, 10+50+245-view_hport[0] -y, translate(temp_keys[? "b_dodge_4"]), fnt_small, 2, c_black, c_white); 
 }
 
 draw_set_halign(fa_left); 
