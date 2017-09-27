@@ -7,19 +7,17 @@ p[? "x"] = global.player.x;
 p[? "y"] = global.player.y;
 p[? "rot"] = global.player.rot;
 p[? "myHealth"] = global.player.myHealth;
-//if( global.player.state == 6 ) { p[? "state"] = 6; }
-//else { p[? "state"] = 0; }
-global.save[? "player"] = ds_map_write(p);
-ds_map_destroy(p);
-
-
 var state = ds_map_create();
 state[? "state"] = global.player.state_machine.state;
-global.save[? "state_machine"] = ds_map_write(state);
+state[? "enabled"] = global.player.state_machine.enabled;
+p[? "state_machine"] = ds_map_write(state);
+p[? "dodge_go"] = global.player.dodge_go;
+global.save[? "player"] = ds_map_write(p);
+ds_map_destroy(p);
 ds_map_destroy(state);
 
 global.save[? "time"] = global.master.time;
-
+global.save[? "time_go"] = global.master.time_go;
 global.save[? "turn"] = global.master.turn;
 global.master.turn = "pause";
 
@@ -102,6 +100,23 @@ with(obj_toggle)
     global.save[? key] = ds_map_write(me);
     ds_map_destroy(me);
 }
+
+
+with(obj_tutorial) //If they're in the tutorial, this object will exist and we will need to save it
+{
+    var tut = ds_map_create();
+    tut[? "time_tut"] = time_tut;
+    tut[? "fight_tut"] = fight_tut;
+    tut[? "dodge_tut"] = dodge_tut;
+    tut[? "interact_tut"] = interact_tut;
+    
+    //ds_print(tut, ds_type_map);
+    
+    global.save[? "tutorial_obj"] = ds_map_write(tut);
+    ds_map_destroy(tut);
+}
+
+
 
 room_goto(rm_pause);
 

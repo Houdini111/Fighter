@@ -8,16 +8,23 @@ with(obj_player)
     myHealth = p[? "myHealth"];
     ds_map_destroy(p);
 }
-
+/*
 with(obj_state)
 {
     var temp = ds_map_create();
-    ds_map_read(temp, global.save[? "state_machine"]);
+    ds_map_read(temp, global.save[? "player"]);
+    ds_map_read(temp, temp[? "state_machine"]);
     if( temp[? "state"] == 6 ) { state = 6; }
     else { state = 0; }
-    //state = temp[? "state"];
+    oldState = state;
+    tree_depth = 0;
+    enabled = temp[? "enabled"];
+    alarm[0] = -1;
+    alarm[1] = -1;
+    alarm[2] = -1;
+    alarm[9] = -1;
 }
-
+*/
 global.master.time = global.save[? "time"];
 global.master.turn = global.save[? "turn"];
 

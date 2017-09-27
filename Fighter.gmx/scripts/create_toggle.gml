@@ -31,37 +31,40 @@ var _at = noone;
 _at = collision_point(_x, _y, all, false, true);
 
 var _s = instance_create(_x, _y, obj_toggle);
-if(_tar == noone) 
+if( instance_exists(_s) )
 {
-    ds_list_destroy(_s.targets);
-    _s.targets = noone;
+    if(_tar == noone) 
+    {
+        if( ds_exists( _s.targets, ds_type_list) ) { ds_list_destroy(_s.targets); }
+        _s.targets = noone;
+    }
+    else if( !ds_exists(_tar, ds_type_list) )
+        { ds_list_add(_s.targets, _tar); }
+    else 
+        { for(var i = 0; i < ds_list_size(_tar); i++) { ds_list_add(_s.targets, _tar[| i]); } }
+    _s.sprite_index = _spr;
+    _s.solid = _sol;
+    if(_sol) { mp_grid_add_cell(global.grid, _x/global.gridSize, _y/global.gridSize); }
+    _s.init_state = _init;
+    _s.state = _init;
+    _s.reusable = _reuse;
+    _s.visible = _vis;
+    _s.condition = _cond;
+    _s.prepare = _prep;
+    _s.action = _act;
+    _s.act_con_arg = _act_con_arg;
+    _s.prep_con_arg = _act_con_arg;
+    _s.act_arg = _act_con_arg;
+    
+    if( script_get_name(_cond) == "targeted_action" ) 
+    {
+        _s.my_prompt = prompt(_s.x+_s.sprite_width/2, _s.y+_s.sprite_height/2-10, 15, "U", global.master.my_orange, 5);
+        instance_deactivate_object(_s.my_prompt);
+    }
+    
+        //If there is somemthing there, make the toggle a faux child
+    if(_at != noone and !object_is_ancestor(_at, obj_toggle) ) { _s.parent = _at; } 
+    else { _s.parent = "none"; }
+    
+    return _s;
 }
-else if( !ds_exists(_tar, ds_type_list) )
-    { ds_list_add(_s.targets, _tar); }
-else 
-    { for(var i = 0; i < ds_list_size(_tar); i++) { ds_list_add(_s.targets, _tar[| i]); } }
-_s.sprite_index = _spr;
-_s.solid = _sol;
-if(_sol) { mp_grid_add_cell(global.grid, _x/global.gridSize, _y/global.gridSize); }
-_s.init_state = _init;
-_s.state = _init;
-_s.reusable = _reuse;
-_s.visible = _vis;
-_s.condition = _cond;
-_s.prepare = _prep;
-_s.action = _act;
-_s.act_con_arg = _act_con_arg;
-_s.prep_con_arg = _act_con_arg;
-_s.act_arg = _act_con_arg;
-
-if( script_get_name(_cond) == "targeted_action" ) 
-{
-    _s.my_prompt = prompt(_s.x+_s.sprite_width/2, _s.y+_s.sprite_height/2-10, 15, "U", global.master.my_orange, 5);
-    instance_deactivate_object(_s.my_prompt);
-}
-
-    //If there is somemthing there, make the toggle a faux child
-if(_at != noone and !object_is_ancestor(_at, obj_toggle) ) { _s.parent = _at; } 
-else { _s.parent = "none"; }
-
-return _s;

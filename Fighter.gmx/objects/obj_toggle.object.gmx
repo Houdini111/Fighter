@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>event_inherited();
 
+image_speed = 0;
+
 //Add/change these immediately after
 targets = ds_list_create(); 
 init_state = true;
@@ -43,7 +45,10 @@ if(ds_map_exists(global.save, key))
     if(ds_map_exists(temp, "alive"))
     {
         if(!temp[? "alive"]) 
-            { instance_destroy(); } //If this is supposed to be dead, destroy it
+            { 
+                show_debug_message(string(x) + ", " + string(y));
+                instance_destroy(); 
+            } //If this is supposed to be dead, destroy it
     }
     //If it isn't, then alive is true, and nothing needs to be changed
     ds_map_destroy(temp); 
@@ -55,14 +60,32 @@ else //If it's the first time loading the room, mark it as alive
     global.save[? key] = ds_map_write(temp);
     ds_map_destroy(temp);    
 }
-/*
-alive = true;
-temp[? "alive"] = alive;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var temp = ds_map_create();
+temp[? "alive"] = false;
 global.save[? key] = ds_map_write(temp);
-*/
-
-
-image_speed = 0;
+ds_map_destroy(temp);
 </string>
           </argument>
         </arguments>

@@ -11,10 +11,7 @@
   <colour>0</colour>
   <showcolour>-1</showcolour>
   <code>load_player(112, 728);
-global.player.state_machine.enabled = false;
-global.player.dodge_go = false;
 
-global.master.time_go = false;
 var time = global.save[? "time"];
 if( time ) { global.master.time = time; }
 
@@ -24,17 +21,51 @@ master_initialize_room();
 
 instance_create(0, 0, obj_tutorial);
 
-create_toggle(192, 712, spr_switch, false, noone, false, false, false, player_step_on, always, toggle_time);
+var test = create_toggle(192, 712, spr_switch, false, noone, false, false, false, player_step_on, always, toggle_time);
 create_toggle(192, 712, spr_switch, false, noone, false, false, false, player_step_on, always, tutorial_toggle_time );
+//NOTE: 0 means that it didn't reach the end of creation, so it didn't return the instance id. 
+//This means that the object was destroyed because the save said that it was destroyed before
+if( test != 0 ) 
+{ 
+    global.master.time_go = false;  
+    with( obj_tutorial ) { time_tut = false; }
+}
+else 
+{ 
+    global.master.time_go = true; 
+    with( obj_tutorial ) { time_tut = true; }
+}
 
-create_toggle(768, 712, spr_switch, false, noone, false, false, false, player_step_on, always, toggle_dodge);
+test = create_toggle(768, 712, spr_switch, false, noone, false, false, false, player_step_on, always, toggle_dodge);
 create_toggle(768, 712, spr_switch, false, noone, false, false, false, player_step_on, always, tutorial_toggle_dodge);
+if( test != 0 ) 
+{ 
+    global.player.dodge_go = false;  
+    with( obj_tutorial ) { dodge_tut = false; }
+}
+else 
+{ 
+    global.player.dodge_go = true; 
+    with( obj_tutorial ) { dodge_tut = true; }
+}
 var d = instance_create(768, 712, obj_door);
 d.active = true;
-create_toggle( 448, 648, spr_switch_5x11, false, d, true, false, false, player_on_while_enemy_turn, always, toggle_door);
+var to = create_toggle( 448, 648, spr_switch_5x11, false, d, true, false, false, player_on_while_enemy_turn, always, toggle_door);
+if(to == 0) { instance_destroy(d); }
 
-create_toggle( 1248, 712, spr_switch, false, noone, false, false, false, player_step_on, always, toggle_attacks );
+
+test = create_toggle( 1248, 712, spr_switch, false, noone, false, false, false, player_step_on, always, toggle_attacks );
 create_toggle( 1248, 712, spr_switch, false, noone, false, false, false, player_step_on, always, tutorial_toggle_fight );
+if( test != 0 ) 
+{ 
+    global.player.state_machine.enabled = false;  
+    with( obj_tutorial ) { attack_tut = true; }
+}
+else 
+{ 
+    global.player.state_machine.enabled = true; 
+    with( obj_tutorial ) { attack_tut = false; }
+}
 
 var e = instance_create(1184+16, 712+16, obj_tut_counter_enemy);
 var opt = ds_map_create();
@@ -43,8 +74,8 @@ var _opt = ds_map_write(opt);
 ds_map_destroy(opt);
 d = instance_create( 1248, 712, obj_door );
 d.active = true;
-create_toggle(1184+16, 712+16, spr_switch, false, d, true, false, false, object_destroyed, always, toggle_door, _opt);
-
+to = create_toggle(1184+16, 712+16, spr_switch, false, d, true, false, false, object_destroyed, always, toggle_door, _opt);
+if(to == 0) { instance_destroy(d); }
 
 create_toggle( 1632, 712, spr_switch, false, noone, false, false, false, player_step_on, always, tutorial_toggle_interact );
 
@@ -55,44 +86,40 @@ var _opt = ds_map_write(opt);
 ds_map_destroy(opt);
 d = instance_create( 1632, 712, obj_door );
 d.active = true;
-create_toggle(1600+16, 712+16, spr_switch, false, d, true, false, false, object_destroyed, always, toggle_door, _opt);
-
+to = create_toggle(1600+16, 712+16, spr_switch, false, d, true, false, false, object_destroyed, always, toggle_door, _opt);
+if(to == 0) { instance_destroy(d); }
 
 d = instance_create( 1856, 712, obj_door );
 d.active = true;
-create_toggle(1824, 744, spr_switch, true, d, true, true, true, targeted_action, always, toggle_door);
+to = create_toggle(1824, 744, spr_switch, true, d, true, true, true, targeted_action, always, toggle_door);
+if(to == 0) { instance_destroy(d); }
 
 
 
-//create_toggle(480, 352, spr_switch, false, noone, false, false, false, player_step_on, always, toggle_attacks);
-//create_toggle(480, 352, spr_switch, false, noone, false, false, false, player_step_on, always, tutorial_toggle_fight);
+with(obj_tutorial)
+{
+    if( ds_map_exists(global.save, "tutorial_obj") )
+    {
+        var me = ds_map_create();
+        ds_map_read( me, global.save[? "tutorial_obj"] );
+        
+        //ds_print(me, ds_type_map);
+        //show_debug_message("BEFORE: " +string(time_tut));
+        
+        time_tut = me[? "time_tut"];
+        fight_tut = me[? "fight_tut"];
+        dodge_tut = me[? "dodge_tut"];
+        interact_tut = me[? "interact_tut"];
+        
+        //show_debug_message("AFTER: " +string(time_tut));
+            
+        ds_map_destroy(me);
+    }
+}
 
-//create_toggle(800, 352, spr_switch, false, noone, false, false, false, player_step_on, always, fow_on);
-//create_toggle(992, 448, spr_switch_1x5, false, noone, false, false, false, player_step_on, always, to_test);
 
-/*
-var d = instance_create(480, 352, obj_door);
-d.active = true;
-var tar = ds_list_create();
-ds_list_add(tar, d);
-var test = create_toggle( 448, 416, spr_switch, true, tar, true, true, true, targeted_action, always, toggle_door);
-ds_list_destroy(tar);
-*/
 
-/*
-var e1 = instance_create(736+16, 352+16, obj_tut_en_1);
-var opt = ds_map_create();
-opt[? "activate_condition"] = e1;
-var _opt = ds_map_write(opt);
-ds_map_destroy(opt);
-var wall = make_fake_wall_objects(768, 320, "vertical", 3);
-create_toggle(736+16, 352+16, spr_switch, false, wall, true, false, false, object_destroyed, always, toggle_fake_wall, _opt);
-*/
 
-/*
-var wall2 = make_fake_wall_objects(960, 448, "horizontal", 5);
-create_toggle(1120, 288, spr_switch, true, wall2, true, true, true, targeted_action, always, toggle_fake_wall);
-*/
 
 
 

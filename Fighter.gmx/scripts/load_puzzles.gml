@@ -1,4 +1,5 @@
 ///load_puzzles()
+
 with(obj_toggle)
 {
     if(ds_map_exists(global.save, key))

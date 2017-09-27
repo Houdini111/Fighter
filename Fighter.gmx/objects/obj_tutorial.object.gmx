@@ -25,10 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>time = false;
-fight = false;
-dodge = false;
-interact = false;
+            <string>time_tut = false;
+fight_tut = false;
+dodge_tut = false;
+interact_tut = false;
 
 </string>
           </argument>
@@ -52,7 +52,10 @@ interact = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>in_m = "k";
+            <string>//show_debug_message("TIME: "+string(time));
+
+
+in_m = "k";
 if( global.gp_slot != -1 ) { in_m = "b"; }
 
 draw_set_font(fnt_small);
@@ -61,11 +64,13 @@ draw_set_color(c_white);
 draw_text(0, 840, "Move with "+translate(global.in_map[? in_m+"_m_up"])+", "+translate(global.in_map[? in_m+"_m_left"])+", "+translate(global.in_map[? in_m+"_m_down"])+", and "+translate(global.in_map[? in_m+"_m_right"]) );
 if(in_m == "k") { draw_text(0, 860, "Look with "+translate(global.in_map[? in_m+"_l_up"])+", "+translate(global.in_map[? in_m+"_l_left"])+", "+translate(global.in_map[? in_m+"_l_down"])+", and "+translate(global.in_map[? in_m+"_l_right"]) ); } 
 else{ draw_text(0, 860, "Look with the right stick"); }
+draw_text(0, 880, "Pause with "+translate(global.in_map[? in_m+"_start"]));
 
-if(time) { draw_text(230, 840, "You and the enemies take turns") }
-if(dodge) { draw_text(800, 840, "Dodge with "+translate(global.in_map[? in_m+"_dodge_1"])+", "+translate(global.in_map[? in_m+"_dodge_2"])+", "+translate(global.in_map[? in_m+"_dodge_3"])+", and "+translate(global.in_map[? in_m+"_dodge_4"]) ); }
-if(fight) { draw_text(1280, 840, "Attack with "+translate(global.in_map[? in_m+"_a_1"])+", "+translate(global.in_map[? in_m+"_a_2"])+", and "+translate(global.in_map[? in_m+"_a_3"])  ); }
-if(interact) { draw_text(1664, 840, "Interact with "+translate(global.in_map[? in_m+"_a_4"]) ); }
+if(time_tut) { draw_text(230, 840, "You and the enemies take turns") }
+if(dodge_tut) { draw_text(800, 840, "Dodge with "+translate(global.in_map[? in_m+"_dodge_1"])+", "+translate(global.in_map[? in_m+"_dodge_2"])+", "+translate(global.in_map[? in_m+"_dodge_3"])+", and "+translate(global.in_map[? in_m+"_dodge_4"]) ); }
+if(fight_tut) { draw_text(1280, 840, "Attack with "+translate(global.in_map[? in_m+"_a_1"])+", "+translate(global.in_map[? in_m+"_a_2"])+", and "+translate(global.in_map[? in_m+"_a_3"])  ); }
+if(interact_tut) { draw_text(1664, 840, "Interact with "+translate(global.in_map[? in_m+"_a_4"]) ); }
+
 </string>
           </argument>
         </arguments>
