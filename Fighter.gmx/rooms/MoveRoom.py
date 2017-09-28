@@ -17,17 +17,28 @@ y = 0
 finding = True
 while finding:
    uIn = input("Please enter the room name: ").strip()
+   room = "";
 
-   p = re.compile("(.*?)\.room\.gmx")
-   find = re.search(p, uIn)
+   possibilities = [ "(.*?)\.room\.gmx", "(.*?).room", "(.*)" ]
+   missing = [ "", ".gmx", ".room.gmx" ]
 
-   if not os.path.isfile(find+".room.gmx"):
-      print("Room not found")
-   else:
-      print("Found room")
-      room = uIn+".room.gmx"
-      finding = False
 
+   i = 0
+   while i < len(possibilities):
+      find = re.search( re.compile(possibilities[i]), uIn)
+      if find is not None:
+         room = str(find.group(1))+str(missing[i])
+         break
+      i = i+1
+      
+   if room is not "":
+      if not os.path.isfile(room):
+         print("Room not found")
+      else:
+         print("Found room")
+         finding = False
+
+   
 #//////////
 #//?ROOM CREATION CODE OPTION?
 #//////////
@@ -71,26 +82,28 @@ while finding:
       x = 0
       finding = False
    else:
-      if uIn.isdigit():
+      try:
          uIn = int(uIn)
-         if uIn or uIn == 0:
-            x = uIn
-            finding = False
+         x = uIn
+         finding = False
+      except ValueError:
+         print("Invalid input")
 print("Moving x by " + str(x))
 
 
 finding = True
 while finding:
-   uIn = input("Please enter the x amount to move (positive is to the right): ").strip()
+   uIn = input("Please enter the y amount to move (positive is downwards): ").strip()
    if uIn == "0":
       y = 0
       finding = False
    else:
-      if uIn.isdigit():
+      try:
          uIn = int(uIn)
-         if uIn or uIn == 0:
-            y = uIn
-            finding = False
+         y = uIn
+         finding = False
+      except ValueError:
+         print("Invalid input")
 print("Moving y by " + str(y))
 
 
