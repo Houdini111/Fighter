@@ -52,7 +52,9 @@
         <sprite>sprites\spr_switch_7x7</sprite>
         <sprite>sprites\spr_switch_5x11</sprite>
       </sprites>
-      <sprite>sprites\spr_toggle_wall</sprite>
+      <sprite>sprites\spr_toggle_door</sprite>
+      <sprite>sprites\spr_toggle_key</sprite>
+      <sprite>sprites\spr_key</sprite>
       <sprite>sprites\spr_switch</sprite>
     </sprites>
     <sprite>sprites\spr_skeleton</sprite>
@@ -189,8 +191,10 @@
     </objects>
     <objects name="puzzle peices">
       <object>objects\obj_door</object>
+      <object>objects\obj_key_door</object>
       <object>objects\obj_interactable</object>
       <object>objects\obj_toggle</object>
+      <object>objects\obj_key</object>
     </objects>
     <object>objects\obj_impassable</object>
     <object>objects\obj_btn_prompt</object>

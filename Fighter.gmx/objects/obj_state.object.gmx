@@ -306,7 +306,7 @@ a[3] = 12;
         draw_state_circle( tree_depth, 'c_t', circle_radius, 0);
     }
     
-    show_debug_message(state);
+    //show_debug_message(state);
 }
 </string>
           </argument>

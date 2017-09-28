@@ -8,6 +8,19 @@ if(_i == global.player)
 {
     //Special ability?
     //otherwise
-    if(place_free(_x, _y)) { return true; }
-    else { return false; } 
+    var hit = collision_point(_x, _y, all, false, true);
+    if( hit and hit.solid ) 
+    { 
+        if( object_get_name(hit.object_index) == "obj_key_door" )
+        {
+            if( global.player.keys > 0 )
+            {
+                global.player.keys--;
+                instance_destroy(hit);
+                return true;
+            }
+        }
+        else { return false; }
+    }
+    else { return true; }
 }

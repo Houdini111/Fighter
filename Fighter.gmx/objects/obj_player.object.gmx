@@ -62,47 +62,8 @@ fov_size = 120;
 
 action_target = noone;
 
-/*
-//Language
-// 0 == a1 (lb)
-// 1 == a2 (rb)
 
-state = 0;
-
-//First number is the current state
-//This column is for "a" buttons
-    //This column is for "x" buttons
-    
-    //--- means unused
-    //! means part of a dead-end accept state (so don't use it)
-st[0, 0] = 1;
-    st[0, 1] = 6;//REJECT
-st[1, 0] = 2;
-    st[1, 1] = 6;//REJECT
-st[2, 0] = 3;    //ACCEPT
-    st[2, 1] = 4;
-st[3, 0] = 0;//!
-    st[3, 1] = 0;//!
-st[4, 0] = 7;
-    st[4, 1] = 5;//ACCEPT
-st[5, 0] = 0;//!
-    st[5, 1] = 0;//!
-st[6, 0] = 6;    //REJECT
-    st[6, 1] = 6;//REJECT
-st[7, 0] = 6;    //REJECT
-    st[7 , 1] = 8 
-st[8, 0] = 6;    //REJECT
-    st[8, 1] = 9;//ACCEPT
-st[9, 0] = 0;//!
-    st[9, 1] = 0;//!
-st[10, 0] = 6;//---
-    st[10, 1] = 6;//---
-st[11, 0] = 0;//---
-    st[11, 1] = 0;//---
-    
-//Reject states
-r[0] = 6; 
-*/
+keys = 0;
 
 
 /*
