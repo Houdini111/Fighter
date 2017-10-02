@@ -15,6 +15,7 @@ with(obj_player)
         oldY = y;
         rot = p[? "rot"];
         myHealth = p[? "myHealth"];
+        ds_map_read( inventory, p[? "inventory"] );
         
         if( ds_map_exists(p, "state_machine") ) 
         { 

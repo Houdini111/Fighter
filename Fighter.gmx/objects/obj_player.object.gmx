@@ -62,8 +62,8 @@ fov_size = 120;
 
 action_target = noone;
 
-
-keys = 0;
+inventory = ds_map_create();
+inventory[? "tut_keys"] = 0;
 
 
 /*
@@ -374,7 +374,7 @@ myHealth = clamp(myHealth, 0, maxHealth);
     {
         draw_set_color(c_black);
         
-        draw_set_alpha(0.2);
+        draw_set_alpha(0.4);
         draw_rectangle(rhythm_left, rhythm_top, rhythm_left+rhythm_width, rhythm_top+rhythm_height, false);
         
         

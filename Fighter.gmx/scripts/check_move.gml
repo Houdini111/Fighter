@@ -13,12 +13,28 @@ if(_i == global.player)
     { 
         if( object_get_name(hit.object_index) == "obj_key_door" )
         {
-            if( global.player.keys > 0 )
+            var rm = "";
+            
+            switch(room_get_name(room))
             {
-                global.player.keys--;
-                instance_destroy(hit);
-                return true;
+                case "rm_tutorial":
+                    rm = "tut"
+                    break;
             }
+            
+            var rm_keys = string(rm)+"_keys";
+            
+            if( rm_keys != "_keys" )
+            {
+                if( global.player.inventory[? rm_keys] > 0 )
+                {
+                    global.player.inventory[? rm_keys]--;
+                    instance_destroy(hit);
+                    return true;
+                }
+                else { return false; }
+            }
+            else { return false; }
         }
         else { return false; }
     }

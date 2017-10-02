@@ -30,6 +30,8 @@ right = global.player.rhythm_left+global.player.rhythm_width;
 top = global.player.rhythm_top;
 bottom = global.player.rhythm_top+global.player.rhythm_height;
 
+dist_in_one_sec = bottom-global.player.judgement.y;
+
 path_height = top - bottom;
 path_width = right - left;
 
@@ -105,10 +107,12 @@ else
             <string>if( global.player.dodge_go )
 {
     if( global.master.turn == 'p' or global.master.turn == 'e')
-        { y -= delta_time/10000*global.master.rhy_speed; }
+    { 
+        y -= (delta_time/1000000)*dist_in_one_sec*global.master.rhy_speed;
+    }
     
     if(y+height &lt; top) { instance_destroy(); }
-}
+};
 </string>
           </argument>
         </arguments>
@@ -132,10 +136,11 @@ else
           <argument>
             <kind>1</kind>
             <string>if(global.master.ui and global.player.dodge_go)
-{
-    h_top = max(y, top);
-    if(y &gt; bottom) { h_bottom = h_top; }
-    else { h_bottom = min(y+height, bottom); }
+{   
+    h_top = max(y-height/2, top);
+    if(y-height/2 &gt; bottom) { h_bottom = h_top; } //If it hasn't begun to show yet
+    else if( y+height/2 &gt; bottom ) { h_bottom = bottom; } //If it has only started peeking
+    else { h_bottom = y+height/2; } //If the bottom of the peice has separated from the bottom
     
     draw_set_blend_mode(bm_normal);
     draw_set_alpha(1);
@@ -147,6 +152,12 @@ else
     draw_rectangle(x, h_top, x+width, h_bottom, false);
     draw_set_alpha(1);
     draw_rectangle(x+width*draw_border, h_top+height*draw_border, x+width*(1-draw_border), h_bottom-height*draw_border, false);
+    
+    if(global.master.debug_ui)
+    {
+        draw_set_color(c_red);
+        draw_line(x, y, x+width, y);
+    }   
 }
 </string>
           </argument>

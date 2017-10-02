@@ -140,7 +140,10 @@
     <script>scripts\load_enemies.gml</script>
     <script>scripts\load_player.gml</script>
     <script>scripts\load_puzzles.gml</script>
-    <script>scripts\ds_print.gml</script>
+    <scripts name="utilities">
+      <script>scripts\ds_print.gml</script>
+      <script>scripts\print.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_myFont</font>
@@ -173,13 +176,18 @@
     </objects>
     <objects name="enemies">
       <object>objects\obj_enemy</object>
-      <object>objects\obj_testEnemy_base</object>
-      <object>objects\obj_testEnemy1</object>
-      <object>objects\obj_testEnemy2</object>
-      <object>objects\obj_testEnemy3</object>
-      <object>objects\obj_testEnemy4</object>
-      <object>objects\obj_tut_en_1</object>
-      <object>objects\obj_tut_counter_enemy</object>
+      <objects name="test enemies">
+        <object>objects\obj_testEnemy_base</object>
+        <object>objects\obj_testEnemy1</object>
+        <object>objects\obj_testEnemy2</object>
+        <object>objects\obj_testEnemy3</object>
+        <object>objects\obj_testEnemy4</object>
+      </objects>
+      <objects name="tutorial enemies">
+        <object>objects\obj_tut_en_1</object>
+        <object>objects\obj_tut_miniboss</object>
+        <object>objects\obj_tut_counter_enemy</object>
+      </objects>
     </objects>
     <objects name="rhythm_objs">
       <object>objects\obj_rhy_judgement_line</object>

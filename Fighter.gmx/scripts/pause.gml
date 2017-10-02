@@ -7,6 +7,7 @@ p[? "x"] = global.player.x;
 p[? "y"] = global.player.y;
 p[? "rot"] = global.player.rot;
 p[? "myHealth"] = global.player.myHealth;
+p[? "inventory"] = ds_map_write(global.player.inventory);
 var state = ds_map_create();
 state[? "state"] = global.player.state_machine.state;
 state[? "enabled"] = global.player.state_machine.enabled;
