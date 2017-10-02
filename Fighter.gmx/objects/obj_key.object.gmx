@@ -25,8 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Get key and check if alive
+            <string>///Get key, check if alive, and child to other object
 key = get_key();
+
+hidden = false;
+parent = noone;
 
 if( ds_map_exists(global.save, key) )
 {
@@ -39,6 +42,14 @@ if( ds_map_exists(global.save, key) )
     }
     ds_map_destroy(map);
 }
+
+var hit = collision_point(x, y, all, false, true );
+if( hit != noone )
+{
+    hidden = true;
+    parent = hit;
+}
+
 </string>
           </argument>
         </arguments>
@@ -71,6 +82,31 @@ ds_map_destroy(map);
         </arguments>
       </action>
     </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check if it has been revealed
+if(parent != noone and !instance_exists(parent) )
+    { hidden = false; }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -88,16 +124,53 @@ ds_map_destroy(map);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Check if player has collided
+            <string>///Move with parent and check if player has collided
 
-var hit = collision_point(x, y, obj_player, false, true);
-if( hit )
+if(parent != noone)
 {
-    if( room_get_name(room) == "rm_tutorial" )
-        { global.player.inventory[? "tut_keys"]++; }
-        
-    instance_destroy();
+    if(instance_exists(parent))
+    {//THIS WILL NOT HANDLE THE OFFSET FOR ENEMIES 
+        x = parent.x;
+        y = parent.y;
+    }
 }
+
+if(!hidden)
+{
+    var hit = collision_point(x, y, obj_player, false, true);
+    if( hit )
+    {
+        if( room_get_name(room) == "rm_tutorial" )
+            { global.player.inventory[? "tut_keys"]++; }
+            
+        instance_destroy();
+    }
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw if not hidden
+if(!hidden){ draw_self(); }
 </string>
           </argument>
         </arguments>

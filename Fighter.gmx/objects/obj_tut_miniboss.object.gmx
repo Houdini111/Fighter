@@ -27,13 +27,13 @@
             <kind>1</kind>
             <string>event_inherited();
 
-maxHealth = 200;
+maxHealth = 180;
 myHealth = maxHealth;
-atk = 120;
-def = 70;
+atk = 60;
+def = 60;
 
 move_tick = 0.5; //In seconds
-attackSpeed = 3; //In seconds
+attackSpeed = 1; //In seconds
 MAX_SPEED = global.gridSize/8; //How much to move divded by how may frames it should take
 
 pattern = 6;

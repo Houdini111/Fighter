@@ -276,6 +276,38 @@ else if( global.master.turn == 'p' )
         </arguments>
       </action>
     </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if( (seen or !global.master.fow) and global.master.ui )
+{
+    var r_x = x - view_xview[0];
+    var r_y = y - view_yview[0];
+    
+    draw_set_color(c_black);
+    draw_rectangle(r_x-sprite_width/2, r_y-health_float_height-sprite_height/2, r_x+sprite_width/2, r_y-health_float_height-sprite_height/2+3, false);
+    draw_set_color(c_red);
+    draw_rectangle(r_x-sprite_width/2, r_y-health_float_height-sprite_height/2, r_x-sprite_width/2+(sprite_width*myHealth/maxHealth), r_y-health_float_height-sprite_height/2+3, false);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -315,14 +347,6 @@ if( seen or !global.master.fow )
     if(global.master.turn == 'p' or global.master.turn == 'pause') { image_blend = my_shade; }
     else if (global.master.turn == 'e') { image_blend = my_col; }
     draw_self();
-    
-    if(global.master.ui)
-    {
-        draw_set_color(c_black);
-        draw_rectangle(x-sprite_width/2, y-health_float_height-sprite_height/2, x+sprite_width/2, y-health_float_height-sprite_height/2+3, false);
-        draw_set_color(c_red);
-        draw_rectangle(x-sprite_width/2, y-health_float_height-sprite_height/2, x-sprite_width/2+(sprite_width*myHealth/maxHealth), y-health_float_height-sprite_height/2+3, false);
-    }
 }
 
 

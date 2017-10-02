@@ -103,15 +103,10 @@ if(to == 0) { instance_destroy(d); }
 
 
 
-d = instance_create( 2304, 704, obj_key_door );
-instance_create( 1920, 416, obj_key );
-
 instance_create( 2080+16, 416+16, obj_tut_miniboss );
+d = instance_create( 2304, 704, obj_key_door );
+instance_create( 2080, 416, obj_key );
 
-
-
-global.player.dodge_go = true;
-instance_create(160+16, 640+16, obj_tut_miniboss);
 
 
 with(obj_tutorial)
