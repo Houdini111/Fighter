@@ -229,11 +229,14 @@ else
             goal_x-=32;
         }
         
-        if( !check_move(id, goal_x, old_goal_y) ) //Can they move to the new x?
-            { goal_x = old_goal_x; }   //If not, move back
-        if( !check_move(id, old_goal_x, goal_y) ) //Can they move to the new Y?
-            { goal_y = old_goal_y; }
-            
+        if(old_goal_x != goal_x or old_goal_y != goal_y)
+        {
+            if( !check_move(id, goal_x, old_goal_y) ) //Can they move to the new x?
+                { goal_x = old_goal_x; }   //If not, move back
+            if( !check_move(id, old_goal_x, goal_y) ) //Can they move to the new Y?
+                { goal_y = old_goal_y; }
+        }
+        
         if( goal_x &gt; x ) { x += min( MAX_SPEED, goal_x-x ); }
         else { x -= min( MAX_SPEED, x-goal_x ); }
         if( goal_y &gt; y ) { y += min( MAX_SPEED, goal_y-y ); }
@@ -448,6 +451,12 @@ myHealth = clamp(myHealth, 0, maxHealth);
     draw_surface(fov_surf, 0, 0); 
     draw_set_blend_mode(bm_normal);
     
+}
+
+if(global.master.debug_ui)
+{
+    draw_set_color(c_red);
+    draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true);
 }
 
 //show_debug_message(rot);

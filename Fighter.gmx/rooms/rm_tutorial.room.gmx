@@ -67,19 +67,22 @@ else
     with( obj_tutorial ) { attack_tut = false; }
 }
 
-var e = instance_create(1184+16, 704+16, obj_tut_counter_enemy);
+//var e = instance_create(1184+16, 704+16, obj_tut_counter_enemy);
+var e = instance_create(1184, 704, obj_tut_counter_enemy);
 var opt = ds_map_create();
 opt[? "activate_condition"] = e;
 var _opt = ds_map_write(opt);
 ds_map_destroy(opt);
 d = instance_create( 1248, 704, obj_door );
 d.active = true;
-to = create_toggle(1184+16, 704+16, spr_switch, false, d, true, false, false, object_destroyed, always, toggle_door, _opt);
+//to = create_toggle(1184+16, 704+16, spr_switch, false, d, true, false, false, object_destroyed, always, toggle_door, _opt);
+to = create_toggle(1184, 704, spr_switch, false, d, true, false, false, object_destroyed, always, toggle_door, _opt);
 if(to == 0) { instance_destroy(d); }
 
 create_toggle( 1632, 704, spr_switch, false, noone, false, false, false, player_step_on, always, tutorial_toggle_interact );
 
-e = instance_create(1600+16, 704+16, obj_tut_en_1);
+//e = instance_create(1600+16, 704+16, obj_tut_en_1);
+e = instance_create(1600, 704, obj_tut_en_1);
 var opt = ds_map_create();
 opt[? "activate_condition"] = e;
 var _opt = ds_map_write(opt);
@@ -103,7 +106,8 @@ if(to == 0) { instance_destroy(d); }
 
 
 
-instance_create( 2080+16, 416+16, obj_tut_miniboss );
+//instance_create( 2080+16, 416+16, obj_tut_miniboss );
+instance_create( 2080, 416, obj_tut_miniboss );
 d = instance_create( 2304, 704, obj_key_door );
 instance_create( 2080, 416, obj_key );
 

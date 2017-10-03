@@ -41,6 +41,9 @@ mp_potential_settings(maxrot, rotstep, ahead, onspot);
 
 seen = true;
 
+x+=16;
+y+=16;
+
 startX = x;
 startY = y;
 nextX = x;
@@ -325,7 +328,14 @@ else if( global.master.turn == 'p' )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if( global.master.debug_ui )
+            <string>if( seen or !global.master.fow )
+{
+    if(global.master.turn == 'p' or global.master.turn == 'pause') { image_blend = my_shade; }
+    else if (global.master.turn == 'e') { image_blend = my_col; }
+    draw_self();
+}
+
+if( global.master.debug_ui )
 {
     if( path_exists(path) ) 
     { 
@@ -340,14 +350,19 @@ else if( global.master.turn == 'p' )
     else { draw_set_color(c_red); }
     inRadius = distance_to_point(global.player.x, global.player.y) &lt; sightRange;
     if(inRadius) { draw_line(x, y, global.player.x, global.player.y); }
+    
+    draw_set_color(c_red);
+    draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true);
+    
+    draw_set_color(c_purple);
+    x_size = 3;
+    draw_line_width(x-x_size, y-x_size, x+x_size, y+x_size, 1);
+    draw_line_width(x+x_size, y-x_size, x-x_size, y+x_size, 1);
+    draw_set_color(c_white);
+    draw_point(x, y);
 }
 
-if( seen or !global.master.fow )
-{
-    if(global.master.turn == 'p' or global.master.turn == 'pause') { image_blend = my_shade; }
-    else if (global.master.turn == 'e') { image_blend = my_col; }
-    draw_self();
-}
+
 
 
 </string>

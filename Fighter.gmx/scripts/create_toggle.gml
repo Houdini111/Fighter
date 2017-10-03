@@ -48,7 +48,7 @@ if( instance_exists(_s) )
     _s.init_state = _init;
     _s.state = _init;
     _s.reusable = _reuse;
-    _s.visible = _vis;
+    _s.draw = _vis;
     _s.condition = _cond;
     _s.prepare = _prep;
     _s.action = _act;

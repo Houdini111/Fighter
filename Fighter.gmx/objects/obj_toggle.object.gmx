@@ -3,7 +3,7 @@
   <spriteName>spr_switch</spriteName>
   <solid>-1</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-5</depth>
   <persistent>0</persistent>
   <parentName>obj_interactable</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -152,7 +152,13 @@ if( ready and script_execute(condition) )
             <kind>1</kind>
             <string>image_index = state;  
 
-draw_self();
+if(draw) { draw_self(); }
+
+if(global.master.debug_ui)
+{
+    draw_set_color(c_red);
+    draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true);
+}
 </string>
           </argument>
         </arguments>
