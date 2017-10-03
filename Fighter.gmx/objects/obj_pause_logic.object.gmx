@@ -138,7 +138,7 @@ if( place == "options" )
 { 
     if( global.in[? "m_down_p"] ) { selection++; } 
     else if ( global.in[? "m_up_p"] ) { selection--; } 
-    selection = clamp(selection, 0, 3); 
+    selection = clamp(selection, 0, 4); 
       
     if( selection == 0 ) //Window Size
     {
@@ -188,7 +188,29 @@ if( place == "options" )
         if( global.in[? "m_left_p"] or global.in[? "m_right_p"] )
             { global.save[? "fow_pen"] = !global.save[? "fow_pen"]; }
     }
-    else if( selection == 3 ) //Key bindings selection
+    else if( selection == 3 ) //Rhythm move speed
+    {
+        if( global.in[? "m_left_p"] or global.in[? "m_right_p"] )
+        {
+            var increment = 0.1;
+            var before = 10.00;
+            
+            if( global.in[? "m_left_p"] ) { global.master.rhy_speed -= increment; }
+            else if( global.in[? "m_right_p"] ) { global.master.rhy_speed += increment; }
+            
+            global.master.rhy_speed = clamp(global.master.rhy_speed, 0.10, 20.00);
+            var scale = global.master.rhy_speed/before;
+            var tempSurf = surface_create(sprite_get_width(spr_rhy_base), sprite_get_height(spr_rhy_base)*scale);
+            surface_set_target(tempSurf);
+            draw_clear(c_black);
+            surface_reset_target();
+            var newHitbox = sprite_create_from_surface(tempSurf, 0, 0, surface_get_width(tempSurf), surface_get_height(tempSurf), false, false, 0, surface_get_height(tempSurf)/2);
+            surface_free(tempSurf);
+            with(obj_rhy_base) { mask_index = newHitbox; }
+            object_set_mask(obj_rhy_base, newHitbox);
+        }
+    }
+    else if( selection == 4 ) //Key bindings selection
     {
         if( global.in[? "d_2_p"] )
         {
@@ -444,11 +466,15 @@ draw_set_halign(fa_right);
 if( global.save[? "fow_pen"] ) { draw_text_shadow(2*view_wport[0]-75 -x, 10+50+70 -y, "ON", fnt_small, 2, c_black, c_white); }
 else { draw_text_shadow(2*view_wport[0]-75 -x, 10+50+70 -y, "OFF", fnt_small, 2, c_black, c_white); }
 
+draw_set_halign(fa_left);
+draw_text_shadow(view_wport[0]+10 -x, 10+50+105 -y, "Rhythm Speed", fnt_small, 2, c_black, c_white); 
+draw_set_halign(fa_right);
+draw_text_shadow(2*view_wport[0]-75 -x, 10+50+105 -y, string(global.master.rhy_speed), fnt_small, 2, c_black, c_white); 
 
 draw_set_halign(fa_left);
-draw_text_shadow(view_wport[0]+10 -x, 10+50+105 -y, "Key Bindings", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(view_wport[0]+10 -x, 10+50+140 -y, "Key Bindings", fnt_small, 2, c_black, c_white); 
 draw_set_halign(fa_right);
-draw_text_shadow(2*view_wport[0]-75 -x, 10+50+105 -y, "&gt;", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(2*view_wport[0]-75 -x, 10+50+140 -y, "&gt;", fnt_small, 2, c_black, c_white); 
 
 
 draw_set_font(fnt_medium);

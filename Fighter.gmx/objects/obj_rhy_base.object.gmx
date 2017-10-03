@@ -45,6 +45,8 @@ y = bottom;
 
 my_color = c_white;
 draw_border = 0.06;
+
+mask_index = object_get_mask(obj_rhy_base);
 </string>
           </argument>
         </arguments>
@@ -108,7 +110,7 @@ else
 {
     if( global.master.turn == 'p' or global.master.turn == 'e')
     { 
-        y -= (delta_time/1000000)*dist_in_one_sec*global.master.rhy_speed;
+        y -= (delta_time/1000000)*dist_in_one_sec*(global.master.rhy_speed/10);
     }
     
     if(y+height &lt; top) { instance_destroy(); }
