@@ -87,6 +87,7 @@
         <script>scripts\draw_state_circle.gml</script>
         <script>scripts\state_second_half.gml</script>
       </scripts>
+      <script>scripts\p_hit_part.gml</script>
     </scripts>
     <scripts name="puzzle logic">
       <script>scripts\create_toggle.gml</script>
@@ -160,6 +161,7 @@
     <object>objects\obj_player</object>
     <object>objects\obj_state</object>
     <object>objects\obj_camera</object>
+    <object>objects\obj_player_hit_phantom</object>
     <objects name="walls">
       <object>objects\obj_wall_N</object>
       <object>objects\obj_wall_S</object>
@@ -192,6 +194,7 @@
     </objects>
     <objects name="rhythm_objs">
       <object>objects\obj_rhy_judgement_line</object>
+      <object>objects\obj_rhy_phantom</object>
       <object>objects\obj_rhy_base</object>
       <object>objects\obj_rhy_1</object>
       <object>objects\obj_rhy_2</object>
