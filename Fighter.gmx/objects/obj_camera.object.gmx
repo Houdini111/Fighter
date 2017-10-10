@@ -38,7 +38,7 @@ magnitude = 10;
 //Display management
 ideal_width = 0;
 ideal_height = 360;
-//ideal_height = 480
+//ideal_height = 1080;
 
 aspect_ratio = display_get_width()/display_get_height();
 

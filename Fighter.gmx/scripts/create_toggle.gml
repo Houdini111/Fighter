@@ -58,8 +58,10 @@ if( instance_exists(_s) )
     
     if( script_get_name(_cond) == "targeted_action" ) 
     {
-        _s.my_prompt = prompt(_s.x+_s.sprite_width/2, _s.y+_s.sprite_height/2-10, 15, "U", global.master.my_orange, 5);
-        instance_deactivate_object(_s.my_prompt);
+        _key = "k";
+        if(global.gp_slot != -1) { _key = "b"; }
+        _s.my_prompt = prompt(_s.x+_s.sprite_width/2, _s.y+_s.sprite_height/2-10, global.master.my_orange, 8, 1.25);
+        _s.my_prompt.parent = _s;
     }
     
         //If there is somemthing there, make the toggle a faux child

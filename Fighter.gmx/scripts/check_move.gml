@@ -24,9 +24,7 @@ if(_i == global.player)
                 
                 switch(room_get_name(room))
                 {
-                    case "rm_tutorial":
-                        rm = "tut"
-                        break;
+                    case "rm_tutorial": rm = "tut"; break;
                 }
                 
                 var rm_keys = string(rm)+"_keys";
@@ -40,6 +38,7 @@ if(_i == global.player)
                         ds_list_destroy(hit_list);
                         return true;
                     }
+                    else { return false; }
                 }
             }
             else

@@ -251,17 +251,23 @@ else
         var h = noone;
         //Interactable in front of player?
         if( rot &gt;= 315 or rot &lt;= 45 ) //rot == 0
-            { h = collision_point(x+global.gridSize, y, obj_interactable, false, true); }
+            { h = collision_point_list(x+global.gridSize, y, obj_interactable, false, true); }
         else if( rot &gt; 45 and rot &lt; 135 ) //rot == 90
-            { h = collision_point(x, y-global.gridSize, obj_interactable, false, true); }
+            { h = collision_point_list(x, y-global.gridSize, obj_interactable, false, true); }
         else if( rot &gt;= 135 and rot &lt;= 225 ) //rot == 180
-            { h = collision_point(x-global.gridSize, y, obj_interactable, false, true); }   
+            { h = collision_point_list(x-global.gridSize, y, obj_interactable, false, true); }   
         else if( rot &gt; 225 and rot  &lt; 315 ) //rot == 270
-            { h = collision_point(x, y+global.gridSize, obj_interactable, false, true); }
-        if( h != noone) 
+            { h = collision_point_list(x, y+global.gridSize, obj_interactable, false, true); }
+        if( h != noone and ds_list_size(h) &gt; 0 ) 
         {  
-            if( script_get_name(h.condition) != "player_step_on" )
-                { action_target = h; }
+            for(var i = 0; i &lt; ds_list_size(h); i++)
+            {
+                if( object_get_name(h[| i].object_index) ==  "obj_toggle" and script_get_name(h[| i].condition) == "targeted_action" )
+                { 
+                    action_target = h[| i]; 
+                    i = ds_list_size(h);
+                }
+            }
         }
         else { action_target = noone; }
     }
@@ -284,25 +290,25 @@ else
     //Non-turn specific actions (dodging) 
     if( global.in[? "d_1_p"] ) //X
     {  
-        h = collision_point(rhythm_left+((rhythm_width/lanes)*.5), judgement.y, obj_rhy_base, false, true);
+        var h = collision_point(rhythm_left+((rhythm_width/lanes)*.5), judgement.y, obj_rhy_base, false, true);
         if( h != noone) //Check if there is a peice in the judgement line
             { with(h) { instance_destroy(); } }
     }
     if( global.in[? "d_2_p"] ) //A
     {  
-        h = collision_point(rhythm_left+((rhythm_width/lanes)*1.5), judgement.y, obj_rhy_base, false, true);
+        var h = collision_point(rhythm_left+((rhythm_width/lanes)*1.5), judgement.y, obj_rhy_base, false, true);
         if( h != noone) //Check if there is a peice in the judgement line
             { with(h) { instance_destroy(); } }
     }
     if( global.in[? "d_3_p"] ) //B
     {  
-        h = collision_point(rhythm_left+((rhythm_width/lanes)*2.5), judgement.y, obj_rhy_base, false, true);
+        var h = collision_point(rhythm_left+((rhythm_width/lanes)*2.5), judgement.y, obj_rhy_base, false, true);
         if( h != noone) //Check if there is a peice in the judgement line
             { with(h) { instance_destroy(); } }
     }
     if( global.in[? "d_4_p"] ) //Y
     {  
-        h = collision_point(rhythm_left+((rhythm_width/lanes)*3.5), judgement.y, obj_rhy_base, false, true);
+        var h = collision_point(rhythm_left+((rhythm_width/lanes)*3.5), judgement.y, obj_rhy_base, false, true);
         if( h != noone) //Check if there is a peice in the judgement line
             { with(h) { instance_destroy(); } }
     }

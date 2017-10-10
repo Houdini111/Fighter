@@ -130,8 +130,8 @@ if(parent != noone)
 {
     if(instance_exists(parent))
     {//THIS WILL NOT HANDLE THE OFFSET FOR ENEMIES 
-        x = parent.x;
-        y = parent.y;
+        x = parent.x-16;
+        y = parent.y-16;
     }
 }
 

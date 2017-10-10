@@ -8,7 +8,7 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="3" enumb="2">
+    <event eventtype="0" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,10 +25,50 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.gp_slot == -1 ) { key = "U"; } 
-else { key = "RT"; }
-size = (r*2*.7)/string_width(key);
+            <string>targeted = false;
+targeted_for = 0;
+offset = 0;
 
+lg = 0;
+sm = 100000;
+going_up = false;
+going_up_for = 0;
+testing = true;
+hit_top = false;
+hit_bottom = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(global.player.action_target == parent) 
+{ 
+    targeted = true; 
+    targeted_for++;
+}
+else 
+{ 
+    targeted = false; 
+    targeted_for = 0;
+    up = true;
+}
 </string>
           </argument>
         </arguments>
@@ -51,19 +91,63 @@ size = (r*2*.7)/string_width(key);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_color(c_white);
-draw_circle(x, y, r, false);
-draw_set_color(c_black);
-draw_circle(x, y, r, true);
-draw_set_color(color);
-draw_set_valign(fa_middle);
-draw_set_halign(fa_center);
-draw_set_font(fnt_gp_sym);
-draw_text_transformed(x, y, key, size, size, 0);
-draw_set_valign(fa_top);
-draw_set_halign(fa_left);
-instance_deactivate_object(id);
+            <string>if(targeted)
+{
+    draw_set_font(fnt_small);
+    key = translate(global.in_map[? "k_a_4"])
+    if(global.gp_slot != -1) { key = translate(global.in_map[? "b_a_4"]); }
 
+    w_pad = 4;
+    h_pad = -1;
+    width = ceil(string_width(key));
+    height = ceil(string_height(key));
+    w_half = ceil(width/2)+w_pad;
+    h_half = ceil(height/2)+h_pad;
+    draw_set_color(c_black);
+    draw_rectangle(x-w_half, y-h_half+offset, x+w_half, y+h_half+offset, false);
+    draw_set_color(c_white);
+    draw_rectangle(x-w_half+1, y-h_half+offset+1, x+w_half-1, y+h_half+offset-1, false);
+    
+    /*
+    if(testing)
+    {
+        if(y+h_half+offset &gt; lg) { lg = y+h_half+offset; }
+        else if (y+h_half+offset &lt; sm) { sm = y+h_half+offset; }
+        else if(y+h_half+offset &lt; lg) { hit_top = true; }
+        else if (y+h_half+offset &gt; sm) { hit_bottom = true; }
+        if(hit_top and hit_bottom) { testing = false; }
+    }
+    
+    if(!testing)
+    {
+        if(y+h_half+offset == lg)
+        { 
+            going_up = false; 
+            going_up_for++;
+            print("-----------");
+            print(current_time);
+            print(going_up_for);
+            going_up_for = 0;
+        }
+        if(y+h_half+offset == sm)
+        { 
+            going_up = true; 
+            going_up_for++;
+            print("-----------");
+            print(current_time);
+            print(going_up_for);
+            going_up_for = 0;
+        }
+        going_up_for++;
+    }
+    */
+    draw_set_color(color);
+    draw_set_valign(fa_middle);
+    draw_set_halign(fa_center);
+    draw_text_transformed(x, y+offset, key, 1, 1, 0);
+    draw_set_valign(fa_top);
+    draw_set_halign(fa_left);
+}
 </string>
           </argument>
         </arguments>

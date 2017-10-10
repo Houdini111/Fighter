@@ -97,7 +97,7 @@ for(var i = 0; i < ds_list_size(_hit); i++)
         var _count;
         if( _b == "n/a" ) { _count = damage_calculation(_pl, _hit[| i]); }
         else { _count = damage_calculation(_pl, _hit[| i], _b); }
-        _count/=10;
+        _count*=0.25;
         p_hit_part( _hit[| i].x, _hit[| i].y, point_direction( global.player.x, global.player.y, _hit[| i].x, _hit[| i].y ), _count );
     }
 }

@@ -9,10 +9,10 @@ with(_new)
     my_part_sys = part_system_create();
     //part_system_automatic_draw(my_part_sys, false);
     
-    max_life = 15;
+    max_life = 25;
     max_angle = 10;
-    max_size = 0.3;
-    max_speed = 7;
+    max_size = 0.1;
+    max_speed = 9;
     radius = 5;
     
     my_part = part_type_create();
