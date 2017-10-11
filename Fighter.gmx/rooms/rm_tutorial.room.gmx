@@ -19,8 +19,6 @@ global.master.fow = false;
 master_initialize_room();
 
 
-create_toggle(160, 704, spr_switch, true, noone, false, true, true, targeted_action, always, tutorial_toggle_time );
-
 
 var test = create_toggle(192, 704, spr_switch, false, noone, false, false, false, player_step_on, always, toggle_time);
 create_toggle(192, 704, spr_switch, false, noone, false, false, false, player_step_on, always, tutorial_toggle_time );
