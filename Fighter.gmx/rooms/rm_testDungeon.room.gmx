@@ -24,11 +24,11 @@ var d = instance_create(768, 416, obj_door);
 d.active = true;
 var tar = ds_list_create();
 ds_list_add(tar, d);
-create_toggle( 416, 512, spr_switch, true, tar, true, true, true, targeted_action, always, toggle_door);
+create_toggle( 416, 512, spr_switch, true, tar, true, true, true, targeted_action, always, toggle_door, "n/a", "n/a", "n/a");
 ds_list_destroy(tar);
 
 var wall2 = make_fake_wall_objects(448, 32, "vertical", 6);
-create_toggle(832, 480, spr_switch, true, wall2, true, true, true, targeted_action, always, toggle_fake_wall);
+create_toggle(832, 480, spr_switch, true, wall2, true, true, true, targeted_action, always, toggle_fake_wall, "n/a", "n/a", "n/a");
 
 
 

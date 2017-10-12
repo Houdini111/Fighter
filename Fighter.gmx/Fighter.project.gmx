@@ -56,6 +56,7 @@
       <sprite>sprites\spr_toggle_key</sprite>
       <sprite>sprites\spr_key</sprite>
       <sprite>sprites\spr_switch</sprite>
+      <sprite>sprites\spr_push</sprite>
     </sprites>
     <sprite>sprites\spr_skeleton</sprite>
   </sprites>
@@ -95,17 +96,20 @@
       <scripts name="actions">
         <script>scripts\toggle_fake_wall.gml</script>
         <script>scripts\toggle_door.gml</script>
+        <script>scripts\toggle_visibility.gml</script>
       </scripts>
       <scripts name="conditions">
         <scripts name="prepare">
           <script>scripts\player_not_on.gml</script>
           <script>scripts\always.gml</script>
+          <script>scripts\push_blocks_not_in_position.gml</script>
         </scripts>
         <scripts name="activate">
           <script>scripts\targeted_action.gml</script>
           <script>scripts\player_step_on.gml</script>
           <script>scripts\object_destroyed.gml</script>
           <script>scripts\player_on_while_enemy_turn.gml</script>
+          <script>scripts\push_blocks_in_position.gml</script>
         </scripts>
       </scripts>
       <scripts name="trigger_events">
@@ -143,9 +147,11 @@
     <script>scripts\load_puzzles.gml</script>
     <scripts name="utilities">
       <script>scripts\ds_print.gml</script>
+      <script>scripts\collision_point_list.gml</script>
       <script>scripts\print.gml</script>
+      <script>scripts\make_grid_false.gml</script>
+      <script>scripts\print_type.gml</script>
     </scripts>
-    <script>scripts\collision_point_list.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_myFont</font>
@@ -207,6 +213,7 @@
       <object>objects\obj_interactable</object>
       <object>objects\obj_toggle</object>
       <object>objects\obj_key</object>
+      <object>objects\obj_push</object>
     </objects>
     <object>objects\obj_impassable</object>
     <object>objects\obj_btn_prompt</object>

@@ -179,8 +179,8 @@ else
             }
         }
     
-        var old_goal_x = goal_x;
-        var old_goal_y = goal_y;
+        old_goal_x = goal_x;
+        old_goal_y = goal_y;
         //Move around
         if(global.in[? "m_up_p"]) //dpad_up first press
             { goal_y-=32; }

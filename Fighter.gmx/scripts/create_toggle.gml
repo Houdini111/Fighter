@@ -1,4 +1,4 @@
-///create_toggle( x, y, sprite, solid, ds_list_of_targets, init_state, reusable, visible, activate_condition, prepare_condition, action[, options_map] )
+///create_toggle( x, y, spr, sld, targets_list, init_state, reusable, visible, act_cond, prep_cond, action, act_cond_arg, prep_cond_arg, act_arg )
 var _x = argument[0];
 var _y = argument[1];
 var _spr = argument[2];
@@ -10,20 +10,18 @@ var _vis = argument[7];
 var _cond = argument[8]; 
 var _prep = argument[9];
 var _act = argument[10];
+var _act_con_arg = argument[11];
+var _prep_con_arg = argument[12];
+var _act_arg = argument[13];
 
-var _act_con_arg = "n/a";
-var _prep_con_arg = "n/a";
-var _act_arg = "n/a";
 
-
-if(argument_count == 12)
+if(_tar != noone and !ds_exists(_tar, ds_type_list) and instance_exists(_tar)) 
 {
-    var _opt = ds_map_create();
-    ds_map_read(_opt, argument[11]);
-    if(ds_map_exists(_opt, "activate_condition")) { _act_con_arg = _opt[? "activate_condition"]; }
-    if(ds_map_exists(_opt, "prepare_condition")) { _prep_con_arg = _opt[? "prepare_condition"]; }
-    if(ds_map_exists(_opt, "action")) { _act_arg = _opt[? "action"]; }
-    ds_map_destroy(_opt);
+    var temp = ds_list_create();
+    ds_list_add(temp, _tar);
+    _tar = ds_list_create();
+    ds_list_copy(_tar, temp);
+    ds_list_destroy(temp);
 }
 
 
@@ -41,7 +39,7 @@ if( instance_exists(_s) )
     else if( !ds_exists(_tar, ds_type_list) )
         { ds_list_add(_s.targets, _tar); }
     else 
-        { for(var i = 0; i < ds_list_size(_tar); i++) { ds_list_add(_s.targets, _tar[| i]); } }
+        { ds_list_copy(_s.targets, _tar); }
     _s.sprite_index = _spr;
     _s.solid = _sol;
     if(_sol) { mp_grid_add_cell(global.grid, _x/global.gridSize, _y/global.gridSize); }
@@ -64,7 +62,19 @@ if( instance_exists(_s) )
         _s.my_prompt.parent = _s;
     }
     
-        //If there is somemthing there, make the toggle a faux child
+    if( _s.act_con_arg != "n/a" )
+    {
+        var _act_con_map = ds_map_create();
+        ds_map_read( _act_con_map, string(_s.act_con_arg) );
+        if( _act_con_map[? "type"] == "push_map" )
+        {
+            _s.places = ds_grid_create( _act_con_map[? "w"], _act_con_map[? "h"] );
+            ds_grid_read(_s.places, _act_con_map[? "grid"]);
+        }
+    }
+    
+    
+    //If there is somemthing there, make the toggle a faux child
     if(_at != noone and !object_is_ancestor(_at, obj_toggle) ) { _s.parent = _at; } 
     else { _s.parent = "none"; }
     
