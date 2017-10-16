@@ -88,7 +88,7 @@ with(obj_toggle)
         for(var i = 0; i < ds_list_size(targets); i++)
         {
             var this = ds_map_create();
-            this[? "active"] = targets[| i].active;
+            this[? "active"] = targets[| i].active; 
             this[? "sprite"] = targets[| i].sprite_index;
             ds_list_add(temp, ds_map_write(this));
             ds_map_destroy(this);
@@ -97,6 +97,16 @@ with(obj_toggle)
         ds_list_destroy(temp);
     }
     
+    
+    global.save[? key] = ds_map_write(me);
+    ds_map_destroy(me);
+}
+
+with(obj_push)
+{
+    var me = ds_map_create();
+    me[? "x"] = x;
+    me[? "y"] = y;
     
     global.save[? key] = ds_map_write(me);
     ds_map_destroy(me);

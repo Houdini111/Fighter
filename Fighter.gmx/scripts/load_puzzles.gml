@@ -57,4 +57,16 @@ with(obj_toggle)
     }
 }
 
+with(obj_push)
+{
+    if(ds_map_exists(global.save, key))
+    {
+        var me = ds_map_create();
+        ds_map_read(me, global.save[? key]);
+        if(ds_map_exists(me, "x")) { x = me[? "x"]; }
+        if(ds_map_exists(me, "y")) { y = me[? "y"]; }
+        ds_map_destroy(me);
+    }
+}
+
 
