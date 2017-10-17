@@ -42,7 +42,7 @@ with(obj_toggle)
                             ds_map_read(this, temp[| i]);
                             targets[| i].active = this[? "active"];
                             targets[| i].sprite_index = this[? "sprite"];
-                            if(targets[| i].active == false) 
+                            if(targets[| i].active == false and object_get_name(targets[| i].object_index) != "obj_push" ) 
                             { 
                                 mp_grid_clear_cell(global.grid, targets[| i].x/global.gridSize, targets[| i].y/global.gridSize);
                                 instance_deactivate_object(targets[| i]); 
@@ -65,6 +65,7 @@ with(obj_push)
         ds_map_read(me, global.save[? key]);
         if(ds_map_exists(me, "x")) { x = me[? "x"]; }
         if(ds_map_exists(me, "y")) { y = me[? "y"]; }
+        if(ds_map_exists(me, "active")) { active = me[? "active"]; }
         ds_map_destroy(me);
     }
 }

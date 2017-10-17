@@ -92,17 +92,21 @@
     </scripts>
     <scripts name="puzzle logic">
       <script>scripts\create_toggle.gml</script>
+      <script>scripts\create_push_block.gml</script>
       <script>scripts\make_fake_wall_objects.gml</script>
       <scripts name="actions">
         <script>scripts\toggle_fake_wall.gml</script>
         <script>scripts\toggle_door.gml</script>
         <script>scripts\toggle_visibility.gml</script>
+        <script>scripts\reset_push_blocks.gml</script>
+        <script>scripts\nothing.gml</script>
       </scripts>
       <scripts name="conditions">
         <scripts name="prepare">
           <script>scripts\player_not_on.gml</script>
           <script>scripts\always.gml</script>
           <script>scripts\push_blocks_not_in_position.gml</script>
+          <script>scripts\timer.gml</script>
         </scripts>
         <scripts name="activate">
           <script>scripts\targeted_action.gml</script>
@@ -127,6 +131,7 @@
           <script>scripts\tutorial_toggle_interact.gml</script>
         </scripts>
       </scripts>
+      <script>scripts\create_block_map_from_list.gml</script>
     </scripts>
     <script>scripts\array.gml</script>
     <script>scripts\check_move.gml</script>

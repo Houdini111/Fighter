@@ -8,14 +8,14 @@ p[? "y"] = global.player.y;
 p[? "rot"] = global.player.rot;
 p[? "myHealth"] = global.player.myHealth;
 p[? "inventory"] = ds_map_write(global.player.inventory);
-var state = ds_map_create();
-state[? "state"] = global.player.state_machine.state;
-state[? "enabled"] = global.player.state_machine.enabled;
-p[? "state_machine"] = ds_map_write(state);
+var p_state = ds_map_create();
+p_state[? "state"] = global.player.state_machine.state;
+p_state[? "enabled"] = global.player.state_machine.enabled;
+p[? "state_machine"] = ds_map_write(p_state);
 p[? "dodge_go"] = global.player.dodge_go;
 global.save[? "player"] = ds_map_write(p);
 ds_map_destroy(p);
-ds_map_destroy(state);
+ds_map_destroy(p_state);
 
 global.save[? "time"] = global.master.time;
 global.save[? "time_go"] = global.master.time_go;
@@ -107,6 +107,7 @@ with(obj_push)
     var me = ds_map_create();
     me[? "x"] = x;
     me[? "y"] = y;
+    me[? "active"] = active;
     
     global.save[? key] = ds_map_write(me);
     ds_map_destroy(me);

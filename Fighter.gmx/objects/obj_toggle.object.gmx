@@ -88,6 +88,30 @@ ds_map_destroy(temp);
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///PLACEHOLDER
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -106,7 +130,7 @@ ds_map_destroy(temp);
           <argument>
             <kind>1</kind>
             <string>if(!ready) { ready = script_execute(prepare); }
-
+//print(alarm[0]);
 if( script_get_name(condition) == "targeted_action") 
 {
     if( ready ) 
@@ -124,6 +148,10 @@ if( ready and script_execute(condition) )
     else { script_execute(action); }
       
     ready = false;
+    print(prep_con_arg);
+    if(script_get_name(prepare) == "timer") { alarm[0] = prep_con_arg; }
+    
+    state = !state;
       
     if(!reusable) { instance_destroy(); }
       
@@ -158,6 +186,11 @@ if(global.master.debug_ui)
 {
     draw_set_color(c_red);
     draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true);
+    draw_set_valign(fa_middle);
+    draw_set_halign(fa_center);
+    draw_text_shadow(x+16, y+16, string(state), fnt_debug, 3, c_black, c_white);
+    draw_set_valign(fa_top);
+    draw_set_halign(fa_left);
 }
 </string>
           </argument>

@@ -43,7 +43,7 @@ if(_i == global.player)
                     }
                 }
             }
-            else if( object_get_name(hit_list[| index].object_index) == "obj_push" )
+            else if( object_get_name(hit_list[| index].object_index) == "obj_push" and hit_list[| index].active )
             {
                 var move_dir;
                 if( global.player.old_goal_x < _x ) { move_dir = "right"; } //Moving right
