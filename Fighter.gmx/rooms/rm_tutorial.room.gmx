@@ -20,7 +20,7 @@ master_initialize_room();
 
 
 
-//create_toggle(32, 640, spr_switch, true, noone, false, true, true, targeted_action, timer, nothing, "n/a", 15, "n/a");
+//global.watching = create_toggle(32, 640, spr_switch, true, noone, false, true, true, targeted_action, timer, nothing, "n/a", 15, "n/a");
 
 
 
@@ -104,8 +104,7 @@ ds_list_add(list, create_push_block(2112, 992, false));
 ds_list_add(list, create_push_block(2112, 960, false));
 ds_list_add(list, create_push_block(2080, 928, true));
 var map = create_block_map_from_list(list);
-create_toggle(1920, 864, spr_switch, true, list, false, true, true, targeted_action, always, reset_push_blocks, map, "n/a", "n/a")
-
+create_toggle(1920, 864, spr_switch, true, list, false, true, true, targeted_action, always, reset_push_blocks, "n/a", "n/a", map);
 
 
 instance_create( 2080, 416, obj_tut_miniboss );

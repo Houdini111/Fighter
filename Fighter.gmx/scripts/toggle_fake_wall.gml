@@ -2,7 +2,6 @@
 if( ds_list_size(targets)&1 == 1 ) { show_debug_message("TOGGLE_FAKE_WALL requires an even number of targets, has odd number"); }
 else
 {   
-    state = !state;
     if(!state)
     {
         if(targets[| 0].x == targets[| 1].x) //Horizontal

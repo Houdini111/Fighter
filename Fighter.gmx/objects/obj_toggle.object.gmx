@@ -130,28 +130,16 @@ ds_map_destroy(temp);
           <argument>
             <kind>1</kind>
             <string>if(!ready) { ready = script_execute(prepare); }
-//print(alarm[0]);
-if( script_get_name(condition) == "targeted_action") 
-{
-    if( ready ) 
-    { 
-        if( global.player.action_target == id ) { instance_activate_object(my_prompt); }
-        else { instance_deactivate_object(my_prompt); }
-    }
-    else { instance_deactivate_object(my_prompt); }
-}
 
 if( ready and script_execute(condition) )
 {
+    state = !state; 
+    ready = false;
     
+    if(script_get_name(prepare) == "timer") { alarm[0] = prep_con_arg; }
+   
     if(action == "toggle_fow") { global.master.fow = !global.master.fow; }
     else { script_execute(action); }
-      
-    ready = false;
-    print(prep_con_arg);
-    if(script_get_name(prepare) == "timer") { alarm[0] = prep_con_arg; }
-    
-    state = !state;
       
     if(!reusable) { instance_destroy(); }
       

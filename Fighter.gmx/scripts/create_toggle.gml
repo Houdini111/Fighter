@@ -51,8 +51,8 @@ if( instance_exists(_s) )
     _s.prepare = _prep;
     _s.action = _act;
     _s.act_con_arg = _act_con_arg;
-    _s.prep_con_arg = _act_con_arg;
-    _s.act_arg = _act_con_arg;
+    _s.prep_con_arg = _prep_con_arg;
+    _s.act_arg = _act_arg;
     
     if( script_get_name(_cond) == "targeted_action" ) 
     {
