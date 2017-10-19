@@ -46,6 +46,15 @@ y = bottom;
 my_color = c_white;
 draw_border = 0.06;
 
+
+
+var base_width = sprite_get_width(spr_rhy_base);
+resize_rhythm_peices(width/base_width, 1);
+
+
+
+
+
 mask_index = object_get_mask(obj_rhy_base);
 </string>
           </argument>

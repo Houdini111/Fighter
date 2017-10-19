@@ -157,6 +157,7 @@
       <script>scripts\make_grid_false.gml</script>
       <script>scripts\print_type.gml</script>
     </scripts>
+    <script>scripts\resize_rhythm_peices.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_myFont</font>

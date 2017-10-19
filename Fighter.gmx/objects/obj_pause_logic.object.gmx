@@ -190,24 +190,15 @@ if( place == "options" )
     }
     else if( selection == 3 ) //Rhythm move speed
     {
+        var increment = 0.1;
+        
         if( global.in[? "m_left_p"] or global.in[? "m_right_p"] )
         {
-            var increment = 0.1;
-            var before = 10.00;
             
             if( global.in[? "m_left_p"] ) { global.master.rhy_speed -= increment; }
             else if( global.in[? "m_right_p"] ) { global.master.rhy_speed += increment; }
             
             global.master.rhy_speed = clamp(global.master.rhy_speed, 0.10, 20.00);
-            var scale = global.master.rhy_speed/before;
-            var tempSurf = surface_create(sprite_get_width(spr_rhy_base), sprite_get_height(spr_rhy_base)*scale);
-            surface_set_target(tempSurf);
-            draw_clear(c_black);
-            surface_reset_target();
-            var newHitbox = sprite_create_from_surface(tempSurf, 0, 0, surface_get_width(tempSurf), surface_get_height(tempSurf), false, false, 0, surface_get_height(tempSurf)/2);
-            surface_free(tempSurf);
-            with(obj_rhy_base) { mask_index = newHitbox; }
-            object_set_mask(obj_rhy_base, newHitbox);
         }
     }
     else if( selection == 4 ) //Key bindings selection
@@ -382,9 +373,13 @@ else if( place == "keys" or place == "buttons" )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Destroy temp_keys
+            <string>///Destroy temp_keys and change rhythm peices hitboxes
 
 if( ds_exists(temp_keys, ds_type_map) ) { ds_map_destroy( temp_keys ); }
+
+
+var scale = global.master.rhy_speed/global.master.default_rhy_speed;
+resize_rhythm_peices(1, scale);
 </string>
           </argument>
         </arguments>

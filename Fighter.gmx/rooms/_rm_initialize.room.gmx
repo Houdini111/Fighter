@@ -20,8 +20,8 @@ global.SEGMENT = 32;
 
 
 global.master = instance_create(0, 0, obj_master);
-global.player = instance_create(0, 0, obj_player);
 global.camera = instance_create(0, 0, obj_camera);
+global.player = instance_create(0, 0, obj_player);
 
 gp_check();
 

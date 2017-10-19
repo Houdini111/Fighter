@@ -37,14 +37,14 @@ magnitude = 10;
 
 //Display management
 ideal_width = 0;
-ideal_height = 360;
+//ideal_height = 360;
+ideal_height = 420;
 //ideal_height = 1080;
 
-aspect_ratio = display_get_width()/display_get_height();
-
-ideal_width = round(ideal_height*aspect_ratio);
+ideal_width = round(ideal_height*  display_get_width()/display_get_height()  );
 
 
+/*
 if(display_get_width() % ideal_width != 0)
 {
     var d = round(display_get_width()/ideal_width);
@@ -55,12 +55,12 @@ if(display_get_height() % ideal_height != 0)
     var d = round(display_get_height()/ideal_height);
     ideal_height=display_get_height()/d;
 }
-
+*/
 
 if(ideal_width &amp; 1) { ideal_width++; }
 if(ideal_height &amp; 1) { ideal_height++; }
 
-for(var i = 1; i &lt;= room_last; i++)
+for(var i = 0; i &lt;= room_last; i++)
 {
     if(room_exists(i))
     {
@@ -69,10 +69,15 @@ for(var i = 1; i &lt;= room_last; i++)
     }
 }
 
+print("WIDTH: " + string(display_get_gui_width()) );
+print("HEIGHT: " + string(display_get_gui_height()) );
+
 surface_resize(application_surface, ideal_width, ideal_height);
 display_set_gui_size(ideal_width, ideal_height);
 window_set_size(ideal_width, ideal_height);
 
+print("WIDTH: " + string(display_get_gui_width()) );
+print("HEIGHT: " + string(display_get_gui_height()) );
 
 window_zoom = 1;
 before_max = window_zoom;
