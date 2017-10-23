@@ -69,6 +69,7 @@
       <script>scripts\comboItem.gml</script>
       <script>scripts\draw_gradient_line.gml</script>
       <script>scripts\draw_text_shadow.gml</script>
+      <script>scripts\draw_text_shadow_transformed.gml</script>
     </scripts>
     <scripts name="input">
       <script>scripts\gp_check.gml</script>
@@ -81,14 +82,15 @@
     <scripts name="player">
       <script>scripts\judgement_line.gml</script>
       <script>scripts\p_attack.gml</script>
+      <script>scripts\p_hit_part.gml</script>
       <script>scripts\fov.gml</script>
       <scripts name="state">
         <script>scripts\state_transition.gml</script>
         <script>scripts\draw_state_triangles.gml</script>
         <script>scripts\draw_state_circle.gml</script>
         <script>scripts\state_second_half.gml</script>
+        <script>scripts\rescale_state.gml</script>
       </scripts>
-      <script>scripts\p_hit_part.gml</script>
     </scripts>
     <scripts name="puzzle logic">
       <script>scripts\create_toggle.gml</script>
@@ -150,6 +152,7 @@
     <script>scripts\load_enemies.gml</script>
     <script>scripts\load_player.gml</script>
     <script>scripts\load_puzzles.gml</script>
+    <script>scripts\resize_rhythm_peices.gml</script>
     <scripts name="utilities">
       <script>scripts\ds_print.gml</script>
       <script>scripts\collision_point_list.gml</script>
@@ -157,7 +160,6 @@
       <script>scripts\make_grid_false.gml</script>
       <script>scripts\print_type.gml</script>
     </scripts>
-    <script>scripts\resize_rhythm_peices.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_myFont</font>

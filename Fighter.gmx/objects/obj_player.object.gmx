@@ -424,8 +424,8 @@ myHealth = clamp(myHealth, 0, maxHealth);
         rhy_col[3] = global.master.my_orange;
         for(i = 0; i &lt; lanes; i++)
         { 
-            draw_text_shadow(rhythm_left+(rhythm_width/lanes/2)+(rhythm_width/lanes*i), rhythm_top-5, 
-                rhy_sym[i], fnt_gp_sym, 2, c_black, rhy_col[i]); 
+            draw_text_shadow_transformed(rhythm_left+(rhythm_width/lanes/2)+(rhythm_width/lanes*i), rhythm_top-5, 
+                rhy_sym[i], fnt_gp_sym, 2, c_black, rhy_col[i], global.res_scale, global.res_scale); 
         } 
         
         

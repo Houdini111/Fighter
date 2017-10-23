@@ -38,7 +38,7 @@ path_width = right - left;
 lanes = global.player.lanes;
 
 width = (path_width-6)/lanes;
-height = 20;
+height = 20*global.res_scale; //ADD MENU OPTION TO CHANGE THIS
 
 x = left;
 y = bottom;

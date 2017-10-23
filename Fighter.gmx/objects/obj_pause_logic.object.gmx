@@ -374,7 +374,6 @@ else if( place == "keys" or place == "buttons" )
           <argument>
             <kind>1</kind>
             <string>///Destroy temp_keys and change rhythm peices hitboxes
-
 if( ds_exists(temp_keys, ds_type_map) ) { ds_map_destroy( temp_keys ); }
 
 

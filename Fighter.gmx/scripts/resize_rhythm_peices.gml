@@ -2,7 +2,9 @@
 var h_scale = argument[0];
 var v_scale = argument[1];
 var base_width = sprite_get_width( spr_rhy_base );
-var base_height = sprite_get_height( spr_rhy_base )
+var base_height = sprite_get_height( spr_rhy_base )*global.res_scale; 
+//Note: The "*global.res_scale" is there to adjust for my arbitrary resolution
+//It merely adjusts the scale so that it will be the same time-size, no matter the pixel-size 
 
 var tempSurf = surface_create(base_width*h_scale, base_height*v_scale);
 surface_set_target(tempSurf);

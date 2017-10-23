@@ -37,9 +37,10 @@ magnitude = 10;
 
 //Display management
 ideal_width = 0;
+//ideal_height = 257;
 //ideal_height = 360;
-ideal_height = 420;
-//ideal_height = 1080;
+//ideal_height= 420;
+ideal_height = 1080;
 
 ideal_width = round(ideal_height*  display_get_width()/display_get_height()  );
 
@@ -69,15 +70,11 @@ for(var i = 0; i &lt;= room_last; i++)
     }
 }
 
-print("WIDTH: " + string(display_get_gui_width()) );
-print("HEIGHT: " + string(display_get_gui_height()) );
 
 surface_resize(application_surface, ideal_width, ideal_height);
 display_set_gui_size(ideal_width, ideal_height);
 window_set_size(ideal_width, ideal_height);
 
-print("WIDTH: " + string(display_get_gui_width()) );
-print("HEIGHT: " + string(display_get_gui_height()) );
 
 window_zoom = 1;
 before_max = window_zoom;

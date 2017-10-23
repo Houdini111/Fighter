@@ -1,0 +1,16 @@
+///draw_text_shadow_transformed(x, y, string, font, shadow_size, shadow_colour, text_colour, w_scale, h_scale);
+var _x, _y, _string, _font, _shadow_size, shadow_colour, text_colour, w_scale, h_scale;
+_x = argument[0];
+_y = argument[1];
+_string = argument[2];
+_font = argument[3];
+_shadow_size = argument[4];
+_shadow_colour = argument[5];
+_text_colour = argument[6];
+w_scale = argument[7];
+h_scale = argument[8];
+draw_set_font(_font);
+draw_set_colour(_shadow_colour);
+draw_text_transformed((_x + _shadow_size), (_y + _shadow_size), string(_string), w_scale, h_scale, 0);
+draw_set_colour(_text_colour);
+draw_text_transformed(_x, _y, string(_string), w_scale, h_scale, 0);

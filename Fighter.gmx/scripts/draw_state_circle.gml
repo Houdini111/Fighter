@@ -10,7 +10,7 @@ if( _pos == 'c_t' )
     draw_set_color(c_white);
     draw_set_halign(fa_center);
     draw_set_valign(fa_middle);
-    draw_text(x+circle_radius, y+circle_radius+ui_height/2, string(_state));
+    draw_text_transformed(x+circle_radius, y+circle_radius+ui_height/2, string(_state), global.res_scale, global.res_scale, 0);
     draw_set_halign(fa_left);
     draw_set_valign(fa_top);
 }
