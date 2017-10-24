@@ -43,13 +43,29 @@ if( ds_map_exists(global.save, key) )
     ds_map_destroy(map);
 }
 
+/*
 var hit = collision_point(x, y, all, false, true );
 if( hit != noone )
 {
     hidden = true;
     parent = hit;
 }
+*/
 
+var hit = collision_point_list(x, y, all, false, true );
+if( hit != noone )
+{
+    for(var i = 0; i &lt; ds_list_size(hit); i++)
+    {
+        if( object_get_name(hit[| i]) != "obj_placeholder" )
+        {
+            hidden = true;
+            parent = hit[|i ];
+            i = ds_list_size(hit);
+        }
+    }
+}
+if( ds_exists(hit, ds_type_list) ) { ds_list_destroy(hit); }
 </string>
           </argument>
         </arguments>

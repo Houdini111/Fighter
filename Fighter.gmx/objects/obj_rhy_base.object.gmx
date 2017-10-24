@@ -38,7 +38,7 @@ path_width = right - left;
 lanes = global.player.lanes;
 
 width = (path_width-6)/lanes;
-height = 20*global.res_scale; //ADD MENU OPTION TO CHANGE THIS
+height = 20*global.rhy_size_scale*global.res_scale;
 
 x = left;
 y = bottom;
@@ -49,13 +49,7 @@ draw_border = 0.06;
 
 
 var base_width = sprite_get_width(spr_rhy_base);
-resize_rhythm_peices(width/base_width, 1);
-
-
-
-
-
-mask_index = object_get_mask(obj_rhy_base);
+resize_rhythm_peices(width/base_width, 1, false, true);
 </string>
           </argument>
         </arguments>
@@ -203,7 +197,7 @@ else
     if(global.master.debug_ui)
     {
         draw_set_color(c_red);
-        draw_line(x, y, x+width, y);
+        draw_line(x, y, floor(x+width), y);
         draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true);
     }   
 }

@@ -1,8 +1,12 @@
-///resize_rhythm_peices(width_ratio, height_ratio)
+///resize_rhythm_peices(width_ratio, height_ratio, relative_width, relative_height)
 var h_scale = argument[0];
 var v_scale = argument[1];
-var base_width = sprite_get_width( spr_rhy_base );
-var base_height = sprite_get_height( spr_rhy_base )*global.res_scale; 
+var base_width;
+var base_height
+if(argument[2]) { base_width =  sprite_get_width( object_get_mask(obj_rhy_base) ); }
+else { base_width = sprite_get_width( spr_rhy_base ); }
+if(argument[3]) { base_height =  sprite_get_height( object_get_mask(obj_rhy_base) ); }
+else { base_height = sprite_get_height( spr_rhy_base )*global.res_scale; }
 //Note: The "*global.res_scale" is there to adjust for my arbitrary resolution
 //It merely adjusts the scale so that it will be the same time-size, no matter the pixel-size 
 

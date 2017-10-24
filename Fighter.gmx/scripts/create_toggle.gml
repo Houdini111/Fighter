@@ -26,7 +26,7 @@ if(_tar != noone and !ds_exists(_tar, ds_type_list) and instance_exists(_tar))
 
 
 var _at = noone;
-_at = collision_point(_x, _y, all, false, true);
+_at = collision_point_list(_x, _y, all, false, true);
 
 var _s = instance_create(_x, _y, obj_toggle);
 if( instance_exists(_s) )
@@ -75,8 +75,20 @@ if( instance_exists(_s) )
     
     
     //If there is somemthing there, make the toggle a faux child
-    if(_at != noone and !object_is_ancestor(_at, obj_toggle) ) { _s.parent = _at; } 
-    else { _s.parent = "none"; }
+    _s.parent = "none";
+    if( _at != noone )
+    {
+        for(var i = 0; i < ds_list_size(_at); i++)
+        {
+            if( object_get_name(_at[| i]) != "obj_placeholder" )
+            {
+                if(!object_is_ancestor(_at, obj_toggle) ) { _s.parent = _at; } 
+                i = ds_list_size(_at);
+            }
+        }
+    }
+    if( ds_exists(_at, ds_type_list) ) { ds_list_destroy(_at); }
     
     return _s;
 }
+if( ds_exists(_at, ds_type_list) ) { ds_list_destroy(_at); }

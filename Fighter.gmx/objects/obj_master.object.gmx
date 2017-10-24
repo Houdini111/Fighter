@@ -48,7 +48,7 @@ global.grid = mp_grid_create(0, 0, room_width/global.gridSize, room_height/globa
 
 grid_surf = surface_create(room_width, room_height);
 
-
+global.rhy_size_scale = 1;
 rhy_speed = 10.00; //Speed mult for how fast the peices move. At 1, it takes 1 second. 
 default_rhy_speed = rhy_speed;
 my_blue = make_color_hsv(154, 191, 210); //Blue

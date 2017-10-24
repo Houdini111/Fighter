@@ -41,6 +41,7 @@
       <sprite>sprites\tile_convex_NW2</sprite>
     </sprites>
     <sprite>sprites\spr_redLine</sprite>
+    <sprite>sprites\spr_placeholder</sprite>
     <sprite>sprites\spr_rhy_base</sprite>
     <sprite>sprites\state_ani</sprite>
     <sprites name="puzzle_peices">
@@ -59,6 +60,7 @@
       <sprite>sprites\spr_push</sprite>
     </sprites>
     <sprite>sprites\spr_skeleton</sprite>
+    <sprite>sprites\spr_TEST</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\tile_cobble</background>
@@ -135,7 +137,6 @@
       </scripts>
       <script>scripts\create_block_map_from_list.gml</script>
     </scripts>
-    <script>scripts\array.gml</script>
     <script>scripts\check_move.gml</script>
     <script>scripts\collision_line_point.gml</script>
     <script>scripts\damage_calculation.gml</script>
@@ -153,12 +154,13 @@
     <script>scripts\load_player.gml</script>
     <script>scripts\load_puzzles.gml</script>
     <script>scripts\resize_rhythm_peices.gml</script>
+    <script>scripts\collision_point_list.gml</script>
     <scripts name="utilities">
       <script>scripts\ds_print.gml</script>
-      <script>scripts\collision_point_list.gml</script>
       <script>scripts\print.gml</script>
       <script>scripts\make_grid_false.gml</script>
       <script>scripts\print_type.gml</script>
+      <script>scripts\array.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
@@ -227,6 +229,7 @@
     <object>objects\obj_btn_prompt</object>
     <object>objects\obj_pause_logic</object>
     <object>objects\obj_tutorial</object>
+    <object>objects\obj_placeholder</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\_rm_initialize</room>

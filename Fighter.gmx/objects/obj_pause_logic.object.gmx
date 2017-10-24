@@ -138,7 +138,7 @@ if( place == "options" )
 { 
     if( global.in[? "m_down_p"] ) { selection++; } 
     else if ( global.in[? "m_up_p"] ) { selection--; } 
-    selection = clamp(selection, 0, 4); 
+    selection = clamp(selection, 0, 5); 
       
     if( selection == 0 ) //Window Size
     {
@@ -198,10 +198,21 @@ if( place == "options" )
             if( global.in[? "m_left_p"] ) { global.master.rhy_speed -= increment; }
             else if( global.in[? "m_right_p"] ) { global.master.rhy_speed += increment; }
             
-            global.master.rhy_speed = clamp(global.master.rhy_speed, 0.10, 20.00);
+            global.master.rhy_speed = clamp(global.master.rhy_speed, 5.00, 20.00);
         }
     }
-    else if( selection == 4 ) //Key bindings selection
+    else if( selection == 4 ) //Rhy peice size
+    {
+        var step_size = 0.05;
+        
+        if( global.in[? "m_right_p"] )  
+            {  global.rhy_size_scale+=step_size; } 
+        else if( global.in[? "m_left_p"] )  
+            { global.rhy_size_scale-=step_size; }
+        
+        global.rhy_size_scale = clamp(global.rhy_size_scale, 0.05, 1.5); 
+    }
+    else if( selection == 5 ) //Key bindings selection
     {
         if( global.in[? "d_2_p"] )
         {
@@ -378,7 +389,7 @@ if( ds_exists(temp_keys, ds_type_map) ) { ds_map_destroy( temp_keys ); }
 
 
 var scale = global.master.rhy_speed/global.master.default_rhy_speed;
-resize_rhythm_peices(1, scale);
+resize_rhythm_peices(1, scale, true, false);
 </string>
           </argument>
         </arguments>
@@ -466,9 +477,15 @@ draw_set_halign(fa_right);
 draw_text_shadow(2*view_wport[0]-75 -x, 10+50+105 -y, string(global.master.rhy_speed), fnt_small, 2, c_black, c_white); 
 
 draw_set_halign(fa_left);
-draw_text_shadow(view_wport[0]+10 -x, 10+50+140 -y, "Key Bindings", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(view_wport[0]+10 -x, 10+50+140 -y, "Rhythm Peice Size", fnt_small, 2, c_black, c_white); 
 draw_set_halign(fa_right);
-draw_text_shadow(2*view_wport[0]-75 -x, 10+50+140 -y, "&gt;", fnt_small, 2, c_black, c_white); 
+draw_text_shadow(2*view_wport[0]-75 -x, 10+50+140 -y, string(global.rhy_size_scale*100)+"%", fnt_small, 2, c_black, c_white); 
+
+
+draw_set_halign(fa_left);
+draw_text_shadow(view_wport[0]+10 -x, 10+50+175 -y, "Key Bindings", fnt_small, 2, c_black, c_white); 
+draw_set_halign(fa_right);
+draw_text_shadow(2*view_wport[0]-75 -x, 10+50+175 -y, "&gt;", fnt_small, 2, c_black, c_white); 
 
 
 draw_set_font(fnt_medium);

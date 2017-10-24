@@ -93,7 +93,7 @@ if(_i == global.player)
             }
         }
     }
-    ds_list_destroy(hit_list);
+    if( ds_exists(hit_list, ds_type_list) ) { ds_list_destroy(hit_list); }
     return true;
 }
 else
@@ -115,6 +115,7 @@ else
                 }
             } 
         }
+        if( ds_exists(hit_list, ds_type_list) ) { ds_list_destroy(hit_list); }
         return true;
     }
 }
