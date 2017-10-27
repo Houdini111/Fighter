@@ -66,11 +66,15 @@ if( instance_exists(_s) )
     {
         var _act_con_map = ds_map_create();
         ds_map_read( _act_con_map, string(_s.act_con_arg) );
-        if( _act_con_map[? "type"] == "push_map" )
+        if( ds_exists( _act_con_map, ds_type_map ) and !ds_map_empty(_act_con_map) )
         {
-            _s.places = ds_grid_create( _act_con_map[? "w"], _act_con_map[? "h"] );
-            ds_grid_read(_s.places, _act_con_map[? "grid"]);
+            if( _act_con_map[? "type"] == "push_map" )
+            {
+                _s.block_key_places = ds_grid_create( _act_con_map[? "w"], _act_con_map[? "h"] );;
+                ds_grid_read(_s.block_key_places, _act_con_map[? "grid"]);
+            }
         }
+        ds_map_destroy(_act_con_map);
     }
     
     

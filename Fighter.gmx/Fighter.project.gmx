@@ -86,6 +86,7 @@
       <script>scripts\p_attack.gml</script>
       <script>scripts\p_hit_part.gml</script>
       <script>scripts\fov.gml</script>
+      <script>scripts\player_teleport.gml</script>
       <scripts name="state">
         <script>scripts\state_transition.gml</script>
         <script>scripts\draw_state_triangles.gml</script>
@@ -98,6 +99,7 @@
       <script>scripts\create_toggle.gml</script>
       <script>scripts\create_push_block.gml</script>
       <script>scripts\make_fake_wall_objects.gml</script>
+      <script>scripts\create_block_map_from_list.gml</script>
       <scripts name="actions">
         <script>scripts\toggle_fake_wall.gml</script>
         <script>scripts\toggle_door.gml</script>
@@ -116,6 +118,7 @@
           <script>scripts\targeted_action.gml</script>
           <script>scripts\player_step_on.gml</script>
           <script>scripts\object_destroyed.gml</script>
+          <script>scripts\objects_destroyed.gml</script>
           <script>scripts\player_on_while_enemy_turn.gml</script>
           <script>scripts\push_blocks_in_position.gml</script>
         </scripts>
@@ -135,33 +138,36 @@
           <script>scripts\tutorial_toggle_interact.gml</script>
         </scripts>
       </scripts>
-      <script>scripts\create_block_map_from_list.gml</script>
+    </scripts>
+    <scripts name="save">
+      <script>scripts\pause.gml</script>
+      <script>scripts\unpause.gml</script>
+      <script>scripts\load_enemies.gml</script>
+      <script>scripts\load_player.gml</script>
+      <script>scripts\load_puzzles.gml</script>
+      <script>scripts\get_key.gml</script>
+    </scripts>
+    <scripts name="utilities">
+      <script>scripts\print.gml</script>
+      <script>scripts\collision_line_point.gml</script>
+      <script>scripts\collision_point_list.gml</script>
+      <script>scripts\make_grid_false.gml</script>
+      <script>scripts\print_type.gml</script>
+      <script>scripts\array.gml</script>
+      <script>scripts\list.gml</script>
+      <script>scripts\ds_print.gml</script>
+      <script>scripts\ds_type.gml</script>
+      <script>scripts\ds_destroy.gml</script>
     </scripts>
     <script>scripts\check_move.gml</script>
-    <script>scripts\collision_line_point.gml</script>
     <script>scripts\damage_calculation.gml</script>
     <script>scripts\e_attack.gml</script>
     <script>scripts\e_check_spots.gml</script>
     <script>scripts\master_initialize_room.gml</script>
     <script>scripts\peice.gml</script>
-    <script>scripts\player_teleport.gml</script>
     <script>scripts\prompt.gml</script>
-    <script>scripts\room_change.gml</script>
-    <script>scripts\pause.gml</script>
-    <script>scripts\unpause.gml</script>
-    <script>scripts\get_key.gml</script>
-    <script>scripts\load_enemies.gml</script>
-    <script>scripts\load_player.gml</script>
-    <script>scripts\load_puzzles.gml</script>
     <script>scripts\resize_rhythm_peices.gml</script>
-    <script>scripts\collision_point_list.gml</script>
-    <scripts name="utilities">
-      <script>scripts\ds_print.gml</script>
-      <script>scripts\print.gml</script>
-      <script>scripts\make_grid_false.gml</script>
-      <script>scripts\print_type.gml</script>
-      <script>scripts\array.gml</script>
-    </scripts>
+    <script>scripts\room_change.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_myFont</font>
