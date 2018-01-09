@@ -213,6 +213,9 @@
         <object>objects\obj_tut_miniboss</object>
         <object>objects\obj_tut_counter_enemy</object>
       </objects>
+      <objects name="Bosses">
+        <object>objects\obj_tut_boss</object>
+      </objects>
     </objects>
     <objects name="rhythm_objs">
       <object>objects\obj_rhy_judgement_line</object>
@@ -241,7 +244,6 @@
     <room>rooms\_rm_initialize</room>
     <room>rooms\rm_testDungeon</room>
     <room>rooms\rm_tutorial</room>
-    <room>rooms\rm_pause</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

@@ -151,18 +151,29 @@ if( t != noone ) { ds_destroy(targets, t); }
             <kind>1</kind>
             <string>if(!ready) { ready = script_execute(prepare); }
 
-if( ready and script_execute(condition) )
+if( ready )
 {
-    state = !state; 
-    ready = false;
-    
-    if(script_get_name(prepare) == "timer") { alarm[0] = prep_con_arg; }
-   
-    if(action == "toggle_fow") { global.master.fow = !global.master.fow; }
-    else { script_execute(action); }
-      
-    if(!reusable) { instance_destroy(); }
-      
+    if( script_execute(condition) )
+    {
+        state = !state; 
+        ready = false;
+        
+        if(script_get_name(prepare) == "timer") { alarm[0] = prep_con_arg; }
+       
+        if(action == "toggle_fow") { global.master.fow = !global.master.fow; }
+        else { script_execute(action); }
+          
+        if(!reusable) { instance_destroy(); }     
+    }
+    /*
+    else 
+    {
+        if( script_get_name(condition) == "push_blocks_in_position" )
+        {
+            reset_push_blocks();
+        }
+    }
+    */
 }
 </string>
           </argument>
